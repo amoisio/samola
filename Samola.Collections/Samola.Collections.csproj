@@ -2,6 +2,9 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Company>Samola</Company>
+    <Authors>Aleksi Moisio</Authors>
   </PropertyGroup>
 
   <ItemGroup>
