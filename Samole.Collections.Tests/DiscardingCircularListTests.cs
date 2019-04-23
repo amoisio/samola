@@ -142,6 +142,29 @@ namespace Samole.Collections.Tests
 
             Assert.Equal(0, _buffer.Count);
         }
+
+        [Fact]
+        public void Runs_a_function_on_a_list_item_when_it_is_added()
+        {
+            StringBuilder sb = new StringBuilder();
+            _buffer.OnIndexChange = item => sb.Append(item);
+
+            _buffer.Add(6);
+
+            Assert.Equal("6", sb.ToString());
+        }
+
+        [Fact]
+        public void Runs_a_function_on_a_list_item_when_its_index_changes()
+        {
+            StringBuilder sb = new StringBuilder();
+            _buffer = new DiscardingCircularList<int>(5, new[] { 1, 2, 3, 4, 5 }, true);
+            _buffer.OnIndexChange = item => sb.Append(item);
+
+            _buffer.Add(6);
+
+            Assert.Equal("62345", sb.ToString());
+        }
     }
 
     public class A_reversed_discarding_circular_list
@@ -199,6 +222,29 @@ namespace Samole.Collections.Tests
             _buffer.Clear();
 
             Assert.Equal(0, _buffer.Count);
+        }
+
+        [Fact]
+        public void Runs_a_function_on_a_list_item_when_it_is_added()
+        {
+            StringBuilder sb = new StringBuilder();
+            _buffer.OnIndexChange = item => sb.Append(item);
+
+            _buffer.Add(6);
+
+            Assert.Equal("1236", sb.ToString());
+        }
+
+        [Fact]
+        public void Runs_a_function_on_a_list_item_when_its_index_changes()
+        {
+            StringBuilder sb = new StringBuilder();
+            _buffer = new DiscardingCircularList<int>(5, new[] { 1, 2, 3, 4, 5 }, true);
+            _buffer.OnIndexChange = item => sb.Append(item);
+
+            _buffer.Add(6);
+
+            Assert.Equal("62345", sb.ToString());
         }
     }
 }

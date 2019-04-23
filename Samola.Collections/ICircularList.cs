@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Samola.Collections
 {
@@ -29,5 +30,7 @@ namespace Samola.Collections
         /// Empties the array
         /// </summary>
         void Clear();
+
+        Action<T> OnIndexChange { get; set; }
     }
 }

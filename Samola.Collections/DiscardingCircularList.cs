@@ -23,7 +23,7 @@ namespace Samola.Collections
         /// <summary>
         /// Internally the circular list is just an array
         /// </summary>
-        private readonly T[] _storage;
+        private readonly List<T> _storage;
 
         /// <summary>
         /// Determines if items are added to the end or to the beginning of the list
@@ -45,23 +45,23 @@ namespace Samola.Collections
 
         public DiscardingCircularList(int size, IEnumerable<T> collection) : this(size, collection, true) { }
 
-        public DiscardingCircularList(int size, bool addToEnd) : this(size, new T[size], addToEnd) { }
+        public DiscardingCircularList(int size, bool addToEnd) : this(size, null, addToEnd) { }
 
-        public DiscardingCircularList(int size, IEnumerable<T> collection, bool addToEnd) : this(size, collection.ToArray(), addToEnd)
-        {
-            _head = CyclicIndex.Create(collection.Count() - 1, Size);
-            _root = CyclicIndex.Create(0, Size);
-        }
-
-        private DiscardingCircularList(int size, T[] items, bool addToEnd)
+        public DiscardingCircularList(int size, IEnumerable<T> items, bool addToEnd)
         {
             if (size < 1) throw new ArgumentException("Size must be greater than 0");
             Size = size;
 
-            if (items.Length > size) throw new ArgumentException("Items collection has too many items");
-            _storage = new T[Size];
-            items.CopyTo(_storage, 0);
+            if (items?.Count() > size) throw new ArgumentException("Items collection has too many items");
+            _storage = new List<T>(Size);
             _addToEnd = addToEnd;
+
+            if (items != null && items.Count() > 0)
+            {
+                _storage.AddRange(items);
+                _head = CyclicIndex.Create(items.Count() - 1, Size);
+                _root = CyclicIndex.Create(0, Size);
+            }
         }
         #endregion
 
@@ -81,7 +81,7 @@ namespace Samola.Collections
                 {
                     return 0;
                 }
-                else 
+                else
                 {
                     return IndexDifference() + 1;
                 }
@@ -99,30 +99,53 @@ namespace Samola.Collections
             return diff.Value;
         }
 
+        public Action<T> OnIndexChange { get; set; }
+
         /// <summary>
         /// Adds a new item to the end/beginning of the list
         /// </summary>
         /// <param name="item"></param>
         public void Add(T item)
         {
-            CyclicIndex next;
-            if (IsEmpty())
-            {
-                _head = CyclicIndex.Create(0, Size);
-                _root = CyclicIndex.Create(0, Size);
-                next = _head;
-            }
-            else
-            {
-                next = _head + 1;
-                if (next == _root)
-                {
-                    _root = _root + 1;
-                }
-                _head = next;
-            }            
+            var next = _head + 1;
 
-            _storage[next.Value] = item;
+            if (Count < Size)
+                _storage.Insert(next.Value, item);
+            else
+                _storage[next.Value] = item;
+
+            IncrementHead();
+
+            if (OnIndexChange != null)
+            {
+                if (_addToEnd)
+                {
+                    OnIndexChange(item);
+                }
+                else
+                {
+                    foreach (var existingItem in _storage)
+                    {
+                        OnIndexChange(existingItem);
+                    }
+                }
+            }
+
+            if (_root == null || _head == _root)
+            {
+                IncrementRoot();
+
+                if (OnIndexChange != null)
+                {
+                    if (_addToEnd)
+                    {
+                        foreach (var existingItem in _storage.SkipWhile(e => Object.Equals(e, item)))
+                        {
+                            OnIndexChange(existingItem);
+                        }
+                    }
+                }
+            }
         }
 
         /// <summary>
@@ -139,9 +162,25 @@ namespace Samola.Collections
                 }
                 else
                 {
-                    _root = _root + 1;
+                    IncrementRoot();
                 }
             }
+        }
+
+        private void IncrementRoot()
+        {
+            if (_root == null)
+                _root = CyclicIndex.Create(0, Size);
+            else
+                _root = _root + 1;
+        }
+
+        private void IncrementHead()
+        {
+            if (_head == null)
+                _head = CyclicIndex.Create(0, Size);
+            else
+                _head = _head + 1;
         }
 
         /// <summary>
@@ -151,7 +190,7 @@ namespace Samola.Collections
         {
             _head = null;
             _root = null;
-            for (int i = 0; i < _storage.Length; i++)
+            for (int i = 0; i < _storage.Count; i++)
             {
                 _storage[i] = default(T);
             }
@@ -163,7 +202,7 @@ namespace Samola.Collections
                 return GetAscendingEnumerator();
             else
                 return GetDescendingEnumerator();
-            
+
         }
 
         private IEnumerator<T> GetAscendingEnumerator()
