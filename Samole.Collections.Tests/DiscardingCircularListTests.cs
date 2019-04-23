@@ -6,13 +6,13 @@ using Xunit;
 
 namespace Samole.Collections.Tests
 {
-    public class An_empty_clock_buffer
+    public class An_empty_discarding_circular_list
     {
-        IClockBuffer<int> _buffer;
+        ICircularList<int> _buffer;
 
-        public An_empty_clock_buffer()
+        public An_empty_discarding_circular_list()
         {
-            _buffer = new ClockBuffer<int>(5);
+            _buffer = new DiscardingCircularList<int>(5);
         }
 
         [Fact]
@@ -40,13 +40,13 @@ namespace Samole.Collections.Tests
         }
     }
 
-    public class An_initialized_buffer
+    public class An_initialized_discarding_circular_list
     {
-        IClockBuffer<int> _buffer;
+        ICircularList<int> _buffer;
 
-        public An_initialized_buffer()
+        public An_initialized_discarding_circular_list()
         {
-            _buffer = new ClockBuffer<int>(4, new []{ 1, 2, 3, 4 });
+            _buffer = new DiscardingCircularList<int>(4, new []{ 1, 2, 3, 4 });
         }
 
         [Fact]
@@ -64,7 +64,7 @@ namespace Samole.Collections.Tests
         [Fact]
         public void Contains_the_initial_items_when_initial_array_fits_into_buffer2()
         {
-            _buffer = new ClockBuffer<int>(4, new[] { 1, 2 });
+            _buffer = new DiscardingCircularList<int>(4, new[] { 1, 2 });
 
             Assert.Equal(2, _buffer.Count);
         }
@@ -72,7 +72,7 @@ namespace Samole.Collections.Tests
         [Fact]
         public void Throws_when_initial_array_does_not_fit_into_buffer()
         {
-            Assert.Throws<ArgumentException>(() => new ClockBuffer<int>(4, new[] { 1, 2, 3, 5, 6 }));
+            Assert.Throws<ArgumentException>(() => new DiscardingCircularList<int>(4, new[] { 1, 2, 3, 5, 6 }));
         }
 
         [Fact]
@@ -86,17 +86,17 @@ namespace Samole.Collections.Tests
         }
     }
 
-    public class A_clock_buffer
+    public class A_normal_discarding_circular_list
     {
-        IClockBuffer<int> _buffer;
+        ICircularList<int> _buffer;
 
-        public A_clock_buffer()
+        public A_normal_discarding_circular_list()
         {
-            _buffer = new ClockBuffer<int>(5, new[] { 1, 2, 3 });
+            _buffer = new DiscardingCircularList<int>(5, new[] { 1, 2, 3 }, true);
         }
 
         [Fact]
-        public void Add_items_to_its_end()
+        public void Adds_items_to_its_end()
         {
             _buffer.Add(4);
 
@@ -120,7 +120,7 @@ namespace Samole.Collections.Tests
         }
 
         [Fact]
-        public void Overwrites_items_from_the_beginning()
+        public void Discards_items_from_the_beginning()
         {
             _buffer.Add(4);
             _buffer.Add(5);
@@ -133,6 +133,64 @@ namespace Samole.Collections.Tests
                 , i => Assert.Equal(4, i)
                 , i => Assert.Equal(5, i)
                 , i => Assert.Equal(6, i));
+        }
+
+        [Fact]
+        public void Clearing_removes_all_items()
+        {
+            _buffer.Clear();
+
+            Assert.Equal(0, _buffer.Count);
+        }
+    }
+
+    public class A_reversed_discarding_circular_list
+    {
+        ICircularList<int> _buffer;
+
+        public A_reversed_discarding_circular_list()
+        {
+            _buffer = new DiscardingCircularList<int>(5, new[] { 1, 2, 3 }, false);
+        }
+
+        [Fact]
+        public void Adds_items_to_its_beginning()
+        {
+            _buffer.Add(4);
+
+            Assert.Equal(4, _buffer.Count);
+            Assert.Collection(_buffer
+                , i => Assert.Equal(4, i)
+                , i => Assert.Equal(3, i)
+                , i => Assert.Equal(2, i)
+                , i => Assert.Equal(1, i));
+        }
+
+        [Fact]
+        public void Removes_items_from_its_end()
+        {
+            _buffer.Remove();
+
+            Assert.Equal(2, _buffer.Count);
+            Assert.Collection(_buffer
+                , i => Assert.Equal(3, i)
+                , i => Assert.Equal(2, i));
+        }
+
+        [Fact]
+        public void Discards_items_from_the_end()
+        {
+            _buffer.Add(4);
+            _buffer.Add(5);
+            _buffer.Add(6);
+
+            Assert.Equal(5, _buffer.Count);
+            Assert.Collection(_buffer
+                , i => Assert.Equal(6, i)
+                , i => Assert.Equal(5, i)
+                , i => Assert.Equal(4, i)
+                , i => Assert.Equal(3, i)
+                , i => Assert.Equal(2, i));
         }
 
         [Fact]

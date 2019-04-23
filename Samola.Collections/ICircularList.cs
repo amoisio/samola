@@ -2,7 +2,7 @@
 
 namespace Samola.Collections
 {
-    public interface IClockBuffer<T> : IEnumerable<T>
+    public interface ICircularList<T> : IEnumerable<T>
     {
         /// <summary>
         /// Maximum number of items that can be stored in the buffer
