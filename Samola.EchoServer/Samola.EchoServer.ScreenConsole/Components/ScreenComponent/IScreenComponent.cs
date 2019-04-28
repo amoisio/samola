@@ -1,4 +1,4 @@
-﻿namespace EchoServer.ScreenConsole.Components
+﻿namespace Samola.EchoServer.ScreenConsole.Components
 {
     /// <summary>
     /// Represents a console GUI component

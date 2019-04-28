@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Samola.Collections
 {
-    public interface IClockBuffer<T> : IEnumerable<T>
+    public interface ICircularList<T> : IEnumerable<T>
     {
         /// <summary>
         /// Maximum number of items that can be stored in the buffer
@@ -29,5 +30,7 @@ namespace Samola.Collections
         /// Empties the array
         /// </summary>
         void Clear();
+
+        Action<T> OnIndexChange { get; set; }
     }
 }

@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using EchoServer.ScreenConsole.Components;
+using System.Collections.Generic;
 using System.Linq;
 
-namespace EchoServer.ScreenConsole.Components
+namespace Samola.EchoServer.ScreenConsole.RenderMaps
 {
     /// <summary>
     /// Represents a rendering map - a list of of items in the exact order in which they are supposted to be rendered

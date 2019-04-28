@@ -1,0 +1,41 @@
+Again here....
+
+Who should keep track of the index of the renderable....
+
+Currently I have a ClockBuffer which does exactly what I want: you add items to it and when the maximum size is reached the oldest items are discarded.
+
+This how ever is not enough, I need to be able to tell that when index of an item changes then some piece of code is evaluated.
+
+Additionally, someone or something in my code needs to decide the order in which items are added. 
+This is significant because we can do it in two ways:
+1) Add to the bottom :
+
+ITEM1*    ITEM1		ITEM1	ITEM2*
+<empty>   ITEM2*	ITEM2 	ITEM3*
+<empty>   <empty>	ITEM3*	ITEM4*
+<EOL>     <EOL>		<EOL>	<EOL>
+
+2) Add to the top :
+
+ITEM1*    ITEM2*	ITEM3*	ITEM4*
+<empty>   ITEM1*	ITEM2* 	ITEM3*
+<empty>   <empty>	ITEM1*	ITEM2*
+<EOL>     <EOL>		<EOL>	<EOL>
+
+Items which need to be rendered on the screen have been marked with *
+
+- The order of renderered items should be determined by the component
+- The order setting should affect the following things:
+	- How the Dirty setting is set when adding an item
+	
+	
+	If I can extend the CyclicBuffer functionality so that I could tell it where to add the item
+	1) currently adds to _head + 1, moves _root forward when _head "pushes" it forward, items are read from _root to _head (this corresponds to the case 1)
+	
+	2) Add setting so that adds _root - 1, moves _head backwards when _root "pushed" it backward, item are read from _root to _head (normally)
+		-> Actually, 2 is equal to 1 if I just read items from _head to _root
+	3) Add a property which executes on every item when _root changes (OnIndexChange)
+		-> And this can be met by applying the event to each item when the _head changes
+	
+	
+		

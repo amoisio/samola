@@ -1,8 +1,9 @@
-﻿using EchoServer.ScreenConsole.Renderer;
+﻿using EchoServer.ScreenConsole.Components;
+using EchoServer.ScreenConsole.Renderer;
 using System;
 using System.Text;
 
-namespace EchoServer.ScreenConsole.Components.EventsComponent
+namespace Samola.EchoServer.ScreenConsole.Components.EventsComponent
 {
     public class RenderableEvent : Renderable<Event>
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace EchoServer.ScreenConsole.Components.EventsComponent
+namespace Samola.EchoServer.ScreenConsole.Components.EventsComponent
 {
     /// <summary>
     /// A single HTTP event

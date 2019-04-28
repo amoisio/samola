@@ -1,8 +1,9 @@
-﻿using EchoServer.ScreenConsole.Renderer;
+﻿using EchoServer.ScreenConsole.Components;
+using EchoServer.ScreenConsole.Renderer;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace EchoServer.ScreenConsole.Components.EventsComponent
+namespace Samola.EchoServer.ScreenConsole.Components.EventsComponent
 {
     /// <summary>
     /// Displays a list of the latest HTTP events
@@ -35,7 +36,7 @@ namespace EchoServer.ScreenConsole.Components.EventsComponent
         /// </summary>
         /// <param name="renderer"></param>
         /// <param name="drawArea"></param>
-        protected override void RenderInitialComponent()
+        protected override void RenderComponent()
         {
             RenderTitle();
             RenderHeader();
@@ -92,7 +93,7 @@ namespace EchoServer.ScreenConsole.Components.EventsComponent
                 .Where(renderable => renderable.IsDirty());
         }
 
-        protected override void RenderChangedComponent()
+        protected override void RenderComponentChanges()
         {
             var items = GetDirtyRenderables();
             RenderItems(items);

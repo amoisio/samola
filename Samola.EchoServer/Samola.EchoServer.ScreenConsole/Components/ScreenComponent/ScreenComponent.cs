@@ -1,6 +1,7 @@
 ﻿using EchoServer.ScreenConsole.Renderer;
+using Samola.EchoServer.ScreenConsole.RenderMaps;
 
-namespace EchoServer.ScreenConsole.Components
+namespace Samola.EchoServer.ScreenConsole.Components
 {
     /// <summary>
     /// Base class for a console GUI component
@@ -15,49 +16,36 @@ namespace EchoServer.ScreenConsole.Components
         }
 
         protected IRenderer Renderer { get; }
-        protected RenderMap RenderMap { get; private set; }
+        protected IRenderMap RenderMap { get; private set; }
 
         /// <summary>
         /// Draws the component onto the screen 
         /// </summary>
         public void Initialize()
         {
-            this.RenderMap = new RenderMap(GetRenderMapMaxSize());
-            ClearRenderArea();
-            RenderInitialComponent();
+            this.RenderMap = new RenderMap2(GetRenderMapMaxSize());
+            this.Renderer.ClearDrawArea();
+            RenderComponent();
         }
 
         protected abstract int GetRenderMapMaxSize();
 
-        private void ClearRenderArea()
-        {
-            this.Renderer.ClearDrawArea();
-        }
-
         /// <summary>
         /// Renders the components contents on to the screen
         /// </summary>
-        protected abstract void RenderInitialComponent();
+        protected abstract void RenderComponent();
 
         /// <summary>
         /// Refreshes the component contents to the rendering device
         /// </summary>
         public void Refresh()
         {
-            if (IsComponentDirty())
-            {
-                RenderChangedComponent();
-            }
-        }
-
-        private bool IsComponentDirty()
-        {
-            return this.RenderMap.HasChanges();
+            RenderComponentChanges();
         }
 
         /// <summary>
         /// Renders the changed components onto the screen
         /// </summary>
-        protected abstract void RenderChangedComponent();
+        protected abstract void RenderComponentChanges();
     }
 }
