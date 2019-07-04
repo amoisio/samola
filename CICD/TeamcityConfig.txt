@@ -17,3 +17,8 @@ docker run -it -e SERVER_URL="http://localhost:8111" -v teamcity_agent:C:/BuildA
 docker run -p 8085:8080 -p 8090:50000 -v jenkins_home:/var/jenkins_home jenkins/jenkins 
 
 docker run -it --name teamcity-server-instance -p 8111:8111 -v teamcity_data:C:\ProgramData\JetBrains\TeamCity -v teamcity_logs:C:\TeamCity\logs jetbrains/teamcity-server
+
+
+ocker run -it -e SERVER_URL="<url>"
+    -v <path>:C:/BuildAgent/conf
+    jetbrains/teamcity-agent
