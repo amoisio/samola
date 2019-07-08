@@ -3,7 +3,7 @@
     <img alt="Vue logo" src="./assets/logo.png">
     <HelloWorld msg="Hello, World!"/>
   </div>
-  <h1>Testing</h1>
+  <h1>test</h1>
 </template>
 
 <script>
