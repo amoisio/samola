@@ -9,7 +9,7 @@ namespace MathExtensions
         /// Tests if a number is prime
         /// </summary>
         /// <param name="number">Number to test</param>
-        public static bool IsPrime(long number)
+        public static bool IsPrimeSimple(long number)
         {
             double max = Math.Sqrt(number);
             for (long i = 2; i <= max; i++)
@@ -24,7 +24,7 @@ namespace MathExtensions
 
         private static List<long> _primes = new List<long>(200) { 2 };
 
-        public static bool IsPrimeV2(long number)
+        public static bool IsPrime(long number)
         {
             if (number < 1)
                 throw new ArgumentException("Number must be >= 1.");

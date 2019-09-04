@@ -11,7 +11,7 @@ namespace MathExtensions.Tests
             int count = 2000000;
             for (int i = 2; i < count; i++)
             {
-                Assert.Equal(MathExt.IsPrime(i), MathExt.IsPrimeV2(i));
+                Assert.Equal(MathExt.IsPrimeSimple(i), MathExt.IsPrime(i));
             }
         }
     }

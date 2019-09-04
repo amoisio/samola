@@ -18,7 +18,7 @@ namespace MathExtensions
             var numbers = Enumerable.Range(1, count);
 
             List<long> timings = new List<long>();
-            Console.WriteLine("Base:");
+            Console.WriteLine("Current:");
 
             for (int i = 0; i < reps; i++)
             {
@@ -36,7 +36,7 @@ namespace MathExtensions
             timings.Clear();
 
             Console.WriteLine();
-            Console.Write("V2  :");
+            Console.Write("Simple :");
 
             for (int i = 0; i < reps; i++)
             {
@@ -45,7 +45,7 @@ namespace MathExtensions
                 stopwatch.Restart();
                 foreach (var number in numbers)
                 {
-                    MathExt.IsPrimeV2(number);
+                    MathExt.IsPrimeSimple(number);
                 }
                 timings.Add(stopwatch.ElapsedMilliseconds);
             }
@@ -53,7 +53,7 @@ namespace MathExtensions
             totals.Add("V2", timings.ToArray());
             timings.Clear();
 
-
+            Console.WriteLine();
             foreach (var total in totals)
             {
                 Console.WriteLine($"{total.Key,-4}: Avg: {total.Value.Average()}ms.");
