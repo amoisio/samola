@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace MathExtensions
 {
@@ -24,7 +25,8 @@ namespace MathExtensions
         }
 
         private static readonly object _lock = new object();
-        private static List<long> _primes = new List<long>();
+        private static readonly ReaderWriterLockSlim _primeLock = new ReaderWriterLockSlim();
+        private static HashSet<long> _primes = new HashSet<long>() { 2 };
 
         public static bool IsPrime(long number)
         {
@@ -37,16 +39,38 @@ namespace MathExtensions
             if (number % 2 == 0)
                 return false;
 
+            // The value up to which we to check to determine if the number is prime
             double max = Math.Sqrt(number);
-            int len = _primes.Count;
-            long tempPrime = 1;
-            for(int i = 0; i < len && tempPrime <= max; i++)
+
+            long tempPrime = 2;
+
+            _primeLock.EnterReadLock();
+            try
             {
-                tempPrime = _primes[i];
-                if (number % tempPrime == 0)
+                // First, iterate over existing primes
+                foreach (var prime in _primes)
                 {
-                    return false;
+                    if (prime == number) 
+                    {
+                        return true; // The number is a prime and is already included
+                    }
+
+                    if (number % prime == 0)
+                    {
+                        return false; // The number is divisible, by another number except 1. Hence it is not a prime
+                    }
+
+                    if (prime > max)
+                    {
+                        break; // The current prime is larger than max, we can stop checking
+                    }
+
+                    tempPrime = prime; // Set tempPrime to hold the value of the last iteration
                 }
+            }
+            finally
+            {
+                _primeLock.ExitReadLock();
             }
 
             for (long i = tempPrime; i <= max; i++)
@@ -57,8 +81,17 @@ namespace MathExtensions
                 }
             }
 
-            lock (_lock) {
-                if (!_primes.Contains(number)) _primes.Add(number);
+            _primeLock.EnterWriteLock();
+            try
+            {
+                if (!_primes.Contains(number))
+                {
+                    _primes.Add(number);
+                }
+            }
+            finally
+            {
+                _primeLock.ExitWriteLock();
             }
             return true;
         }
