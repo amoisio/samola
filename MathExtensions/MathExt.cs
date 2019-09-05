@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 
 namespace MathExtensions
@@ -22,7 +23,8 @@ namespace MathExtensions
             return true;
         }
 
-        private static List<long> _primes = new List<long>(200) { 2 };
+        private static readonly object _lock = new object();
+        private static List<long> _primes = new List<long>();
 
         public static bool IsPrime(long number)
         {
@@ -37,7 +39,7 @@ namespace MathExtensions
 
             double max = Math.Sqrt(number);
             int len = _primes.Count;
-            long tempPrime = 0;
+            long tempPrime = 1;
             for(int i = 0; i < len && tempPrime <= max; i++)
             {
                 tempPrime = _primes[i];
@@ -55,7 +57,9 @@ namespace MathExtensions
                 }
             }
 
-            _primes.Add(number);
+            lock (_lock) {
+                if (!_primes.Contains(number)) _primes.Add(number);
+            }
             return true;
         }
     }
