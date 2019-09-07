@@ -7,59 +7,23 @@ namespace MathExtensions
 {
     class Program
     {
+        private static Menu _menu;
+
         static void Main(string[] args)
         {
-            Dictionary<string, long[]> totals = new Dictionary<string, long[]>();
-            Stopwatch stopwatch = new Stopwatch();
-            Console.WriteLine("IsPrime - performance testing:");
+            _menu = new Menu();
+            RegisterExecutables();
 
-            int count = 2000000;
-            int reps = 10;
-            var numbers = Enumerable.Range(1, count);
+            _menu.ReadAndExecute();
 
-            List<long> timings = new List<long>();
-            Console.WriteLine("Current:");
+            Console.WriteLine("Press any key to end...");
+            Console.ReadKey();
+        }
 
-            for (int i = 0; i < reps; i++)
-            {
-                Console.SetCursorPosition(6, 1);
-                Console.Write($"{i + 1} :");
-                stopwatch.Restart();
-                foreach (var number in numbers)
-                {
-                    MathExt.IsPrime(number);
-                }
-                timings.Add(stopwatch.ElapsedMilliseconds);
-            }
-            stopwatch.Stop();
-            totals.Add("Base", timings.ToArray());
-            timings.Clear();
-
-            Console.WriteLine();
-            Console.Write("Simple :");
-
-            for (int i = 0; i < reps; i++)
-            {
-                Console.SetCursorPosition(6, 2);
-                Console.Write($"{i + 1} :");
-                stopwatch.Restart();
-                foreach (var number in numbers)
-                {
-                    MathExt.IsPrimeSimple(number);
-                }
-                timings.Add(stopwatch.ElapsedMilliseconds);
-            }
-            stopwatch.Stop();
-            totals.Add("V2", timings.ToArray());
-            timings.Clear();
-
-            Console.WriteLine();
-            foreach (var total in totals)
-            {
-                Console.WriteLine($"{total.Key,-4}: Avg: {total.Value.Average()}ms.");
-            }
-
-            Console.ReadLine();
+        private static void RegisterExecutables()
+        {
+            _menu.Executables.Add(new IsPrimePerformance());
+            _menu.Executables.Add(new ShowPrimeDecomposition());
         }
     }
 }
