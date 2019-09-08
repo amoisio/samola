@@ -44,5 +44,15 @@ namespace MathExtensions.Tests
                 Assert.Equal(MathExt.IsPrimeBase(i), MathExt.IsPrimeSimple6k(i));
             }
         }
+
+        [Fact]
+        public void IsPrimeSimple_return_the_same_values_as_IsPrimeSimple6kCached()
+        {
+            int count = 2000000;
+            for (int i = 1; i < count; i++)
+            {
+                Assert.Equal(MathExt.IsPrimeBase(i), MathExt.IsPrimeSimple6kCached(i));
+            }
+        }
     }
 }

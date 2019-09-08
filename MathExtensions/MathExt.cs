@@ -13,27 +13,10 @@ namespace MathExtensions
 
     public static class MathExt
     {
-        // Problem with IsPrime checks
-        // - Can use IsPrimeSimple which is simple and does not store state (ie. is pure computation) but is also a slow method
-        // - Or can use the IsPrimeCached which attempts to optimize over the simple algorithm by storing calculated primes in process memory
-
-
-        /// <summary>
-        /// The problem with these algorithm switches is that what happens if one yoinks the switch in the middle of a run
-        /// </summary>
-        //public static PrimeAlgorithm PrimeAlgorithm = PrimeAlgorithm.Simple;
-
-        //public static bool IsPrime(long number)
-        //{
-        //    switch (PrimeAlgorithm)
-        //    {
-        //        case PrimeAlgorithm.Shared:
-        //            return IsPrimeCached(number);
-        //        case PrimeAlgorithm.Simple:
-        //        default:
-        //            return IsPrimeSimple(number);
-        //    }
-        //}
+        public static bool IsPrime(long number)
+        {
+            return IsPrimeSimple6k(number);
+        }
 
         /// <summary>
         /// Tests if a number is prime
@@ -208,7 +191,7 @@ namespace MathExtensions
         }
 
         /// <summary>
-        /// Tests if a number is prime
+        /// Tests if a number is prime (employs the realization that all primes >= 5 can be represented as 6*k +- 1 where k > 0).
         /// </summary>
         /// <param name="number">Number to test</param>
         public static bool IsPrimeSimple6k(long number)
@@ -222,38 +205,94 @@ namespace MathExtensions
             if (number % 2 == 0 || number % 3 == 0)
                 return false;
 
-            for (long i = 2; i * i <= number; i++)
+            for (long k = 1; (6*k - 1) * (6*k - 1) <= number; k++)
             {
-                if (number % i == 0)
-                {
+                long lvalue = 6 * k - 1;
+                if (number % lvalue == 0)
                     return false;
-                }
+
+                long rvalue = 6 * k + 1;
+                if (number % rvalue == 0)
+                    return false;
             }
 
             return true;
+        }
 
-            // init. check all i less than sqrt(n) -> if divisible then not a prime
-            // all primes above 6 are of form 6k +- 1
+        private static readonly ReaderWriterLockSlim _cached6kLock = new ReaderWriterLockSlim();
+        private static HashSet<long> _cached6k = new HashSet<long>() { 2, 3 };
 
-            // for checking primeness it is enough to check divisibility with primes
-            // and in this case we check divisibility with primes
-            // (6k +- 1) less than sqrt(n)
-            for (long i = 5; i * i < number; i++)
+        /// <summary>
+        /// Tests if a number is prime (employs the realization that all primes >= 5 can be represented as 6*k +- 1 where k > 0).
+        /// </summary>
+        /// <param name="number">Number to test</param>
+        public static bool IsPrimeSimple6kCached(long number)
+        {
+            if (number < 1)
+                throw new ArgumentException("Number must be non-negative.");
+
+            if (number <= 3)
+                return true;
+
+            if (number % 2 == 0 || number % 3 == 0)
+                return false;
+
+            long tempPrime = 2;
+
+            _cached6kLock.EnterReadLock();
+            try
             {
-
-            }
-
-            double max = (Math.Sqrt(number) + 1)/6D;
-            
-            for (long i = 1; i <= max; i++)
-            {
-                long kp = 6 * i + 1;
-                long km = 6 * i - 1;
-                if (number % kp == 0 || number % km == 0)
+                // First, iterate over existing primes
+                foreach (var prime in _cached6k)
                 {
-                    return false;
+                    if (prime == number)
+                    {
+                        return true; // The number is a prime and is already included
+                    }
+
+                    if (number % prime == 0)
+                    {
+                        return false; // The number is divisible, by another number except 1. Hence it is not a prime
+                    }
+
+                    if (prime * prime > number)
+                    {
+                        break; // The current prime is larger than max, we can stop checking
+                    }
+
+                    tempPrime = prime; // Set tempPrime to hold the value of the last iteration
                 }
             }
+            finally
+            {
+                _cached6kLock.ExitReadLock();
+            }
+
+            var a = Math.Max((tempPrime + 1) / 6, 1);
+            for (long k = a; (6 * k - 1) * (6 * k - 1) <= number; k++)
+            {
+                long lvalue = 6 * k - 1;
+                if (number % lvalue == 0)
+                    return false;
+
+                long rvalue = 6 * k + 1;
+                if (number % rvalue == 0)
+                    return false;
+            }
+
+            _cached6kLock.EnterWriteLock();
+            try
+            {
+                if (!_cached6k.Contains(number))
+                {
+                    _cached6k.Add(number);
+                }
+            }
+            finally
+            {
+                _cached6kLock.ExitWriteLock();
+            }
+
             return true;
         }
     }

@@ -13,8 +13,8 @@ namespace MathExtensions
         public void Run()
         {
             Dictionary<string, long[]> totals = new Dictionary<string, long[]>();
-            int count = 1000000;
-            int reps = 5;
+            int count = 2000000;
+            int reps = 10;
 
             // Numbers to test
             var numbers = Enumerable.Range(1, count);
@@ -23,6 +23,7 @@ namespace MathExtensions
             totals.Add("Cached", Perforce("Cached", MathExt.IsPrimeCached, reps, numbers, 2));
             totals.Add("CachedNoLocks", Perforce("Cached No Locks", MathExt.IsPrimeCachedNoLocks, reps, numbers, 3));
             totals.Add("Simple6k", Perforce("Simple6k", MathExt.IsPrimeSimple6k, reps, numbers, 4));
+            totals.Add("Simple6kCache", Perforce("Simple6k Cached", MathExt.IsPrimeSimple6kCached, reps, numbers, 5));
 
             Console.WriteLine();
             foreach (var total in totals)
