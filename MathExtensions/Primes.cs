@@ -47,7 +47,7 @@ namespace MathExtensions
         /// <param name="number">Number to test</param>
         public static bool IsPrime(long number)
         {
-            return MathExt.IsPrimeSimple(number); 
+            return MathExt.IsPrime(number); 
         }
     }
 }
