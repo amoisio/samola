@@ -5,12 +5,6 @@ using System.Threading;
 
 namespace MathExtensions
 {
-    public enum PrimeAlgorithm
-    {
-        Simple = 0,
-        Shared = 1
-    }
-
     public static class MathExt
     {
         public static bool IsPrime(long number)
