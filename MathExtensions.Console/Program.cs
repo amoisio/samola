@@ -24,6 +24,8 @@ namespace MathExtensions
         {
             _menu.Executables.Add(new IsPrimePerformance());
             _menu.Executables.Add(new ShowPrimeDecomposition());
+            _menu.Executables.Add(new ComputePrimes());
+            _menu.Executables.Add(new ComparePrimeGenerationTimes());
         }
     }
 }

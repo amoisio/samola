@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using Xunit;
 
 namespace MathExtensions.Tests
@@ -52,6 +53,19 @@ namespace MathExtensions.Tests
             for (int i = 1; i < count; i++)
             {
                 Assert.Equal(MathExt.IsPrimeBase(i), MathExt.IsPrimeSimple6kCached(i));
+            }
+        }
+
+        [Fact]
+        public void Primes_and_PrimesNew_return_the_same_values()
+        {
+            int count = 200000;
+            var control = new Primes(count).ToArray();
+            var nprimes = PrimesNew.Create(count, PrimesGenerationRule.GenerateNPrimes).ToArray();
+
+            for(int i = 0; i < count; i++)
+            {
+                Assert.Equal(control[i], nprimes[i]);
             }
         }
     }
