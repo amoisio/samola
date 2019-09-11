@@ -7,7 +7,7 @@ namespace MathExtensions
     /// <summary>
     /// Calculates the prime decomposition of a given number
     /// </summary>
-    public class PrimeDecomposer
+    public class PrimeDecomposer : IPrimeDecomposer
     {
         private readonly IPrimes _primes;
         public PrimeDecomposer(IPrimes primesGenerator)
