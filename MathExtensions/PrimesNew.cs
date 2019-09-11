@@ -66,7 +66,7 @@ namespace MathExtensions
                 {
                     primes.Add(candidate);
                     yield return candidate;
-                    if (++generated > n) yield break;
+                    if (++generated >= n) yield break;
                 }
             }
         }
