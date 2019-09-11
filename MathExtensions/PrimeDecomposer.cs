@@ -9,8 +9,8 @@ namespace MathExtensions
     /// </summary>
     public class PrimeDecomposer
     {
-        private readonly Primes _primes;
-        public PrimeDecomposer(Primes primesGenerator)
+        private readonly IPrimes _primes;
+        public PrimeDecomposer(IPrimes primesGenerator)
         {
             _primes = primesGenerator;
         }
@@ -18,7 +18,7 @@ namespace MathExtensions
         public Dictionary<long, long> CalculateDecomposition(long number)
         {
             var decomposition = new Dictionary<long, long>();
-            if (Primes.IsPrime(number))
+            if (MathExt.IsPrime(number))
             {
                 decomposition.Add(number, 1);
             }

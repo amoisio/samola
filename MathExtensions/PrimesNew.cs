@@ -9,7 +9,7 @@ namespace MathExtensions
     /// <summary>
     /// Generates N first prime numbers
     /// </summary>
-    public class PrimesNew : IEnumerable<long>
+    public class PrimesNew : IPrimes
     {
         private readonly long _n;
         private readonly PrimesGenerationRule _rule;
@@ -20,7 +20,7 @@ namespace MathExtensions
             _rule = rule;
         }
 
-        public static PrimesNew Create(long n, PrimesGenerationRule rule)
+        public static PrimesNew Create(long n, PrimesGenerationRule rule = PrimesGenerationRule.GenerateNPrimes)
         {
             return new PrimesNew(n, rule);
         }
