@@ -68,5 +68,67 @@ namespace MathExtensions.Tests
                 Assert.Equal(control[i], nprimes[i]);
             }
         }
+
+        [Theory]
+        [InlineData(1, new long[] { 2 })]
+        [InlineData(2, new long[] { 2, 3 })]
+        [InlineData(3, new long[] { 2, 3, 5 })]
+        [InlineData(4, new long[] { 2, 3, 5, 7 })]
+        [InlineData(6, new long[] { 2, 3, 5, 7, 11, 13 })]
+        [InlineData(7, new long[] { 2, 3, 5, 7, 11, 13, 17 })]
+        [InlineData(5, new long[] { 2, 3, 5, 7, 11 })]
+        public void Primes_generate_primes_correctly(int maxPrimes, long[] expectedPrimes)
+        {
+            Primes primes = new Primes(maxPrimes);
+
+            long[] actual = primes.ToArray();
+
+            Assert.Equal(expectedPrimes, actual);
+        }
+
+        [Theory]
+        [InlineData(1, new long[] { 2 })]
+        [InlineData(2, new long[] { 2, 3 })]
+        [InlineData(3, new long[] { 2, 3, 5 })]
+        [InlineData(4, new long[] { 2, 3, 5, 7 })]
+        [InlineData(6, new long[] { 2, 3, 5, 7, 11, 13 })]
+        [InlineData(7, new long[] { 2, 3, 5, 7, 11, 13, 17 })]
+        [InlineData(5, new long[] { 2, 3, 5, 7, 11 })]
+        public void PrimesNew_generate_primes_correctly(int maxPrimes, long[] expectedPrimes)
+        {
+            var primes = PrimesNew.Create(maxPrimes, PrimesGenerationRule.GenerateNPrimes);
+
+            long[] actual = primes.ToArray();
+
+            Assert.Equal(expectedPrimes, actual);
+        }
+
+        [Fact]
+        public void PrimesNew_and_Primes_generate_the_same_primes()
+        {
+            int maxPrimes = 5000;
+
+            var primes1 = new Primes(maxPrimes).ToArray();
+            var primes2 = PrimesNew.Create(maxPrimes, PrimesGenerationRule.GenerateNPrimes).ToArray();
+
+            for (int i = 0; i < primes1.Length; i++)
+            {
+                Assert.Equal(primes1[i], primes2[i]);
+            }
+        }
+
+        [Fact]
+        public void Prime_calculators_return_the_same_primes()
+        {
+            var primes = new Primes(20).ToArray();
+            var primesFast = new Primes(20).ToArray();
+
+            for (int i = 0; i < 20; i++)
+            {
+                Assert.Equal(primes[i], primesFast[i]);
+            }
+
+
+        }
     }
 }
