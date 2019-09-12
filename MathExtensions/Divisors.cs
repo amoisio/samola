@@ -21,5 +21,17 @@ namespace MathExtensions
 
             return D;
         }
+
+        //public static HashSet<long> Divisors(int number, IPrimeDecomposer decomposer)
+        //{
+        //    var decomposition = decomposer.CalculateDecomposition(number);
+        //}
+
+        //public static HashSet<long> ProperDivisors(int number, IPrimeDecomposer decomposer)
+        //{
+        //    var divisors = NumberOfDivisors(number, decomposer);
+
+        //    divisors.Where()
+        //}
     }
 }
