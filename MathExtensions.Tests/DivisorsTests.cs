@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Xunit;
 using MathExtensions;
+using System.Linq;
 
 namespace MathExtensions.Tests
 {
@@ -76,6 +77,30 @@ namespace MathExtensions.Tests
             Assert.Contains(60, divisors);
             Assert.Contains(90, divisors);
             Assert.Contains(180, divisors);
+        }
+
+        [Fact]
+        public void ProperDivisors_contain_all_divisors_except_the_number_itself()
+        {
+            var divisors = Divisors.GetProperDivisors(180);
+            Assert.Contains(1, divisors);
+            Assert.Contains(2, divisors);
+            Assert.Contains(3, divisors);
+            Assert.Contains(4, divisors);
+            Assert.Contains(5, divisors);
+            Assert.Contains(6, divisors);
+            Assert.Contains(9, divisors);
+            Assert.Contains(10, divisors);
+            Assert.Contains(12, divisors);
+            Assert.Contains(15, divisors);
+            Assert.Contains(18, divisors);
+            Assert.Contains(20, divisors);
+            Assert.Contains(30, divisors);
+            Assert.Contains(36, divisors);
+            Assert.Contains(45, divisors);
+            Assert.Contains(60, divisors);
+            Assert.Contains(90, divisors);
+            Assert.DoesNotContain(180, divisors);
         }
     }
 }

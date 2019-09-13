@@ -26,6 +26,14 @@ namespace MathExtensions
             return D;
         }
 
+        public static HashSet<long> GetDivisors(long number)
+        {
+            var primes = PrimesGenerator.Create(number, PrimesGenerationRule.GenaratePrimesUpToN);
+            var decomposer = new PrimeDecomposer(primes);
+            var decomposition = decomposer.CalculateDecomposition(number);
+            return GetDivisors(decomposition);
+        }
+
         public static HashSet<long> GetDivisors(Dictionary<long, long> decomposition)
         {
             // Calculate a helper array
@@ -63,11 +71,11 @@ namespace MathExtensions
         //    var decomposition = decomposer.CalculateDecomposition(number);
         //}
 
-        //public static HashSet<long> ProperDivisors(int number, IPrimeDecomposer decomposer)
-        //{
-        //    var divisors = NumberOfDivisors(number, decomposer);
-
-        //    divisors.Where()
-        //}
+        public static HashSet<long> GetProperDivisors(long n)
+        {
+            var divisors = GetDivisors(n);
+            divisors.Remove(n);
+            return divisors;
+        }
     }
 }
