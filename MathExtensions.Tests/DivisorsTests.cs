@@ -48,5 +48,34 @@ namespace MathExtensions.Tests
 
             Assert.Equal(expectedDivisors, D);
         }
+
+        [Fact]
+        public void Divisors_return_all_divisors_of_a_number()
+        {
+            int number = 180;
+
+            var decomposer = new PrimeDecomposer(PrimesNew.Create(number, PrimesGenerationRule.GenaratePrimesUpToN));
+            var decomposition = decomposer.CalculateDecomposition(number);
+            var divisors = Divisors.GetDivisors(decomposition);
+
+            Assert.Contains(1, divisors);
+            Assert.Contains(2, divisors);
+            Assert.Contains(3, divisors);
+            Assert.Contains(4, divisors);
+            Assert.Contains(5, divisors);
+            Assert.Contains(6, divisors);
+            Assert.Contains(9, divisors);
+            Assert.Contains(10, divisors);
+            Assert.Contains(12, divisors);
+            Assert.Contains(15, divisors);
+            Assert.Contains(18, divisors);
+            Assert.Contains(20, divisors);
+            Assert.Contains(30, divisors);
+            Assert.Contains(36, divisors);
+            Assert.Contains(45, divisors);
+            Assert.Contains(60, divisors);
+            Assert.Contains(90, divisors);
+            Assert.Contains(180, divisors);
+        }
     }
 }

@@ -5,8 +5,34 @@ using System.Threading;
 
 namespace MathExtensions
 {
-    public static class MathExt
+    public static partial class MathExt
     {
+        public static long Pow(int x, int y)
+        {
+            if (y < 0)
+                throw new ArgumentException("Exponent must be non-negative.");
+
+            if (y == 0)
+                return 1;
+
+            if (y == 1)
+                return x;
+
+            if (x % 2 == 0)
+            {
+                return x << y - 1;
+            }
+            else
+            {
+                long result = 1;
+                while (y-- > 0)
+                {
+                    result *= x;
+                }
+                return result;
+            }
+        }
+
         public static bool IsPrime(long number)
         {
             return IsPrimeSimple6k(number);
