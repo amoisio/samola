@@ -18,7 +18,7 @@ namespace MathExtensions.Tests
 
             var decomposition = decomposer.CalculateDecomposition(number);
 
-            var expected = new Dictionary<long, long>()
+            var expected = new Dictionary<int, int>()
             {
                 { 2, 1 },
                 { 7, 1 }
@@ -34,7 +34,7 @@ namespace MathExtensions.Tests
 
             var decomposition = decomposer.CalculateDecomposition(75);
 
-            var expected = new Dictionary<long, long>()
+            var expected = new Dictionary<int, int>()
             {
                 { 3, 1 },
                 { 5, 2 }
@@ -50,7 +50,7 @@ namespace MathExtensions.Tests
 
             var decomposition = decomposer.CalculateDecomposition(420);
 
-            var expected = new Dictionary<long, long>()
+            var expected = new Dictionary<int, int>()
             {
                 { 2, 2 },
                 { 3, 1 },
@@ -68,7 +68,7 @@ namespace MathExtensions.Tests
 
             var decomposition = decomposer.CalculateDecomposition(65536);
 
-            var expected = new Dictionary<long, long>()
+            var expected = new Dictionary<int, int>()
             {
                 { 2, 16 },
             };
@@ -83,7 +83,7 @@ namespace MathExtensions.Tests
 
             var decomposition = decomposer.CalculateDecomposition(14);
 
-            var expected = new Dictionary<long, long>()
+            var expected = new Dictionary<int, int>()
             {
                 { 2, 1 },
                 { 7, 1 }
@@ -99,7 +99,7 @@ namespace MathExtensions.Tests
 
             var decomposition = decomposer.CalculateDecomposition(75);
 
-            var expected = new Dictionary<long, long>()
+            var expected = new Dictionary<int, int>()
             {
                 { 3, 1 },
                 { 5, 2 }
@@ -115,7 +115,7 @@ namespace MathExtensions.Tests
 
             var decomposition = decomposer.CalculateDecomposition(420);
 
-            var expected = new Dictionary<long, long>()
+            var expected = new Dictionary<int, int>()
             {
                 { 2, 2 },
                 { 3, 1 },
@@ -133,7 +133,7 @@ namespace MathExtensions.Tests
 
             var decomposition = decomposer.CalculateDecomposition(65536);
 
-            var expected = new Dictionary<long, long>()
+            var expected = new Dictionary<int, int>()
             {
                 { 2, 16 },
             };

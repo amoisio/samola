@@ -20,13 +20,13 @@ namespace MathExtensions
             return new DivisorCalculator(primesCreator);
         }
 
-        public long NumberOfDivisors(int number)
+        public int NumberOfDivisors(int number)
         {
             var decomposition = _primeDecomposer.CalculateDecomposition(number);
             return NumberOfDivisors(decomposition);
         }
 
-        public long NumberOfDivisors(Dictionary<long, long> decomposition)
+        public int NumberOfDivisors(Dictionary<int, int> decomposition)
         {
             // if the decomposition only consists of the trivial prime 1 then return 1
             if (decomposition.Count == 1 && decomposition.First().Key == 1)
@@ -38,13 +38,13 @@ namespace MathExtensions
             return D;
         }
 
-        public HashSet<long> GetDivisors(long number)
+        public HashSet<int> GetDivisors(int number)
         {
             var decomposition = _primeDecomposer.CalculateDecomposition(number);
             return GetDivisors(decomposition);
         }
 
-        public HashSet<long> GetProperDivisors(long n)
+        public HashSet<int> GetProperDivisors(int n)
         {
             var divisors = GetDivisors(n);
             divisors.Remove(n);
@@ -52,7 +52,7 @@ namespace MathExtensions
         }
 
 
-        public HashSet<long> GetDivisors(Dictionary<long, long> decomposition)
+        public HashSet<int> GetDivisors(Dictionary<int, int> decomposition)
         {
             // Calculate a helper array
             var darr = decomposition.ToArray();
@@ -69,15 +69,15 @@ namespace MathExtensions
             }
 
             // Calculate the divisors
-            long n = NumberOfDivisors(decomposition);
-            HashSet<long> divisors = new HashSet<long>();
+            int n = NumberOfDivisors(decomposition);
+            HashSet<int> divisors = new HashSet<int>();
             for (int i = 0; i < n; i++)
             {
-                long temp = 1L;
+                int temp = 1;
                 for (int j = 0; j < len; j++)
                 {
                     int exponent = (i / t[j]) % m1[j];
-                    temp *= MathExt.Pow((int)darr[j].Key, exponent);
+                    temp *= MathExt.Pow(darr[j].Key, exponent);
                 }
                 divisors.Add(temp);
             }

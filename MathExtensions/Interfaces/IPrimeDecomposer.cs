@@ -6,6 +6,6 @@ namespace MathExtensions
 {
     public interface IPrimeDecomposer
     {
-        Dictionary<long, long> CalculateDecomposition(long number);
+        Dictionary<int, int> CalculateDecomposition(int number);
     }
 }

@@ -20,9 +20,9 @@ namespace MathExtensions.Primes
             return new PrimeDecomposer(primesCreator);
         }
 
-        public Dictionary<long, long> CalculateDecomposition(long number)
+        public Dictionary<int, int> CalculateDecomposition(int number)
         {
-            var decomposition = new Dictionary<long, long>();
+            var decomposition = new Dictionary<int, int>();
             if (MathExt.IsPrime(number))
             {
                 decomposition.Add(number, 1);

@@ -6,7 +6,7 @@ namespace MathExtensions
 {
     public static partial class MathExt
     {
-        public static long Pow(int x, int y)
+        public static int Pow(int x, int y)
         {
             if (y < 0)
                 throw new ArgumentException("Exponent must be non-negative.");
@@ -23,7 +23,7 @@ namespace MathExtensions
             }
             else
             {
-                long result = 1;
+                int result = 1;
                 while (y-- > 0)
                 {
                     result *= x;

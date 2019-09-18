@@ -5,18 +5,18 @@ namespace MathExtensions
 {
     public class AmicableNumberCalculator
     {
-        private readonly HashSet<long> _nonAmicableNumbers;
-        private readonly Dictionary<long, long> _amicableNumbers;
+        private readonly HashSet<int> _nonAmicableNumbers;
+        private readonly Dictionary<int, int> _amicableNumbers;
         private readonly DivisorCalculator _divisorCalculator;
 
         public AmicableNumberCalculator(IPrimesCreator primesCreator)
         {
             _divisorCalculator = new DivisorCalculator(primesCreator);
-            _nonAmicableNumbers = new HashSet<long>();
-            _amicableNumbers = new Dictionary<long, long>();
+            _nonAmicableNumbers = new HashSet<int>();
+            _amicableNumbers = new Dictionary<int, int>();
         }
 
-        public long? FindAmicableNumber(long a)
+        public int? FindAmicableNumber(int a)
         {
             if (_amicableNumbers.ContainsKey(a))
                 return _amicableNumbers[a];
@@ -30,7 +30,7 @@ namespace MathExtensions
             if (b > 0)
             {
                 var sumDivisors = _divisorCalculator.GetProperDivisors(b);
-                long bSum = sumDivisors.Sum(); // d(b) = sumSum
+                int bSum = sumDivisors.Sum(); // d(b) = sumSum
                 if (a != b && a == bSum)
                 {
 
