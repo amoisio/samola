@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using MathExtensions.Primes;
 
 namespace MathExtensions
 {
@@ -11,25 +12,14 @@ namespace MathExtensions
 
         public void Run()
         {
-            PrimeDecomposer primeDecomposer = new PrimeDecomposer(new Primes(200));
-
             Console.Write("Print divisors for > ");
             int number = Int32.Parse(Console.ReadLine());
 
-            //Console.Write($"{number} : ");
-            //foreach (var factor in decomposition)
-            //{
-            //    Console.Write($"({factor.Key}, {factor.Value}) ");
-            //}
+            var primesCreator = new Primes6kFactory(number, true);
+            var primeDecomposer = new PrimeDecomposer(primesCreator);
+            var divisorCalculator = new DivisorCalculator(primesCreator);
 
-            //int[] a = new int[3] { 0, 1, 2 };
-            //int[] b = new int[3] { 0, 1, 2 };
-            //int[] c = new int[2] { 0, 1 };
-
-            //List<int[]> l = new List<int[]>()
-            //{
-            //    a, b, c
-            //};
+            
 
             // Calculate the prime decomposition of the number
             var decomposition = primeDecomposer.CalculateDecomposition(number);
@@ -49,7 +39,7 @@ namespace MathExtensions
             }
 
             // Calculate the divisors
-            long n = Divisors.NumberOfDivisors(decomposition);
+            long n = divisorCalculator.NumberOfDivisors(decomposition);
             long[] divisors = new long[n];
             for (int i = 0; i < n; i++)
             {

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MathExtensions.Primes;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -13,11 +14,12 @@ namespace MathExtensions
         public void Run()
         {
             Stopwatch stopwatch = new Stopwatch();
-            for (int k = 0; k < 20; k++)
+            for (int k = 0; k < 10; k++)
             {
                 int n = (int)Math.Pow(10, 5) * (k + 1);
-                Primes control = new Primes(n);
-                PrimesNew nprimes = PrimesNew.Create(n, PrimesGenerationRule.GenerateNPrimes);
+                var control = new PrimesSimple(n);
+                var nprimes = PrimesNew.Create(n, PrimesGenerationRule.GenerateNPrimes);
+                var cprimes = Primes6k.Create(n, true);
 
                 stopwatch.Restart();
                 var ccount = control.ToArray();
@@ -28,6 +30,11 @@ namespace MathExtensions
                 var ncount = nprimes.ToArray();
                 stopwatch.Stop();
                 Console.WriteLine($"NPrimes (10^{k}): {stopwatch.ElapsedMilliseconds}ms");
+
+                stopwatch.Restart();
+                var cacount = cprimes.ToArray();
+                stopwatch.Stop();
+                Console.WriteLine($"CPrimes (10^{k}): {stopwatch.ElapsedMilliseconds}ms");
             }
         }
     }

@@ -2,19 +2,31 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using MathExtensions;
+using MathExtensions.Primes;
 
 namespace MathExtensions
 {
-    public static class Divisors
+    public class DivisorCalculator
     {
-        public static long NumberOfDivisors(int number, IPrimeDecomposer decomposer)
+        private IPrimeDecomposer _primeDecomposer;
+
+        public DivisorCalculator(IPrimesCreator primesCreator)
         {
-            var decomposition = decomposer.CalculateDecomposition(number);
+            _primeDecomposer = new PrimeDecomposer(primesCreator);
+        }
+
+        public static DivisorCalculator Create(IPrimesCreator primesCreator)
+        {
+            return new DivisorCalculator(primesCreator);
+        }
+
+        public long NumberOfDivisors(int number)
+        {
+            var decomposition = _primeDecomposer.CalculateDecomposition(number);
             return NumberOfDivisors(decomposition);
         }
 
-        public static long NumberOfDivisors(Dictionary<long, long> decomposition)
+        public long NumberOfDivisors(Dictionary<long, long> decomposition)
         {
             // if the decomposition only consists of the trivial prime 1 then return 1
             if (decomposition.Count == 1 && decomposition.First().Key == 1)
@@ -26,15 +38,21 @@ namespace MathExtensions
             return D;
         }
 
-        public static HashSet<long> GetDivisors(long number)
+        public HashSet<long> GetDivisors(long number)
         {
-            var primes = PrimesGenerator.Create(number, PrimesGenerationRule.GenaratePrimesUpToN);
-            var decomposer = new PrimeDecomposer(primes);
-            var decomposition = decomposer.CalculateDecomposition(number);
+            var decomposition = _primeDecomposer.CalculateDecomposition(number);
             return GetDivisors(decomposition);
         }
 
-        public static HashSet<long> GetDivisors(Dictionary<long, long> decomposition)
+        public HashSet<long> GetProperDivisors(long n)
+        {
+            var divisors = GetDivisors(n);
+            divisors.Remove(n);
+            return divisors;
+        }
+
+
+        public HashSet<long> GetDivisors(Dictionary<long, long> decomposition)
         {
             // Calculate a helper array
             var darr = decomposition.ToArray();
@@ -66,16 +84,5 @@ namespace MathExtensions
             return divisors;
         }
 
-        //public static HashSet<long> Divisors(int number, IPrimeDecomposer decomposer)
-        //{
-        //    var decomposition = decomposer.CalculateDecomposition(number);
-        //}
-
-        public static HashSet<long> GetProperDivisors(long n)
-        {
-            var divisors = GetDivisors(n);
-            divisors.Remove(n);
-            return divisors;
-        }
     }
 }

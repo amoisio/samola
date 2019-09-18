@@ -27,6 +27,9 @@ namespace MathExtensions
             _menu.Executables.Add(new ComputePrimes());
             _menu.Executables.Add(new ComparePrimeGenerationTimes());
             _menu.Executables.Add(new ShowDivisors());
+            _menu.Executables.Add(new AmicableNumbersPerformance());
+            _menu.Executables.Add(new PrimeRulePerformance());
+            _menu.Executables.Add(new PrimeGenerationPerformance());
         }
     }
 }

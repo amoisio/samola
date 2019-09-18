@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using MathExtensions.Primes;
 
 namespace MathExtensions
 {
@@ -21,7 +22,7 @@ namespace MathExtensions
             Console.Write("> ");
             int u = Int32.Parse(Console.ReadLine());
 
-            var control = new Primes(n).ToArray();
+            var control = new PrimesSimple(n).ToArray();
             var nprimes = PrimesNew.Create(n, PrimesGenerationRule.GenerateNPrimes).ToArray();
             var uprimes = PrimesNew.Create(u, PrimesGenerationRule.GenaratePrimesUpToN).ToArray();
 

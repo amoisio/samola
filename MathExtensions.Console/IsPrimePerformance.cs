@@ -8,7 +8,7 @@ namespace MathExtensions
 {
     class IsPrimePerformance : IConsoleExcutable
     {
-        public string ExecutableName => "IsPrime - performance testing";
+        public string ExecutableName => "Measure performances of different IsPrime tests.";
 
         public void Run()
         {

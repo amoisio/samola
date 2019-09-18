@@ -2,17 +2,22 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace MathExtensions
+namespace MathExtensions.Primes
 {
     /// <summary>
     /// Calculates the prime decomposition of a given number
     /// </summary>
     public class PrimeDecomposer : IPrimeDecomposer
     {
-        private readonly IPrimes _primes;
-        public PrimeDecomposer(IPrimes primesGenerator)
+        private readonly IPrimesCreator _primesCreator;
+        public PrimeDecomposer(IPrimesCreator primesCreator)
         {
-            _primes = primesGenerator;
+            _primesCreator = primesCreator;
+        }
+
+        public static PrimeDecomposer Create(IPrimesCreator primesCreator)
+        {
+            return new PrimeDecomposer(primesCreator);
         }
 
         public Dictionary<long, long> CalculateDecomposition(long number)
@@ -25,12 +30,12 @@ namespace MathExtensions
             else
             {
                 var temp = number;
-                foreach (var prime in _primes)
+                foreach (var prime in _primesCreator.Create())
                 {
                     if (temp == 1)
                         break;
 
-                    while ( temp % prime == 0) {
+                    while (temp % prime == 0) {
                         if (decomposition.ContainsKey(prime))
                             decomposition[prime]++;
                         else

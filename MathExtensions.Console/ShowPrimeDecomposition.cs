@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using MathExtensions.Primes;
 
 namespace MathExtensions
 {
@@ -10,7 +11,8 @@ namespace MathExtensions
 
         public void Run()
         {
-            PrimeDecomposer primeDecomposer = new PrimeDecomposer(new Primes(200));
+            var primesCreator = new Primes6kFactory(200, true);
+            PrimeDecomposer primeDecomposer = new PrimeDecomposer(primesCreator);
 
             Console.Write("Print decompositions up to > ");
             int upTo = Int32.Parse(Console.ReadLine());

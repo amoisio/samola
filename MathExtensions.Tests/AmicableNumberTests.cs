@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Xunit;
+using MathExtensions.Primes;
 
 namespace MathExtensions.Tests
 {
@@ -12,7 +13,9 @@ namespace MathExtensions.Tests
         [InlineData(284, 220)]
         public void AmicableNumbers_works(int number, int expected)
         {
-            var amicableNumber = AmicableNumber.FindAmicableNumber(number);
+            var primesCreator = new Primes6kFactory(number, true);
+            var aNumber = new AmicableNumberCalculator(primesCreator);
+            var amicableNumber = aNumber.FindAmicableNumber(number);
             Assert.Equal(expected, amicableNumber);
         }
     }

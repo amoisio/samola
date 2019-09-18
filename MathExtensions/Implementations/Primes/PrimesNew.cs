@@ -1,31 +1,32 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
-namespace MathExtensions
+namespace MathExtensions.Primes
 {
-    /// <summary>
-    /// Generates N first prime numbers
-    /// </summary>
-    public class PrimesNew : IPrimes
+    [Obsolete("Use Primes6k instead")]
+    public class PrimesNew : PrimesBase
     {
-        private readonly long _n;
+        private readonly int _n;
         private readonly PrimesGenerationRule _rule;
 
-        private PrimesNew(long n, PrimesGenerationRule rule)
+        /// <summary>
+        /// Does not use cache.
+        /// </summary>
+        private PrimesNew(int n, PrimesGenerationRule rule) : base(n, false)
         {
             _n = n;
             _rule = rule;
         }
 
-        public static PrimesNew Create(long n, PrimesGenerationRule rule = PrimesGenerationRule.GenerateNPrimes)
+        public static PrimesNew Create(int n, PrimesGenerationRule rule = PrimesGenerationRule.GenerateNPrimes)
         {
             return new PrimesNew(n, rule);
         }
 
-        public IEnumerator<long> GetEnumerator()
+        /// <summary>
+        /// Does not utilize the 'from' argument.   
+        /// </summary>
+        protected override IEnumerable<int> GetPrimes(int[] previousPrimes)
         {
             switch (_rule)
             {
@@ -37,9 +38,11 @@ namespace MathExtensions
             }
         }
 
-        private static IEnumerator<long> GetNPrimes(long n)
+        // TODO: Add comments
+        // TODO: What if we run out of primes because of too low n?
+        private static IEnumerable<int> GetNPrimes(int n)
         {
-            List<long> primes = new List<long>();
+            List<int> primes = new List<int>();
             int generated = 0;
             foreach(var candidate in GetPrimeCandidates())
             {
@@ -71,7 +74,7 @@ namespace MathExtensions
             }
         }
 
-        private static IEnumerable<long> GetPrimeCandidates()
+        private static IEnumerable<int> GetPrimeCandidates()
         {
             yield return 2;
             yield return 3;
@@ -84,7 +87,7 @@ namespace MathExtensions
             }
         }
 
-        private static IEnumerator<long> GetUpToNPrimes(long n)
+        private static IEnumerable<int> GetUpToNPrimes(int n)
         {
             if (n >= 2) yield return 2;
             if (n >= 3) yield return 3;
@@ -92,24 +95,12 @@ namespace MathExtensions
             {
                 for (int k = 1; 6 * k - 1 <= n; k++)
                 {
-                    long lvalue = 6 * k - 1;
+                    int lvalue = 6 * k - 1;
                     if (MathExt.IsPrime(lvalue)) yield return lvalue;
-                    long rvalue = 6 * k + 1;
+                    int rvalue = 6 * k + 1;
                     if (rvalue <= n && MathExt.IsPrime(rvalue)) yield return rvalue;
                 }
             }
         }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetEnumerator();
-        }
     }
-
-    public enum PrimesGenerationRule
-    {
-        GenerateNPrimes = 0,
-        GenaratePrimesUpToN = 1
-    }
-
 }
