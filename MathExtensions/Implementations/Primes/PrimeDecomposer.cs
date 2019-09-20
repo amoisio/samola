@@ -9,10 +9,10 @@ namespace MathExtensions.Primes
     /// </summary>
     public class PrimeDecomposer : IPrimeDecomposer
     {
-        private readonly IPrimesCreator _primesCreator;
+        private readonly IPrimes _primes;
         public PrimeDecomposer(IPrimesCreator primesCreator)
         {
-            _primesCreator = primesCreator;
+            _primes = primesCreator.Create();
         }
 
         public static PrimeDecomposer Create(IPrimesCreator primesCreator)
@@ -30,7 +30,7 @@ namespace MathExtensions.Primes
             else
             {
                 var temp = number;
-                foreach (var prime in _primesCreator.Create())
+                foreach (var prime in _primes)
                 {
                     if (temp == 1)
                         break;
