@@ -4,7 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <Description>MathExtensions</Description>
-    <Version>1.0.4</Version>
+    <Version>1.0.5</Version>
     <RunPostBuildEvent>Always</RunPostBuildEvent>
   </PropertyGroup>
 
