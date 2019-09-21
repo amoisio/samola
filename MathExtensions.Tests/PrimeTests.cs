@@ -1,5 +1,7 @@
 using MathExtensions.Primes;
 using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using Xunit;
 
@@ -64,7 +66,7 @@ namespace MathExtensions.Tests
             var control = new PrimesSimple(count).ToArray();
             var nprimes = PrimesNew.Create(count, PrimesGenerationRule.GenerateNPrimes).ToArray();
 
-            for(int i = 0; i < count; i++)
+            for (int i = 0; i < count; i++)
             {
                 Assert.Equal(control[i], nprimes[i]);
             }
@@ -135,7 +137,7 @@ namespace MathExtensions.Tests
         {
             var primes = new Primes6kFactory(PrimesBase.MAX_COUNT, true);
             long p = 0;
-            foreach(var prime in primes.Create())
+            foreach (var prime in primes.Create())
             {
                 p = prime;
                 if (prime == 17)
@@ -201,6 +203,44 @@ namespace MathExtensions.Tests
             int[] actual = primes.ToArray();
 
             Assert.Equal(expectedPrimes, actual);
+        }
+
+        [Fact]
+        public void Iterating_over_a_large_cached_prime_collection_should_be_faster_than_non_cached()
+        {
+            var nonCached = Primes6k.Create(Primes6k.MAX_COUNT, false);
+            var cached = Primes6k.Create(Primes6k.MAX_COUNT, true);
+
+            int reps = 10;
+            int maxCount = 1000000;
+
+            Stopwatch stopwatch = new Stopwatch();
+
+            List<long> nonCachedTotals = new List<long>(reps);
+            List<long> cachedTotals = new List<long>();
+            for (int i = 0; i < reps; i++)
+            {
+                int count = 0;
+                stopwatch.Restart();
+                foreach (var prime in nonCached)
+                {
+                    if (count++ > maxCount)
+                        break;
+                }
+                stopwatch.Stop();
+                nonCachedTotals.Add(stopwatch.ElapsedMilliseconds);
+                count = 0;
+                stopwatch.Restart();
+                foreach (var prime in cached)
+                {
+                    if (count++ > maxCount)
+                        break;
+                }
+                stopwatch.Stop();
+                cachedTotals.Add(stopwatch.ElapsedMilliseconds);
+            }
+
+            Assert.True(nonCachedTotals.Average() > cachedTotals.Average());
         }
     }
 }

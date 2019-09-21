@@ -7,7 +7,7 @@ namespace MathExtensions.Primes
     /// <summary>
     /// Generates N first prime numbers
     /// </summary>
-    public class Primes6k : PrimesBase
+    public class Primes6k : PrimesBase2
     {
         private Primes6k(int maxCount, bool useCache)
             : base(maxCount, useCache)
