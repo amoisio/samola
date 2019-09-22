@@ -5,7 +5,7 @@ using System.Text;
 namespace MathExtensions
 {
     /// <summary>
-    /// Integer wrapper creates a nice development experience when using MathExtension.
+    /// Integer wrapper creates a nicer development experience when using MathExtension.
     /// All classes
     /// </summary>
     public class IntegerWrapper
