@@ -8,13 +8,12 @@ namespace MathExtensions.Implementations
         //
         // Constants
         //
-        public const int MAX_COUNT = 2000000;
         public const int INIT_CACHE_CAPACITY = 15000;
 
         /// <summary>
-        /// Maximum count of items that the enumerable can return
+        /// Backstop limit for enumerating items
         /// </summary>
-        private readonly int _maxCount;
+        private readonly EnumerateLimit<T> _limit;
 
         /// <summary>
         /// Set to true to collect computed items into the cache
@@ -28,6 +27,7 @@ namespace MathExtensions.Implementations
         // /CACHE
 
         public T LastYielded { get; private set; }
+        public int YieldedCount { get; private set; }
 
         static BaseCachingCollection()
         {
@@ -38,14 +38,17 @@ namespace MathExtensions.Implementations
                 _cacheLock = new object();
         }
 
-        protected BaseCachingCollection(int maxCount, bool useCache)
+        protected BaseCachingCollection(EnumerateLimit<T> limit, bool useCache)
         {
-            _maxCount = maxCount;
+            _limit = limit;
             _useCache = useCache;
         }
 
         public IEnumerator<T> GetEnumerator()
         {
+            this.YieldedCount = 0;
+            this.LastYielded = default(T);
+
             if (_useCache)
                 return GetCachedEnumerator();
             else
@@ -54,22 +57,23 @@ namespace MathExtensions.Implementations
 
         private IEnumerator<T> GetCachedEnumerator()
         {
-            int yieldedCount = 0;
             T tempItem = default(T);
             int tempIndex = 0;
             int maxIndexToYield = _cache.Count - 1;
 
-            while (yieldedCount < _maxCount)
+            while (_limit.CanStillYield(this.YieldedCount, this.LastYielded))
             {
                 // Yield cached items from [temp, max]
                 for (int i = tempIndex; i <= maxIndexToYield; i++)
                 {
                     tempItem = _cache[i];
-                    yield return tempItem;
-                    LastYielded = tempItem;
 
-                    if (++yieldedCount >= _maxCount)
+                    if (!_limit.CanStillYield(this.YieldedCount, tempItem))
                         yield break;
+
+                    this.YieldedCount++;
+                    this.LastYielded = tempItem;
+                    yield return tempItem;
                 }
 
                 lock (_cacheLock)
@@ -86,13 +90,13 @@ namespace MathExtensions.Implementations
                         var cachedItems = _cache.ToArray();
                         foreach (var newItem in GetItems(cachedItems))
                         {
-                            yield return newItem;
-                            LastYielded = newItem;
-
-                            _cache.Add(newItem);
-
-                            if (++yieldedCount == _maxCount)
+                            if (!_limit.CanStillYield(this.YieldedCount, newItem))
                                 yield break;
+
+                            this.YieldedCount++;
+                            this.LastYielded = newItem;
+                            yield return newItem;
+                            _cache.Add(newItem);
                         };
                     }
                 }
@@ -101,14 +105,14 @@ namespace MathExtensions.Implementations
 
         private IEnumerator<T> GetNonCachedEnumerator()
         {
-            int yieldedCount = 0;
             foreach (var newItem in GetItems(null))
             {
-                yield return newItem;
-                LastYielded = newItem;
-
-                if (++yieldedCount >= _maxCount)
+                if (!_limit.CanStillYield(this.YieldedCount, newItem))
                     yield break;
+
+                this.YieldedCount++;
+                this.LastYielded = newItem;
+                yield return newItem;
             };
         }
 
