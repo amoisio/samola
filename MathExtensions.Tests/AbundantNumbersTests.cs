@@ -1,4 +1,5 @@
 ﻿using MathExtensions.Cache;
+using MathExtensions.Construction;
 using MathExtensions.Enumerables;
 using MathExtensions.Implementations;
 using MathExtensions.Primes;
@@ -22,7 +23,7 @@ namespace MathExtensions.Tests
             _primesCreator = new Primes6kFactory(PrimesBase.MAX_COUNT, true);
             _numberClassifier = new NumberClassifier(_primesCreator);
             _divisorCalculator = new DivisorCalculator(_primesCreator);
-            _provider = new EnumerableCacheProvider<int>();
+            _provider = new EnumerableCacheProvider<int>("abundantNumbers");
         }
 
         [Fact]

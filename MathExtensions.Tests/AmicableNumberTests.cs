@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Xunit;
 using MathExtensions.Primes;
+using MathExtensions.Construction;
 
 namespace MathExtensions.Tests
 {

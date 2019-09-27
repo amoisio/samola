@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace MathExtensions.Enumerables
 {
-    public class PrimeNumbers : CalculatedEnumerableBase<int>
+    public class PrimeNumbers : CalculatedEnumerable<int>
     {
         private readonly IntegerLimit _integerLimit;
 

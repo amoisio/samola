@@ -9,7 +9,7 @@ namespace MathExtensions.Enumerables
     /// for faster access in subsequent enumerations.
     /// </summary>
     /// <typeparam name="T">Type to enumerate</typeparam>
-    public abstract class CalculatedEnumerableBase<T> : IEnumerable<T>
+    public abstract class CalculatedEnumerable<T> : IEnumerable<T>
     {
         /// <summary>
         /// Indicates whether cache is in use.
@@ -31,7 +31,7 @@ namespace MathExtensions.Enumerables
         /// The enumerable cache
         /// TODO: Consider including a cache provider as well
         /// </summary>
-        private static IEnumerableCache<T> _cache;
+        private IEnumerableCache<T> _cache;
 
         /// <summary>
         /// Cache provider. Called
@@ -51,7 +51,7 @@ namespace MathExtensions.Enumerables
         /// <summary>
         /// Calculated enumerable without a cache
         /// </summary>
-        protected CalculatedEnumerableBase()
+        protected CalculatedEnumerable()
         {
             _cacheProvider = null;
         }
@@ -59,7 +59,7 @@ namespace MathExtensions.Enumerables
         /// <summary>
         /// Calculated enumerable with a cache created by the cache provider
         /// </summary>
-        protected CalculatedEnumerableBase(IEnumerableCacheProvider<T> cacheProvider)
+        protected CalculatedEnumerable(IEnumerableCacheProvider<T> cacheProvider)
         {
             _cacheProvider = cacheProvider;
         }

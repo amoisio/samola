@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MathExtensions.Construction;
+using System;
 using System.Collections.Generic;
 using System.Text;
 

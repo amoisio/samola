@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.Caching.Memory;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -13,13 +14,20 @@ namespace MathExtensions.Cache
     }
 
     /// <summary>
-    /// Cache provider for a list base enumerable cache
+    /// Cache provider for enumerable values
     /// </summary>
     public class EnumerableCacheProvider<T> : IEnumerableCacheProvider<T>
     {
+        private readonly string _cacheName;
+        public EnumerableCacheProvider(string cacheName)
+        {
+            _cacheName = cacheName;
+        }
+
         public IEnumerableCache<T> Create()
         {
-            return new EnumerableCache<T>();
+            var memoryCache = new MemoryCache(new MemoryCacheOptions());
+            return new EnumerableCache<T>(memoryCache, _cacheName);
         }
     }
 }

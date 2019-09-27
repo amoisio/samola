@@ -5,6 +5,7 @@ using Xunit;
 using MathExtensions;
 using System.Linq;
 using MathExtensions.Primes;
+using MathExtensions.Construction;
 
 namespace MathExtensions.Tests
 {

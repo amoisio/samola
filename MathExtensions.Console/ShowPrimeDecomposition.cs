@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using MathExtensions.Construction;
 using MathExtensions.Primes;
 
 namespace MathExtensions

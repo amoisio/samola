@@ -4,6 +4,7 @@ using System.Linq;
 using System.Collections.Generic;
 using MathExtensions;
 using MathExtensions.Primes;
+using MathExtensions.Construction;
 
 namespace MathExtensions.Tests
 {

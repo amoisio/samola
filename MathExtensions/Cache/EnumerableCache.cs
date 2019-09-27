@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace MathExtensions.Cache
 {
@@ -19,25 +20,34 @@ namespace MathExtensions.Cache
     public class EnumerableCache<T> : IEnumerableCache<T>
     {
         public const int INIT_CACHE_SIZE = 10000;
-        private readonly List<T> _cache;
+        private readonly IMemoryCache _cache;
+        private readonly string _cacheName;
 
-        public EnumerableCache()
+        public EnumerableCache(IMemoryCache memoryCache, string cacheName)
         {
-            _cache = new List<T>(INIT_CACHE_SIZE);
+            _cache = memoryCache;
+            _cacheName = cacheName;
+
+            using (var cacheEntry = _cache.CreateEntry(_cacheName))
+            {
+                cacheEntry.Value = new List<T>(INIT_CACHE_SIZE);
+            }
         }
 
-        public T this[int index] => _cache[index];
+        public T this[int index] => CachedItems[index];
 
-        public int Count => _cache.Count;
+        public int Count => CachedItems.Count;
 
         public void Add(T item)
         {
-            _cache.Add(item);
+            CachedItems.Add(item);
         }
 
         public T[] ToArray()
         {
-            return _cache.ToArray();
+            return CachedItems.ToArray();
         }
+
+        private List<T> CachedItems => _cache.Get<List<T>>(_cacheName);
     }
 }

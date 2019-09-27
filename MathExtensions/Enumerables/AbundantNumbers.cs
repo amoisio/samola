@@ -1,11 +1,12 @@
 ﻿using MathExtensions.Cache;
+using MathExtensions.Construction;
 using MathExtensions.Implementations;
 using System;
 using System.Collections.Generic;
 
 namespace MathExtensions.Enumerables
 {
-    public class AbundantNumbers : CalculatedEnumerableBase<int>
+    public class AbundantNumbers : CalculatedEnumerable<int>
     {
         private readonly NumberClassifier _classifier;
         private readonly IntegerLimit _integerLimit;
@@ -42,22 +43,3 @@ namespace MathExtensions.Enumerables
         }
     }
 }
-
-
-
-//public AbundantNumbers(IPrimesCreator primesCreator) 
-//    : base()
-//{
-//    _classifier = new NumberClassifier(primesCreator);
-//}
-
-//public AbundantNumbers(IPrimesCreator primesCreator, int maxCount, bool useCache) : base(maxCount, useCache)
-//{
-//    _classifier = new NumberClassifier(primesCreator);
-//}
-
-//public AbundantNumbers(IPrimesCreator primesCreator, EnumerateLimit<int> limit, bool useCache) 
-//    : base(limit, useCache)
-//{
-//    _classifier = new NumberClassifier(primesCreator);
-//}

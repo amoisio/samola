@@ -1,4 +1,6 @@
-﻿namespace MathExtensions.Primes
+﻿using MathExtensions.Primes;
+
+namespace MathExtensions.Construction
 {
     public class PrimesSimpleFactory : IPrimesCreator
     {
