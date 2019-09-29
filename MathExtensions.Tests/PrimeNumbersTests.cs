@@ -19,7 +19,7 @@ namespace MathExtensions.Tests
         public PrimeNumbersTests()
         {
             _primesCreator = new Primes6kFactory(PrimesBase.MAX_COUNT, true);
-            _provider = new EnumerableCacheProvider<int>("primes");
+            _provider = null; // new EnumerableCacheProvider<int>("primes");
         }
 
         [Theory]

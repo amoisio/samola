@@ -19,24 +19,19 @@ namespace MathExtensions.Enumerables
         /// <summary>
         /// Gets the contents of the cache.
         /// </summary>
-        public T[] CachedItems => _cache?.ToArray();
+        public T[] CachedItems => _cache?.Items;
+
+        /// <summary>
+        /// Cache settings
+        /// </summary>
+        private IEnumerableCache<T> _cache;
+        private readonly IEnumerableCacheProvider<T> _cacheProvider;
 
         /// <summary>
         /// Calculation lock guarantees that enumerated value are calculated and added to the cache synchronously. 
         /// Ie. each value is calculated only once and placed in the cache in deterministic order.
         /// </summary>
         private static object _calculationLock = new object();
-
-        /// <summary>
-        /// The enumerable cache
-        /// TODO: Consider including a cache provider as well
-        /// </summary>
-        private IEnumerableCache<T> _cache;
-
-        /// <summary>
-        /// Cache provider. Called
-        /// </summary>
-        private readonly IEnumerableCacheProvider<T> _cacheProvider;
 
         /// <summary>
         /// The last item yielded by the enumerable
@@ -49,7 +44,7 @@ namespace MathExtensions.Enumerables
         public int YieldedCount { get; private set; }
 
         /// <summary>
-        /// Calculated enumerable without a cache
+        /// Calculated enumerable without cache
         /// </summary>
         protected CalculatedEnumerable()
         {
@@ -57,8 +52,11 @@ namespace MathExtensions.Enumerables
         }
 
         /// <summary>
-        /// Calculated enumerable with a cache created by the cache provider
+        /// Calculated enumerable with cache
         /// </summary>
+        /// <param name="cacheProvider"></param>
+        /// <param name="cachePrefix"></param>
+        /// <param name="capacity"></param>
         protected CalculatedEnumerable(IEnumerableCacheProvider<T> cacheProvider)
         {
             _cacheProvider = cacheProvider;
@@ -71,9 +69,7 @@ namespace MathExtensions.Enumerables
 
             if (this.UseCache)
             {
-                if (_cache == null)
-                    _cache = _cacheProvider.Create();
-
+                _cache = _cacheProvider.CreateOrGet();
                 return GetCachedEnumerator();
             }
             else
@@ -124,7 +120,7 @@ namespace MathExtensions.Enumerables
                         // 
                         // TODO: Find a way around this issue. Ideally, waiting threads could yield newly cached values as soon
                         // as they are added in the cache. And after that remain waiting for the lock.
-                        var cachedItems = _cache.ToArray();
+                        var cachedItems = _cache.Items;
                         foreach (var newItem in GetItems(cachedItems))
                         {
                             if (!CanYield(newItem))

@@ -1,33 +1,52 @@
 ﻿using Microsoft.Extensions.Caching.Memory;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace MathExtensions.Cache
 {
     /// <summary>
     /// Represents a factory for instantiating enumerable cache objects
     /// </summary>
-    public interface IEnumerableCacheProvider<T>
+    public interface IEnumerableCacheProvider<TEnumerable>
     {
-        IEnumerableCache<T> Create();
+        /// <summary>
+        /// Creates or gets a handle to a memory cache.
+        /// </summary>
+        IEnumerableCache<TEnumerable> CreateOrGet();
     }
 
     /// <summary>
-    /// Cache provider for enumerable values
+    /// Cache provider for a list of values. Time complexities are that of a List.
     /// </summary>
-    public class EnumerableCacheProvider<T> : IEnumerableCacheProvider<T>
+    public class EnumerableCacheProvider<TEnumerable> : IEnumerableCacheProvider<TEnumerable>
     {
-        private readonly string _cacheName;
-        public EnumerableCacheProvider(string cacheName)
+        private readonly IMemoryCache _memoryCache;
+        private readonly string _cachePrefix;
+        private readonly int _capacity;
+        public EnumerableCacheProvider(IMemoryCache memoryCache, string cachePrefix, int capacity)
         {
-            _cacheName = cacheName;
+            _memoryCache = memoryCache;
+            _cachePrefix = cachePrefix;
+            _capacity = capacity;
         }
 
-        public IEnumerableCache<T> Create()
+        public IEnumerableCache<TEnumerable> CreateOrGet()
         {
-            var memoryCache = new MemoryCache(new MemoryCacheOptions());
-            return new EnumerableCache<T>(memoryCache, _cacheName);
+            string cacheName = GetCacheKey(_cachePrefix);
+
+            if (!_memoryCache.TryGetValue(cacheName, out object value))
+            {
+                using (var cacheEntry = _memoryCache.CreateEntry(cacheName))
+                {
+                    cacheEntry.Value = new List<TEnumerable>(_capacity);
+                }
+            }
+
+            return new EnumerableCache<TEnumerable>(_memoryCache, cacheName);
+        }
+
+        public string GetCacheKey(string cacheName)
+        {
+            return $"{cacheName}.{typeof(TEnumerable).Name}.list";
         }
     }
 }

@@ -4,50 +4,47 @@ using Microsoft.Extensions.Caching.Memory;
 namespace MathExtensions.Cache
 {
     /// <summary>
-    /// Represents an enumerable, read-only, cache
+    /// Represents an enumerable cache.
     /// </summary>
-    public interface IEnumerableCache<T>
+    public interface IEnumerableCache<TEnumerable>
     {
-        T[] ToArray();
+        TEnumerable[] Items { get; }
         int Count { get; }
-        T this[int index] { get; }
-        void Add(T item);
+        TEnumerable this[int index] { get; }
+        void Add(TEnumerable item);
     }
 
-    /// <summary>
-    /// Simple enumerable cache based on encapsulating a list.
-    /// </summary>
-    public class EnumerableCache<T> : IEnumerableCache<T>
+    public class EnumerableCache<TEnumerable> : IEnumerableCache<TEnumerable>
     {
-        public const int INIT_CACHE_SIZE = 10000;
-        private readonly IMemoryCache _cache;
+        private readonly IMemoryCache _memoryCache;
         private readonly string _cacheName;
+
+        /// <summary>
+        /// All writes to the cached array of items are synchronized with this.
+        /// </summary>
+        private static readonly object _writeLock = new object();
 
         public EnumerableCache(IMemoryCache memoryCache, string cacheName)
         {
-            _cache = memoryCache;
+            _memoryCache = memoryCache;
             _cacheName = cacheName;
-
-            using (var cacheEntry = _cache.CreateEntry(_cacheName))
-            {
-                cacheEntry.Value = new List<T>(INIT_CACHE_SIZE);
-            }
         }
 
-        public T this[int index] => CachedItems[index];
+        public TEnumerable this[int index] => CachedItems[index];
 
         public int Count => CachedItems.Count;
 
-        public void Add(T item)
+        public void Add(TEnumerable item)
         {
-            CachedItems.Add(item);
+            lock (_writeLock)
+            {
+                
+                CachedItems.Add(item);
+            }
         }
 
-        public T[] ToArray()
-        {
-            return CachedItems.ToArray();
-        }
+        public TEnumerable[] Items => CachedItems.ToArray();
 
-        private List<T> CachedItems => _cache.Get<List<T>>(_cacheName);
+        private List<TEnumerable> CachedItems => _memoryCache.Get<List<TEnumerable>>(_cacheName);
     }
 }

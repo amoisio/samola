@@ -23,7 +23,7 @@ namespace MathExtensions.Tests
             _primesCreator = new Primes6kFactory(PrimesBase.MAX_COUNT, true);
             _numberClassifier = new NumberClassifier(_primesCreator);
             _divisorCalculator = new DivisorCalculator(_primesCreator);
-            _provider = new EnumerableCacheProvider<int>("abundantNumbers");
+            _provider = null; // new EnumerableCacheProvider<int>("abundantNumbers");
         }
 
         [Fact]
