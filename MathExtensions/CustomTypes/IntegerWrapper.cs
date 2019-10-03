@@ -1,8 +1,9 @@
-﻿using System;
+﻿using MathExtensions.Primes;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace MathExtensions
+namespace MathExtensions.CustomTypes
 {
     /// <summary>
     /// Integer wrapper creates a nicer development experience when using MathExtension.

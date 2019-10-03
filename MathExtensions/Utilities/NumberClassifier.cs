@@ -1,18 +1,17 @@
-﻿using MathExtensions.Construction;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
-namespace MathExtensions.Implementations
+namespace MathExtensions.Utilities
 {
+    // TODO: Comments
     public class NumberClassifier
     {
         private readonly DivisorCalculator _divisorCalculator;
         private readonly Dictionary<int, NumberClassification> _classifications;
-        public NumberClassifier(IPrimesCreator primesCreator)
+
+        public NumberClassifier(DivisorCalculator divisorCalculator)
         {
-            _divisorCalculator = new DivisorCalculator(primesCreator);
+            _divisorCalculator = divisorCalculator;
             _classifications = new Dictionary<int, NumberClassification>();
         }
 
@@ -35,6 +34,5 @@ namespace MathExtensions.Implementations
                     return NumberClassification.Perfect;
             }
         }
-
     }
 }

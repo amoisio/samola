@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 using MathExtensions.Construction;
+using MathExtensions.Enumerables;
 using MathExtensions.Primes;
+using MathExtensions.Utilities;
 
 namespace MathExtensions
 {
@@ -16,10 +18,13 @@ namespace MathExtensions
             Console.Write("Compute amicable numbers up to > ");
             int number = Int32.Parse(Console.ReadLine());
 
-            var primesCreator = new Primes6kFactory(number, true);
+            var maxValueLimit = new MaxValueLimit(number);
+            var decomposer = new PrimeDecomposer(maxValueLimit);
+            var divisor = new DivisorCalculator(decomposer);
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
-            var amicableNumber = new AmicableNumberCalculator(primesCreator);
+            
+            var amicableNumber = new AmicableNumberCalculator(divisor);
 
             for (int i = 1; i <= number; i++)
             {

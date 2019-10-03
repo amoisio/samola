@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using MathExtensions;
 using MathExtensions.Primes;
 using MathExtensions.Construction;
+using MathExtensions.Utilities;
+using MathExtensions.Enumerables;
 
 namespace MathExtensions.Tests
 {
@@ -14,8 +16,8 @@ namespace MathExtensions.Tests
         public void PrimeDecomposition_decomposes_number_14_correctly()
         {
             var number = 14;
-            var primesCreator = new Primes6kFactory(number, true);
-            var decomposer = new PrimeDecomposer(primesCreator);
+            var maxValueLimit = new MaxValueLimit(number);
+            var decomposer = new PrimeDecomposer(maxValueLimit);
 
             var decomposition = decomposer.CalculateDecomposition(number);
 
@@ -30,8 +32,8 @@ namespace MathExtensions.Tests
         [Fact]
         public void PrimeDecomposition_decomposes_number_75_correctly()
         {
-            var primesCreator = new Primes6kFactory(75, true);
-            var decomposer = new PrimeDecomposer(primesCreator);
+            var maxValueLimit = new MaxValueLimit(75);
+            var decomposer = new PrimeDecomposer(maxValueLimit);
 
             var decomposition = decomposer.CalculateDecomposition(75);
 
@@ -46,8 +48,8 @@ namespace MathExtensions.Tests
         [Fact]
         public void PrimeDecomposition_decomposes_number_420_correctly()
         {
-            var primesCreator = new Primes6kFactory(420, true);
-            var decomposer = new PrimeDecomposer(primesCreator);
+            var maxValueLimit = new MaxValueLimit(420);
+            var decomposer = new PrimeDecomposer(maxValueLimit);
 
             var decomposition = decomposer.CalculateDecomposition(420);
 
@@ -64,8 +66,8 @@ namespace MathExtensions.Tests
         [Fact]
         public void PrimeDecomposition_decomposes_number_65536_correctly()
         {
-            var primesCreator = new Primes6kFactory(65536, true);
-            var decomposer = new PrimeDecomposer(primesCreator);
+            var maxValueLimit = new MaxValueLimit(65536);
+            var decomposer = new PrimeDecomposer(maxValueLimit);
 
             var decomposition = decomposer.CalculateDecomposition(65536);
 
@@ -79,8 +81,7 @@ namespace MathExtensions.Tests
         [Fact]
         public void PrimeDecomposition_decomposes_number_14_correctly_with_unlimited_primes()
         {
-            var primesCreator = new Primes6kFactory(PrimesBase.MAX_COUNT, true);
-            var decomposer = PrimeDecomposer.Create(primesCreator);
+            var decomposer = new PrimeDecomposer(CountLimit.Default);
 
             var decomposition = decomposer.CalculateDecomposition(14);
 
@@ -95,8 +96,7 @@ namespace MathExtensions.Tests
         [Fact]
         public void PrimeDecomposition_decomposes_number_75_correctly_with_unlimited_primes()
         {
-            var primesCreator = new Primes6kFactory(PrimesBase.MAX_COUNT, true);
-            var decomposer = PrimeDecomposer.Create(primesCreator);
+            var decomposer = new PrimeDecomposer(CountLimit.Default);
 
             var decomposition = decomposer.CalculateDecomposition(75);
 
@@ -111,8 +111,7 @@ namespace MathExtensions.Tests
         [Fact]
         public void PrimeDecomposition_decomposes_number_420_correctly_with_unlimited_primes()
         {
-            var primesCreator = new Primes6kFactory(PrimesBase.MAX_COUNT, true);
-            var decomposer = PrimeDecomposer.Create(primesCreator);
+            var decomposer = new PrimeDecomposer(CountLimit.Default);
 
             var decomposition = decomposer.CalculateDecomposition(420);
 
@@ -129,8 +128,7 @@ namespace MathExtensions.Tests
         [Fact]
         public void PrimeDecomposition_decomposes_number_65536_correctly_with_unlimited_primes()
         {
-            var primesCreator = new Primes6kFactory(PrimesBase.MAX_COUNT, true);
-            var decomposer = PrimeDecomposer.Create(primesCreator);
+            var decomposer = new PrimeDecomposer(CountLimit.Default);
 
             var decomposition = decomposer.CalculateDecomposition(65536);
 

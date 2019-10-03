@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace MathExtensions
+namespace MathExtensions.Primes
 {
     /// <summary>
     /// Represents a collection of prime number

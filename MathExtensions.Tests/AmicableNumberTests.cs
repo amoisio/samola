@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Xunit;
-using MathExtensions.Primes;
-using MathExtensions.Construction;
+﻿using Xunit;
+using MathExtensions.Utilities;
+using MathExtensions.Enumerables;
 
 namespace MathExtensions.Tests
 {
@@ -14,8 +11,10 @@ namespace MathExtensions.Tests
         [InlineData(284, 220)]
         public void AmicableNumbers_works(int number, int expected)
         {
-            var primesCreator = new Primes6kFactory(number, true);
-            var aNumber = new AmicableNumberCalculator(primesCreator);
+            var maxValueLimit = new MaxValueLimit(number);
+            var decomposer = new PrimeDecomposer(maxValueLimit);
+            var divisor = new DivisorCalculator(decomposer);
+            var aNumber = new AmicableNumberCalculator(divisor);
             var amicableNumber = aNumber.FindAmicableNumber(number);
             Assert.Equal(expected, amicableNumber);
         }

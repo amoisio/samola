@@ -5,20 +5,15 @@ using System.Text;
 using MathExtensions.Construction;
 using MathExtensions.Primes;
 
-namespace MathExtensions
+namespace MathExtensions.Utilities
 {
     public class DivisorCalculator
     {
-        private IPrimeDecomposer _primeDecomposer;
+        private PrimeDecomposer _primeDecomposer;
 
-        public DivisorCalculator(IPrimesCreator primesCreator)
+        public DivisorCalculator(PrimeDecomposer primeDecomposer)
         {
-            _primeDecomposer = new PrimeDecomposer(primesCreator);
-        }
-
-        public static DivisorCalculator Create(IPrimesCreator primesCreator)
-        {
-            return new DivisorCalculator(primesCreator);
+            _primeDecomposer = primeDecomposer;
         }
 
         public int NumberOfDivisors(int number)
@@ -84,6 +79,5 @@ namespace MathExtensions
             }
             return divisors;
         }
-
     }
 }

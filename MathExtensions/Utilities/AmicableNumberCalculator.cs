@@ -1,8 +1,9 @@
 ﻿using MathExtensions.Construction;
+using MathExtensions.Primes;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace MathExtensions
+namespace MathExtensions.Utilities
 {
     public class AmicableNumberCalculator
     {
@@ -10,9 +11,9 @@ namespace MathExtensions
         private readonly Dictionary<int, int> _amicableNumbers;
         private readonly DivisorCalculator _divisorCalculator;
 
-        public AmicableNumberCalculator(IPrimesCreator primesCreator)
+        public AmicableNumberCalculator(DivisorCalculator divisorCalculator)
         {
-            _divisorCalculator = new DivisorCalculator(primesCreator);
+            _divisorCalculator = divisorCalculator;
             _nonAmicableNumbers = new HashSet<int>();
             _amicableNumbers = new Dictionary<int, int>();
         }

@@ -12,8 +12,9 @@
     }
 
     /// <summary>
-    /// Represents the state of an enumerable state machine. Encapsulates the item to be yielded next as well as the count of items
-    /// yielded so far. When yieldedCount == 0 then item is default(T).
+    /// Represents the state of an MathExtensions.Enumerables enumerable. 
+    /// Encapsulates the item to be yielded next as well as the count of items yielded so far. 
+    /// When yieldedCount == 0 then item is default(T).
     /// </summary>
     public class EnumerationState<T>
     {

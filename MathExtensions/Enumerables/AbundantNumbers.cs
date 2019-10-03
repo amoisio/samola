@@ -1,26 +1,18 @@
 ﻿using MathExtensions.Cache;
-using MathExtensions.Construction;
-using MathExtensions.Implementations;
-using System;
+using MathExtensions.Utilities;
 using System.Collections.Generic;
 
 namespace MathExtensions.Enumerables
 {
+    // TODO: Comments...
     public class AbundantNumbers : CalculatedEnumerable<int>
     {
         private readonly NumberClassifier _classifier;
-        private readonly IntegerLimit _integerLimit;
 
-        public AbundantNumbers(IPrimesCreator primesCreator, IntegerLimit integerLimit, IEnumerableCacheProvider<int> cacheProvider)
-            : base(cacheProvider)
+        public AbundantNumbers(NumberClassifier classifier, IntegerLimit integerLimit, IEnumerableCacheProvider<int> cacheProvider)
+            : base(integerLimit, cacheProvider)
         {
-            _integerLimit = integerLimit;
-            _classifier = new NumberClassifier(primesCreator);
-        }
-
-        protected override bool CanYield(EnumerationState<int> state)
-        {
-            return _integerLimit.LimitOK(state);
+            _classifier = classifier;
         }
 
         protected override IEnumerable<int> GetItems(int[] previousItems)

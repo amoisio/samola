@@ -2,6 +2,7 @@
 using MathExtensions.Construction;
 using MathExtensions.Enumerables;
 using MathExtensions.Primes;
+using Microsoft.Extensions.Caching.Memory;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,16 +11,12 @@ using Xunit;
 
 namespace MathExtensions.Tests
 {
-    public class PrimeNumbersTests
+    public class PrimeNumbersTestsCache
     {
-
-        private EnumerableCacheProvider<int> _provider;
-        private IPrimesCreator _primesCreator;
-
-        public PrimeNumbersTests()
+        private EnumerableListCacheProvider<int> _provider;
+        public PrimeNumbersTestsCache()
         {
-            _primesCreator = new Primes6kFactory(PrimesBase.MAX_COUNT, true);
-            _provider = null; // new EnumerableCacheProvider<int>("primes");
+            _provider = new EnumerableListCacheProvider<int>("primes", 1000000);
         }
 
         [Theory]
@@ -88,6 +85,42 @@ namespace MathExtensions.Tests
                 Assert.False(prime >= 17);
                 Assert.True(prime < 17);
             }
+        }
+
+        [Fact]
+        public void CountLimit_forces_prime_number_generation_to_halt()
+        {
+            int maxCount = 1000;
+            var primes = new PrimeNumbers(new CountLimit(maxCount), _provider);
+
+            int count = 0;
+            foreach(var prime in primes)
+            {
+                count++;
+            }
+
+            Assert.Equal(maxCount, count);
+            Assert.Equal(maxCount, primes.Count());
+        }
+
+        [Fact]
+        public void MaxValueLimit_forces_prime_number_generation_to_halt()
+        {
+            int maxValue = 950;
+            var primes = new PrimeNumbers(new MaxValueLimit(maxValue), _provider);
+
+            int temp = 0;
+            foreach (var prime in primes)
+            {
+                temp = prime;
+            }
+            Assert.True(temp < maxValue);
+
+            int count = primes.Count();
+            primes = new PrimeNumbers(new CountLimit(count + 1), _provider);
+            temp = primes.Last();
+
+            Assert.True(temp > maxValue);
         }
     }
 }

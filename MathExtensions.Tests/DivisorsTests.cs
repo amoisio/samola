@@ -6,6 +6,8 @@ using MathExtensions;
 using System.Linq;
 using MathExtensions.Primes;
 using MathExtensions.Construction;
+using MathExtensions.Utilities;
+using MathExtensions.Enumerables;
 
 namespace MathExtensions.Tests
 {
@@ -29,8 +31,9 @@ namespace MathExtensions.Tests
         [InlineData(3022111, 4)]
         public void Divisors_should_calculate_the_correct_amount(int number, int expectedDivisors)
         {
-            var primesCreator = new Primes6kFactory(number, true);
-            DivisorCalculator divisorCalculator = new DivisorCalculator(primesCreator);
+            var maxValueLimit = new MaxValueLimit(number);
+            var decomposer = new PrimeDecomposer(maxValueLimit);
+            DivisorCalculator divisorCalculator = new DivisorCalculator(decomposer);
             var D = divisorCalculator.NumberOfDivisors(number);
 
             Assert.Equal(expectedDivisors, D);
@@ -47,8 +50,9 @@ namespace MathExtensions.Tests
         [InlineData(3, 2)]
         public void Divisors_should_return_1_and_prime_for_prime_numbers(int number, int expectedDivisors)
         {
-            var primesCreator = new Primes6kFactory(number, true);
-            DivisorCalculator divisorCalculator = new DivisorCalculator(primesCreator);
+            var maxValueLimit = new MaxValueLimit(number);
+            var decomposer = new PrimeDecomposer(maxValueLimit);
+            DivisorCalculator divisorCalculator = new DivisorCalculator(decomposer);
             var D = divisorCalculator.NumberOfDivisors(number);
 
             Assert.Equal(expectedDivisors, D);
@@ -58,11 +62,10 @@ namespace MathExtensions.Tests
         public void Divisors_return_all_divisors_of_a_number()
         {
             int number = 180;
-
-            var primesCreator = new Primes6kFactory(number, true);
-            var decomposer = new PrimeDecomposer(primesCreator);
+            var maxValueLimit = new MaxValueLimit(number);
+            var decomposer = new PrimeDecomposer(maxValueLimit);
             var decomposition = decomposer.CalculateDecomposition(number);
-            DivisorCalculator divisorCalculator = new DivisorCalculator(primesCreator);
+            DivisorCalculator divisorCalculator = new DivisorCalculator(decomposer);
             var divisors = divisorCalculator.GetDivisors(decomposition);
 
             Assert.Contains(1, divisors);
@@ -89,8 +92,9 @@ namespace MathExtensions.Tests
         public void ProperDivisors_contain_all_divisors_except_the_number_itself()
         {
             var number = 180;
-            var primesCreator = new Primes6kFactory(number, true);
-            DivisorCalculator divisorCalculator = new DivisorCalculator(primesCreator);
+            var maxValueLimit = new MaxValueLimit(number);
+            var decomposer = new PrimeDecomposer(maxValueLimit);
+            DivisorCalculator divisorCalculator = new DivisorCalculator(decomposer);
             var divisors = divisorCalculator.GetProperDivisors(number);
             Assert.Contains(1, divisors);
             Assert.Contains(2, divisors);
@@ -130,8 +134,8 @@ namespace MathExtensions.Tests
         [InlineData(3022111, 4)]
         public void Divisors_should_calculate_the_correct_amount_with_unlimited_primes(int number, int expectedDivisors)
         {
-            var primesCreator = new Primes6kFactory(PrimesBase.MAX_COUNT, true);
-            var divisorCalculator = DivisorCalculator.Create(primesCreator);
+            var decomposer = new PrimeDecomposer(CountLimit.Default);
+            var divisorCalculator = new DivisorCalculator(decomposer);
             var D = divisorCalculator.NumberOfDivisors(number);
 
             Assert.Equal(expectedDivisors, D);
@@ -148,8 +152,8 @@ namespace MathExtensions.Tests
         [InlineData(3, 2)]
         public void Divisors_should_return_1_and_prime_for_prime_numbers_with_unlimited_primes(int number, int expectedDivisors)
         {
-            var primesCreator = new Primes6kFactory(PrimesBase.MAX_COUNT, true);
-            var divisorCalculator = DivisorCalculator.Create(primesCreator);
+            var decomposer = new PrimeDecomposer(CountLimit.Default);
+            var divisorCalculator = new DivisorCalculator(decomposer);
             var D = divisorCalculator.NumberOfDivisors(number);
 
             Assert.Equal(expectedDivisors, D);
@@ -159,8 +163,8 @@ namespace MathExtensions.Tests
         public void Divisors_return_all_divisors_of_a_number_with_unlimited_primes()
         {
             int number = 180;
-            var primesCreator = new Primes6kFactory(PrimesBase.MAX_COUNT, true);
-            var divisorCalculator = DivisorCalculator.Create(primesCreator);
+            var decomposer = new PrimeDecomposer(CountLimit.Default);
+            var divisorCalculator = new DivisorCalculator(decomposer);
             var divisors = divisorCalculator.GetDivisors(number);
 
             Assert.Contains(1, divisors);
@@ -186,8 +190,8 @@ namespace MathExtensions.Tests
         [Fact]
         public void ProperDivisors_contain_all_divisors_except_the_number_itself_with_unlimited_primes()
         {
-            var primesCreator = new Primes6kFactory(PrimesBase.MAX_COUNT, true);
-            var divisorCalculator = DivisorCalculator.Create(primesCreator);
+            var decomposer = new PrimeDecomposer(CountLimit.Default);
+            var divisorCalculator = new DivisorCalculator(decomposer);
             var divisors = divisorCalculator.GetProperDivisors(180);
             Assert.Contains(1, divisors);
             Assert.Contains(2, divisors);

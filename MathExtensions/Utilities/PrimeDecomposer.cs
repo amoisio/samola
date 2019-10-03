@@ -1,24 +1,23 @@
-﻿using MathExtensions.Construction;
-using System;
+﻿using MathExtensions.Enumerables;
 using System.Collections.Generic;
-using System.Text;
 
-namespace MathExtensions.Primes
+namespace MathExtensions.Utilities
 {
     /// <summary>
     /// Calculates the prime decomposition of a given number
     /// </summary>
-    public class PrimeDecomposer : IPrimeDecomposer
+    public class PrimeDecomposer 
     {
-        private readonly IPrimes _primes;
-        public PrimeDecomposer(IPrimesCreator primesCreator)
-        {
-            _primes = primesCreator.Create();
-        }
+        private readonly PrimeNumbers _primes;
 
-        public static PrimeDecomposer Create(IPrimesCreator primesCreator)
+        public PrimeDecomposer(IntegerLimit limit)
         {
-            return new PrimeDecomposer(primesCreator);
+            PrimeNumbersBuilder builder = new PrimeNumbersBuilder()
+            {
+                Limit = limit,
+                UseCache = true
+            };
+            _primes = builder.Build();
         }
 
         public Dictionary<int, int> CalculateDecomposition(int number)

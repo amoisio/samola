@@ -4,14 +4,13 @@ using System.Collections.Generic;
 
 namespace MathExtensions.Enumerables
 {
+    // TODO: comments...
     public class PrimeNumbers : CalculatedEnumerable<int>
     {
-        private readonly IntegerLimit _integerLimit;
-
         public PrimeNumbers(IntegerLimit integerLimit, IEnumerableCacheProvider<int> cacheProvider)
-            : base(cacheProvider)
+            : base(integerLimit, cacheProvider)
         {
-            _integerLimit = integerLimit;
+            
         }
 
         protected override IEnumerable<int> GetItems(int[] previousItems)
@@ -92,11 +91,6 @@ namespace MathExtensions.Enumerables
                 yield return 6 * k + 1;
                 k++;
             }
-        }
-
-        protected override bool CanYield(EnumerationState<int> state)
-        {
-            return _integerLimit.LimitOK(state);
         }
     }
 }

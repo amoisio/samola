@@ -4,6 +4,8 @@
     {
         public CountLimit(int limit) : base(limit) { }
 
+        public static CountLimit Default => new CountLimit(2000000);
+
         public override bool LimitOK(EnumerationState<int> state)
         {
             // Yielded count must be less than the limit

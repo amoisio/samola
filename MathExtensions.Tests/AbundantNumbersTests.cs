@@ -1,42 +1,36 @@
 ﻿using MathExtensions.Cache;
 using MathExtensions.Construction;
 using MathExtensions.Enumerables;
-using MathExtensions.Implementations;
 using MathExtensions.Primes;
-using System;
-using System.Collections.Generic;
+using MathExtensions.Utilities;
 using System.Linq;
-using System.Text;
 using Xunit;
 
 namespace MathExtensions.Tests
 {
     public class AbundantNumbersTests
     {
-        private EnumerableCacheProvider<int> _provider;
-        private IPrimesCreator _primesCreator;
-        private NumberClassifier _numberClassifier;
-        private DivisorCalculator _divisorCalculator;
+        private EnumerableListCacheProvider<int> _provider;
 
         public AbundantNumbersTests()
         {
-            _primesCreator = new Primes6kFactory(PrimesBase.MAX_COUNT, true);
-            _numberClassifier = new NumberClassifier(_primesCreator);
-            _divisorCalculator = new DivisorCalculator(_primesCreator);
-            _provider = null; // new EnumerableCacheProvider<int>("abundantNumbers");
+            _provider = new EnumerableListCacheProvider<int>("abundantNumbers", 1000);
         }
 
         [Fact]
         public void Returns_only_abundant_numbers()
         {
             var maxLimit = new MaxValueLimit(28123);
-            var abundantNumbers = new AbundantNumbers(_primesCreator, maxLimit, _provider);
+            var decomposer = new PrimeDecomposer(maxLimit);
+            var divisor = new DivisorCalculator(decomposer);
+            var classifier = new NumberClassifier(divisor);
+            var abundantNumbers = new AbundantNumbers(classifier, maxLimit, _provider);
             foreach(var aNumber in abundantNumbers)
             {
-                var classification = _numberClassifier.Classify(aNumber);
+                var classification = classifier.Classify(aNumber);
                 Assert.True(classification == NumberClassification.Abundant);
 
-                var properSum = _divisorCalculator.GetProperDivisors(aNumber).Sum();
+                var properSum = divisor.GetProperDivisors(aNumber).Sum();
                 Assert.True(properSum > aNumber);
             }
         }
@@ -45,7 +39,11 @@ namespace MathExtensions.Tests
         public void MaxValueLimit_limits_the_abundant_numbers()
         {
             var maxLimit = new MaxValueLimit(28123);
-            var abundantNumbers = new AbundantNumbers(_primesCreator, maxLimit, _provider);
+            var decomposer = new PrimeDecomposer(maxLimit);
+            var divisor = new DivisorCalculator(decomposer);
+            var classifier = new NumberClassifier(divisor);
+
+            var abundantNumbers = new AbundantNumbers(classifier, maxLimit, _provider);
             Assert.True(abundantNumbers.Last() <= 28123);
         }
 
@@ -53,7 +51,12 @@ namespace MathExtensions.Tests
         public void CountLimit_limits_the_abundant_numbers()
         {
             var limit = new CountLimit(1000);
-            var abundantNumbers = new AbundantNumbers(_primesCreator, limit, _provider);
+            var decomposer = new PrimeDecomposer(limit);
+            var divisor = new DivisorCalculator(decomposer);
+            var classifier = new NumberClassifier(divisor);
+
+
+            var abundantNumbers = new AbundantNumbers(classifier, limit, _provider);
             Assert.Equal(1000, abundantNumbers.Count());
         }
     }

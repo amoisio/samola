@@ -1,4 +1,5 @@
 ﻿using MathExtensions.Cache;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -28,6 +29,11 @@ namespace MathExtensions.Enumerables
         private readonly IEnumerableCacheProvider<T> _cacheProvider;
 
         /// <summary>
+        /// Limit condition for stopping the enumerable from yielding values.
+        /// </summary>
+        private readonly EnumerableLimit<T> _limitCondition;
+
+        /// <summary>
         /// Calculation lock guarantees that enumerated value are calculated and added to the cache synchronously. 
         /// Ie. each value is calculated only once and placed in the cache in deterministic order.
         /// </summary>
@@ -55,11 +61,10 @@ namespace MathExtensions.Enumerables
         /// Calculated enumerable with cache
         /// </summary>
         /// <param name="cacheProvider"></param>
-        /// <param name="cachePrefix"></param>
-        /// <param name="capacity"></param>
-        protected CalculatedEnumerable(IEnumerableCacheProvider<T> cacheProvider)
+        protected CalculatedEnumerable(EnumerableLimit<T> limit, IEnumerableCacheProvider<T> cacheProvider)
         {
             _cacheProvider = cacheProvider;
+            _limitCondition = limit ?? throw new ArgumentNullException("limit", "A limit must be provided for the enumerable to prevent infinite enumeration.");
         }
 
         public IEnumerator<T> GetEnumerator()
@@ -81,15 +86,17 @@ namespace MathExtensions.Enumerables
         private IEnumerator<T> GetCachedEnumerator()
         {
             T tempItem = default(T);
-            int tempIndex = 0;
-            int maxIndexToYield = _cache.Count - 1;
-
+            
             while (CanYield(tempItem))
             {
+                int tempIndex = 0;
+                var tempItems = _cache.Items;
+                int maxIndexToYield = tempItems.Length - 1;
+
                 // Yield cached items from [temp, maxIndex]
                 for (int i = tempIndex; i <= maxIndexToYield; i++)
                 {
-                    tempItem = _cache[i];
+                    tempItem = tempItems[i];
 
                     if (!CanYield(tempItem))
                         yield break;
@@ -129,6 +136,10 @@ namespace MathExtensions.Enumerables
                             this.YieldedCount++;
                             this.LastYielded = newItem;
                             yield return newItem;
+
+                            if (newItem as int? == 2)
+                                _cache.ToString();
+
                             _cache.Add(newItem);
                         };
                     }
@@ -166,7 +177,10 @@ namespace MathExtensions.Enumerables
         /// <summary>
         /// The enumeration backstop condition. When fulfilled, the enumerable stops yielding new values.
         /// </summary>
-        protected abstract bool CanYield(EnumerationState<T> state);
+        protected virtual bool CanYield(EnumerationState<T> state)
+        {
+            return _limitCondition.LimitOK(state);
+        }
 
         IEnumerator IEnumerable.GetEnumerator()
         {

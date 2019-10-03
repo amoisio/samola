@@ -4,6 +4,8 @@ using System.Text;
 using System.Linq;
 using MathExtensions.Primes;
 using MathExtensions.Construction;
+using MathExtensions.Utilities;
+using MathExtensions.Enumerables;
 
 namespace MathExtensions
 {
@@ -16,9 +18,8 @@ namespace MathExtensions
             Console.Write("Print divisors for > ");
             int number = Int32.Parse(Console.ReadLine());
 
-            var primesCreator = new Primes6kFactory(number, true);
-            var primeDecomposer = new PrimeDecomposer(primesCreator);
-            var divisorCalculator = new DivisorCalculator(primesCreator);
+            var primeDecomposer = new PrimeDecomposer(new MaxValueLimit(number));
+            var divisorCalculator = new DivisorCalculator(primeDecomposer);
 
             
 
