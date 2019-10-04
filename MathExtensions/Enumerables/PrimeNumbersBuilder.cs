@@ -11,7 +11,7 @@ namespace MathExtensions.Enumerables
 
         public PrimeNumbersBuilder()
         {
-            UseCache = false;
+            UseCache = true;
         }
 
         public virtual PrimeNumbers Build()

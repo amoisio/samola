@@ -11,6 +11,11 @@ namespace MathExtensions.Enumerables
         public NumberClassifier Classifier { get; set; }
         public bool UseCache { get; set; }
 
+        public AbundantNumbersBuilder()
+        {
+            UseCache = true;
+        }
+
         public virtual AbundantNumbers Build()
         {
             EnumerableListCacheProvider<int> provider = null;

@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Caching.Memory;
+using System;
 using System.Collections.Generic;
 
 namespace MathExtensions.Cache
@@ -22,7 +23,13 @@ namespace MathExtensions.Cache
         private readonly string _cachePrefix;
         private readonly int _capacity;
 
-        public EnumerableListCacheProvider(string cachePrefix, int capacity)
+        public EnumerableListCacheProvider(int capacity)
+            : this (Guid.NewGuid().ToString(), capacity)
+        {
+
+        }
+
+        internal EnumerableListCacheProvider(string cachePrefix, int capacity)
         {
             _cachePrefix = cachePrefix;
             _capacity = capacity;

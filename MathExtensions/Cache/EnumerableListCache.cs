@@ -21,7 +21,7 @@ namespace MathExtensions.Cache
         private static SingletonCacheLock _memoryCacheLock = SingletonCacheLock.Instance;
         private readonly string _cacheKey;
 
-        public EnumerableListCache(string cacheKeyPrefix, int capacity)
+        internal EnumerableListCache(string cacheKeyPrefix, int capacity)
         {
             _cacheKey = GetCacheKey(cacheKeyPrefix);
             InitializeCache(_cacheKey, capacity);
@@ -43,7 +43,7 @@ namespace MathExtensions.Cache
 
         private static string GetCacheKey(string cachePrefix)
         {
-            return $"{cachePrefix}.{typeof(TEnumerable).Name}.list";
+            return $"{cachePrefix}.{typeof(TEnumerable).FullName}.list";
         }
 
         public int Count

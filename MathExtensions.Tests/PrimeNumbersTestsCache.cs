@@ -13,10 +13,11 @@ namespace MathExtensions.Tests
 {
     public class PrimeNumbersTestsCache
     {
-        private EnumerableListCacheProvider<int> _provider;
+        private PrimeNumbersBuilder _builder;
+
         public PrimeNumbersTestsCache()
         {
-            _provider = new EnumerableListCacheProvider<int>("primes", 1000000);
+            _builder = new PrimeNumbersBuilder();
         }
 
         [Theory]
@@ -29,7 +30,8 @@ namespace MathExtensions.Tests
         [InlineData(5, new int[] { 2, 3, 5, 7, 11 })]
         public void PrimeNumbers_generate_primes_correctly(int maxPrimes, int[] expectedPrimes)
         {
-            var primes = new PrimeNumbers(new CountLimit(maxPrimes), _provider);
+            _builder.Limit = new CountLimit(maxPrimes);
+            var primes = _builder.Build();
 
             int[] actual = primes.ToArray();
 
@@ -42,7 +44,9 @@ namespace MathExtensions.Tests
             int maxPrimes = 5000;
 
             var primes1 = new PrimesSimple(maxPrimes).ToArray();
-            var primes2 = new PrimeNumbers(new CountLimit(maxPrimes), _provider).ToArray();
+
+            _builder.Limit = new CountLimit(maxPrimes);
+            var primes2 = _builder.Build().ToArray();
 
             for (int i = 0; i < primes1.Length; i++)
             {
@@ -53,7 +57,8 @@ namespace MathExtensions.Tests
         [Fact]
         public void PrimeNumbers_iteration_can_be_stopped_midstream()
         {
-            var primes = new PrimeNumbers(new CountLimit(1000000), _provider);
+            _builder.Limit = new CountLimit(1000000);
+            var primes = _builder.Build();
             long p = 0;
             foreach (var prime in primes)
             {
@@ -68,7 +73,8 @@ namespace MathExtensions.Tests
         [Fact]
         public void PrimeNumbers_can_be_iterated_over_multiple_times()
         {
-            var primes = new PrimeNumbers(new CountLimit(1000000), _provider);
+            _builder.Limit = new CountLimit(1000000);
+            var primes = _builder.Build();
             long p = 0;
             foreach (var prime in primes)
             {
@@ -91,7 +97,8 @@ namespace MathExtensions.Tests
         public void CountLimit_forces_prime_number_generation_to_halt()
         {
             int maxCount = 1000;
-            var primes = new PrimeNumbers(new CountLimit(maxCount), _provider);
+            _builder.Limit = new CountLimit(maxCount);
+            var primes = _builder.Build();
 
             int count = 0;
             foreach(var prime in primes)
@@ -107,7 +114,8 @@ namespace MathExtensions.Tests
         public void MaxValueLimit_forces_prime_number_generation_to_halt()
         {
             int maxValue = 950;
-            var primes = new PrimeNumbers(new MaxValueLimit(maxValue), _provider);
+            _builder.Limit = new MaxValueLimit(maxValue);
+            var primes = _builder.Build();
 
             int temp = 0;
             foreach (var prime in primes)
@@ -117,7 +125,8 @@ namespace MathExtensions.Tests
             Assert.True(temp < maxValue);
 
             int count = primes.Count();
-            primes = new PrimeNumbers(new CountLimit(count + 1), _provider);
+            _builder.Limit = new CountLimit(count + 1);
+            primes = _builder.Build();
             temp = primes.Last();
 
             Assert.True(temp > maxValue);

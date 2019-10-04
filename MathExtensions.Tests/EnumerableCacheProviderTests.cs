@@ -7,21 +7,15 @@ namespace MathExtensions.Tests
 {
     public class EnumerableCacheProviderTests
     {
-        private readonly IMemoryCache _memoryCache;
-
         public EnumerableCacheProviderTests()
         {
-            var options = new MemoryCacheOptions()
-            {
-                
-            };
-            _memoryCache = new MemoryCache(options);
+
         }
 
         [Fact]
         public void Can_add_items_to_cache()
         {
-            var provider = new EnumerableListCacheProvider<int>(Guid.NewGuid().ToString(), 100);
+            var provider = new EnumerableListCacheProvider<int>(100);
             IEnumerableCache<int> cache = provider.CreateOrGet();
             cache.Add(2);
 
@@ -31,7 +25,7 @@ namespace MathExtensions.Tests
         [Fact]
         public void Can_get_the_count_of_items_in_cache()
         {
-            var provider = new EnumerableListCacheProvider<int>(Guid.NewGuid().ToString(), 100);
+            var provider = new EnumerableListCacheProvider<int>(100);
             IEnumerableCache<int> cache = provider.CreateOrGet();
             cache.Add(2);
             cache.Add(3);
@@ -43,7 +37,7 @@ namespace MathExtensions.Tests
         [Fact]
         public void Can_get_the_cached_items_as_an_array()
         {
-            var provider = new EnumerableListCacheProvider<int>(Guid.NewGuid().ToString(), 100);
+            var provider = new EnumerableListCacheProvider<int>(100);
             IEnumerableCache<int> cache = provider.CreateOrGet();
             cache.Add(2);
             cache.Add(3);
@@ -59,7 +53,7 @@ namespace MathExtensions.Tests
         [Fact]
         public void Can_access_cached_items_directly_with_an_indexer()
         {
-            var provider = new EnumerableListCacheProvider<int>(Guid.NewGuid().ToString(), 100);
+            var provider = new EnumerableListCacheProvider<int>(100);
 
             IEnumerableCache<int> cache = provider.CreateOrGet();
             cache.Add(1);
@@ -75,8 +69,7 @@ namespace MathExtensions.Tests
         [Fact]
         public void Instantiating_a_cache_with_the_same_name_and_type_gives_the_same_cache()
         {
-            var cachePrefix = Guid.NewGuid().ToString();
-            var provider = new EnumerableListCacheProvider<int>(cachePrefix, 100);
+            var provider = new EnumerableListCacheProvider<int>(100);
 
             IEnumerableCache<int> cache = provider.CreateOrGet();
             cache.Add(1);

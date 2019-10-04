@@ -10,11 +10,11 @@ namespace MathExtensions.Tests
 {
     public class AbundantNumbersTests
     {
-        private EnumerableListCacheProvider<int> _provider;
+        private AbundantNumbersBuilder _builder;
 
         public AbundantNumbersTests()
         {
-            _provider = new EnumerableListCacheProvider<int>("abundantNumbers", 1000);
+            _builder = new AbundantNumbersBuilder();
         }
 
         [Fact]
@@ -24,7 +24,10 @@ namespace MathExtensions.Tests
             var decomposer = new PrimeDecomposer(maxLimit);
             var divisor = new DivisorCalculator(decomposer);
             var classifier = new NumberClassifier(divisor);
-            var abundantNumbers = new AbundantNumbers(classifier, maxLimit, _provider);
+
+            _builder.Limit = maxLimit;
+            _builder.Classifier = classifier;
+            var abundantNumbers = _builder.Build();
             foreach(var aNumber in abundantNumbers)
             {
                 var classification = classifier.Classify(aNumber);
@@ -43,7 +46,10 @@ namespace MathExtensions.Tests
             var divisor = new DivisorCalculator(decomposer);
             var classifier = new NumberClassifier(divisor);
 
-            var abundantNumbers = new AbundantNumbers(classifier, maxLimit, _provider);
+            _builder.Limit = maxLimit;
+            _builder.Classifier = classifier;
+            var abundantNumbers = _builder.Build();
+
             Assert.True(abundantNumbers.Last() <= 28123);
         }
 
@@ -55,8 +61,9 @@ namespace MathExtensions.Tests
             var divisor = new DivisorCalculator(decomposer);
             var classifier = new NumberClassifier(divisor);
 
-
-            var abundantNumbers = new AbundantNumbers(classifier, limit, _provider);
+            _builder.Limit = limit;
+            _builder.Classifier = classifier;
+            var abundantNumbers = _builder.Build();
             Assert.Equal(1000, abundantNumbers.Count());
         }
     }
