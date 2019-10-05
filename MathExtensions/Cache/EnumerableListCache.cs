@@ -13,6 +13,7 @@ namespace MathExtensions.Cache
         TEnumerable[] Items { get; }
         int Count { get; }
         void Add(TEnumerable item);
+        bool Contains(TEnumerable item);
     }
 
     public class EnumerableListCache<TEnumerable> : IEnumerableCache<TEnumerable>
@@ -66,6 +67,14 @@ namespace MathExtensions.Cache
             lock (_memoryCacheLock)
             {
                 CachedItems.Add(item);
+            }
+        }
+
+        public bool Contains(TEnumerable item)
+        {
+            lock(_memoryCacheLock)
+            {
+                return CachedItems.Contains(item);
             }
         }
 

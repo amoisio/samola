@@ -46,7 +46,8 @@ namespace MathExtensions.Tests
             var primes1 = new PrimesSimple(maxPrimes).ToArray();
 
             _builder.Limit = new CountLimit(maxPrimes);
-            var primes2 = _builder.Build().ToArray();
+            var primes2a = _builder.Build();
+            var primes2 = primes2a.ToArray();
 
             for (int i = 0; i < primes1.Length; i++)
             {

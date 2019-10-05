@@ -9,7 +9,7 @@ namespace MathExtensions.Enumerables
     {
         private readonly NumberClassifier _classifier;
 
-        public AbundantNumbers(NumberClassifier classifier, IntegerLimit integerLimit, IEnumerableCacheProvider<int> cacheProvider)
+        internal AbundantNumbers(NumberClassifier classifier, IntegerLimit integerLimit, IEnumerableCacheProvider<int> cacheProvider)
             : base(integerLimit, cacheProvider)
         {
             _classifier = classifier;
@@ -20,7 +20,7 @@ namespace MathExtensions.Enumerables
             int next = 1;
             if (previousItems != null && previousItems.Length > 0)
             {
-                next = previousItems[previousItems.Length - 1];
+                next = previousItems[previousItems.Length - 1] + 1;
             }
 
             while (true)

@@ -22,7 +22,7 @@ namespace MathExtensions.Tests
         [Fact]
         public void IsPrimeSimple_return_the_same_values_as_IsPrimeBase()
         {
-            int count = 2000000;
+            int count = 20000;
             for (int i = 1; i < count; i++)
             {
                 Assert.Equal(MathExt.IsPrimeBase(i), MathExt.IsPrimeSimple(i));
@@ -32,7 +32,7 @@ namespace MathExtensions.Tests
         [Fact]
         public void IsPrimeSimple_return_the_same_values_as_IsPrimeCached()
         {
-            int count = 2000000;
+            int count = 20000;
             for (int i = 1; i < count; i++)
             {
                 Assert.Equal(MathExt.IsPrimeBase(i), MathExt.IsPrimeCached(i));
@@ -42,7 +42,7 @@ namespace MathExtensions.Tests
         [Fact]
         public void IsPrimeSimple_return_the_same_values_as_IsPrimeCachedNoLocks()
         {
-            int count = 2000000;
+            int count = 20000;
             for (int i = 1; i < count; i++)
             {
                 Assert.Equal(MathExt.IsPrimeBase(i), MathExt.IsPrimeCachedNoLocks(i));
@@ -52,7 +52,7 @@ namespace MathExtensions.Tests
         [Fact]
         public void IsPrimeSimple_return_the_same_values_as_IsPrimeSimple6k()
         {
-            int count = 2000000;
+            int count = 20000;
             for (int i = 1; i < count; i++)
             {
                 Assert.Equal(MathExt.IsPrimeBase(i), MathExt.IsPrimeSimple6k(i));
@@ -62,7 +62,7 @@ namespace MathExtensions.Tests
         [Fact]
         public void IsPrimeSimple_return_the_same_values_as_IsPrimeSimple6kCached()
         {
-            int count = 2000000;
+            int count = 20000;
             for (int i = 1; i < count; i++)
             {
                 Assert.Equal(MathExt.IsPrimeBase(i), MathExt.IsPrimeSimple6kCached(i));
@@ -72,7 +72,7 @@ namespace MathExtensions.Tests
         [Fact]
         public void PrimesSimple_and_PrimesNew_return_the_same_values()
         {
-            int count = 200000;
+            int count = 20000;
             var control = new PrimesSimple(count).ToArray();
             var nprimes = PrimesNew.Create(count, PrimesGenerationRule.GenerateNPrimes).ToArray();
 
@@ -183,19 +183,15 @@ namespace MathExtensions.Tests
         [Fact]
         public void PrimesSimple_and_PrimesNewCached_return_the_same_values()
         {
-            int count = 200000;
+            int count = 20000;
             var control = new PrimesSimple(count).ToArray();
             var nprimes = Primes6k.Create(count, true).ToArray();
-            //var diff = new int[nprimes.Length];
+
             Assert.Equal(control.Length, nprimes.Length);
             for (int i = 0; i < count; i++)
             {
                 Assert.Equal(control[i], nprimes[i]);
-                //diff[i] = nprimes[i] - control[i];
             }
-
-            //var d = diff.Where(e => e > 0).ToArray();
-            //Assert.Equal(0, d.Length);
         }
 
         [Theory]

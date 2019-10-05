@@ -11,7 +11,6 @@ namespace MathExtensions.Tests
         public PrimeNumbersTestsCache_Builder()
         {
             _provider = new PrimeNumbersBuilder();
-            _provider.UseCache = true;
         }
 
         [Theory]
@@ -40,7 +39,8 @@ namespace MathExtensions.Tests
             var primes1 = new PrimesSimple(maxPrimes).ToArray();
 
             _provider.Limit = new CountLimit(maxPrimes);
-            var primes2 = _provider.Build().ToArray();
+            var primes2a = _provider.Build();
+            var primes2 = primes2a.ToArray();
 
             for (int i = 0; i < primes1.Length; i++)
             {

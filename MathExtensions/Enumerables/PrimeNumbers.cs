@@ -7,7 +7,7 @@ namespace MathExtensions.Enumerables
     // TODO: comments...
     public class PrimeNumbers : CalculatedEnumerable<int>
     {
-        public PrimeNumbers(IntegerLimit integerLimit, IEnumerableCacheProvider<int> cacheProvider)
+        internal PrimeNumbers(IntegerLimit integerLimit, IEnumerableCacheProvider<int> cacheProvider)
             : base(integerLimit, cacheProvider)
         {
             

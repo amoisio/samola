@@ -40,16 +40,6 @@ namespace MathExtensions.Enumerables
         private static object _calculationLock = new object();
 
         /// <summary>
-        /// The last item yielded by the enumerable
-        /// </summary>
-        public T LastYielded { get; private set; }
-
-        /// <summary>
-        /// The number of items yielded 
-        /// </summary>
-        public int YieldedCount { get; private set; }
-
-        /// <summary>
         /// Calculated enumerable without cache
         /// </summary>
         protected CalculatedEnumerable()
@@ -69,12 +59,9 @@ namespace MathExtensions.Enumerables
 
         public IEnumerator<T> GetEnumerator()
         {
-            this.YieldedCount = 0;
-            this.LastYielded = default(T);
-
             if (this.UseCache)
             {
-                _cache = _cacheProvider.CreateOrGet();
+                _cache = _cache ?? _cacheProvider.CreateOrGet();
                 return GetCachedEnumerator();
             }
             else
@@ -85,11 +72,12 @@ namespace MathExtensions.Enumerables
 
         private IEnumerator<T> GetCachedEnumerator()
         {
+            int tempIndex = 0;
+            int yieldedCount = 0;
             T tempItem = default(T);
             
-            while (CanYield(tempItem))
+            while (CanYield(tempItem, yieldedCount))
             {
-                int tempIndex = 0;
                 var tempItems = _cache.Items;
                 int maxIndexToYield = tempItems.Length - 1;
 
@@ -98,11 +86,10 @@ namespace MathExtensions.Enumerables
                 {
                     tempItem = tempItems[i];
 
-                    if (!CanYield(tempItem))
+                    if (!CanYield(tempItem, yieldedCount))
                         yield break;
 
-                    this.YieldedCount++;
-                    this.LastYielded = tempItem;
+                    yieldedCount++;
                     yield return tempItem;
                 }
 
@@ -130,15 +117,11 @@ namespace MathExtensions.Enumerables
                         var cachedItems = _cache.Items;
                         foreach (var newItem in GetItems(cachedItems))
                         {
-                            if (!CanYield(newItem))
+                            if (!CanYield(newItem, yieldedCount))
                                 yield break;
 
-                            this.YieldedCount++;
-                            this.LastYielded = newItem;
+                            yieldedCount++;
                             yield return newItem;
-
-                            if (newItem as int? == 2)
-                                _cache.ToString();
 
                             _cache.Add(newItem);
                         };
@@ -152,13 +135,13 @@ namespace MathExtensions.Enumerables
         /// </summary>
         private IEnumerator<T> GetNonCachedEnumerator()
         {
+            int yieldedCount = 0;
             foreach (var newItem in GetItems(null))
             {
-                if (!CanYield(newItem))
+                if (!CanYield(newItem, yieldedCount))
                     yield break;
 
-                this.YieldedCount++;
-                this.LastYielded = newItem;
+                yieldedCount++;
                 yield return newItem;
             };
         }
@@ -168,9 +151,9 @@ namespace MathExtensions.Enumerables
         /// </summary>
         protected abstract IEnumerable<T> GetItems(T[] previousItems);
 
-        private bool CanYield(T item)
+        private bool CanYield(T item, int yieldedCount)
         {
-            var state = EnumerationState.Create(item, this.YieldedCount);
+            var state = EnumerationState.Create(item, yieldedCount);
             return CanYield(state);
         }
 
