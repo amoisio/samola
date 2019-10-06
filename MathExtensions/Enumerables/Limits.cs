@@ -1,4 +1,6 @@
-﻿namespace MathExtensions.Enumerables
+﻿using MathExtensions.CustomTypes;
+
+namespace MathExtensions.Enumerables
 {
     public class CountLimit : IntegerLimit
     {
@@ -13,6 +15,16 @@
         }
     }
 
+    public class MaxNaturalCountLimit : NaturalNumberLimit
+    {
+        public MaxNaturalCountLimit(int limit) : base(new NaturalNumber(limit)) { }
+
+        public override bool LimitOK(EnumerationState<NaturalNumber> state)
+        {
+            return state.YieldedCount < this.Limit.Value;
+        }
+    }
+
     public class MaxValueLimit : IntegerLimit
     {
         public MaxValueLimit(int limit) : base(limit) { }
@@ -22,6 +34,24 @@
             // The item that is to be yielded must be leq the limit.
             return state.Item <= this.Limit;
         }
+    }
+
+    public class MaxNaturalValueLimit : NaturalNumberLimit
+    {
+        public MaxNaturalValueLimit(int limit) : base(new NaturalNumber(limit)) { }
+
+        public override bool LimitOK(EnumerationState<NaturalNumber> state)
+        {
+
+            return state.Item == null || state.Item.Value <= this.Limit.Value;
+        }
+    }
+
+    public abstract class NaturalNumberLimit : EnumerableLimit<NaturalNumber>
+    {
+        public NaturalNumberLimit(NaturalNumber limit) : base(limit) { }
+
+        public NaturalNumberLimit(int limit) : this(new NaturalNumber(limit)) { }
     }
 
     public abstract class IntegerLimit : EnumerableLimit<int>
