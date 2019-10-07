@@ -4,7 +4,7 @@ using MathExtensions.Enumerables;
 
 namespace MathExtensions.Tests
 {
-    public class AmicableNumberTests
+    public class AmicableNumberCalculatorTests
     {
         [Theory]
         [InlineData(220, 284)]

@@ -42,9 +42,10 @@ namespace MathExtensions.Enumerables
         /// <summary>
         /// Calculated enumerable without cache
         /// </summary>
-        protected CalculatedEnumerable()
+        protected CalculatedEnumerable(EnumerableLimit<T> limit)
+            : this(limit, null)
         {
-            _cacheProvider = null;
+            
         }
 
         /// <summary>
