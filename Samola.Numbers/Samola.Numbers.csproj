@@ -3,8 +3,8 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-    <Description>MathExtensions</Description>
-    <Version>1.1.9</Version>
+    <Description>Samola.Numbers</Description>
+    <Version>2.2.10</Version>
     <RunPostBuildEvent>Always</RunPostBuildEvent>
   </PropertyGroup>
 

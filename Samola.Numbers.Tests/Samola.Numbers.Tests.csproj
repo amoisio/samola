@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MathExtensions\MathExtensions.csproj" />
+    <ProjectReference Include="..\Samola.Numbers\Samola.Numbers.csproj" />
   </ItemGroup>
 
 </Project>
