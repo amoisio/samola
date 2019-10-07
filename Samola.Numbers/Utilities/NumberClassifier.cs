@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace MathExtensions.Utilities
+namespace Samola.Numbers.Utilities
 {
     // TODO: Comments
     public class NumberClassifier

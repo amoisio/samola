@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace MathExtensions.Primes
+namespace Samola.Numbers.Primes
 {
     [Obsolete("Use Primes6k instead")]
     public class PrimesNew : PrimesBase

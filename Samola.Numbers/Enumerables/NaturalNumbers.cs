@@ -1,9 +1,9 @@
-﻿using MathExtensions.Cache;
-using MathExtensions.CustomTypes;
+﻿using Samola.Numbers.Cache;
+using Samola.Numbers.CustomTypes;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace MathExtensions.Enumerables
+namespace Samola.Numbers.Enumerables
 {
     public class NaturalNumbers : CalculatedEnumerable<NaturalNumber>
     {

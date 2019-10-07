@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using MathExtensions.Construction;
-using MathExtensions.Primes;
+using Samola.Numbers.Construction;
+using Samola.Numbers.Primes;
 
-namespace MathExtensions.Utilities
+namespace Samola.Numbers.Utilities
 {
     public class DivisorCalculator
     {

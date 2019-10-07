@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using MathExtensions.Construction;
-using MathExtensions.Enumerables;
-using MathExtensions.Primes;
-using MathExtensions.Utilities;
+using Samola.Numbers.Construction;
+using Samola.Numbers.Enumerables;
+using Samola.Numbers.Primes;
+using Samola.Numbers.Utilities;
 
-namespace MathExtensions
+namespace Samola.Numbers
 {
     class ShowPrimeDecomposition : IConsoleExcutable
     {

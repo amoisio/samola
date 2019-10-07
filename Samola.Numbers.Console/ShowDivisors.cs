@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
-using MathExtensions.Primes;
-using MathExtensions.Construction;
-using MathExtensions.Utilities;
-using MathExtensions.Enumerables;
+using Samola.Numbers.Primes;
+using Samola.Numbers.Construction;
+using Samola.Numbers.Utilities;
+using Samola.Numbers.Enumerables;
 
-namespace MathExtensions
+namespace Samola.Numbers
 {
     public class ShowDivisors : IConsoleExcutable
     {

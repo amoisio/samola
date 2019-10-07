@@ -1,9 +1,9 @@
-﻿using MathExtensions.Cache;
+﻿using Samola.Numbers.Cache;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace MathExtensions.Enumerables
+namespace Samola.Numbers.Enumerables
 {
     /// <summary>
     /// An enumerable base class whose values are calculated on demand. Has the ability to cache calculated values 

@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace MathExtensions.Cache
+namespace Samola.Numbers.Cache
 {
     /// <summary>
     /// Represents an enumerable cache.

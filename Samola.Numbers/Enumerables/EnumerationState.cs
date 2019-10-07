@@ -1,4 +1,4 @@
-﻿namespace MathExtensions.Enumerables
+﻿namespace Samola.Numbers.Enumerables
 {
     /// <summary>
     /// Helper class for constructing EnumerationState objects
@@ -12,7 +12,7 @@
     }
 
     /// <summary>
-    /// Represents the state of an MathExtensions.Enumerables enumerable. 
+    /// Represents the state of an Samola.Numbers.Enumerables enumerable. 
     /// Encapsulates the item to be yielded next as well as the count of items yielded so far. 
     /// When yieldedCount == 0 then item is default(T).
     /// </summary>

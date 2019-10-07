@@ -1,7 +1,7 @@
-﻿using MathExtensions.Enumerables;
+﻿using Samola.Numbers.Enumerables;
 using System.Collections.Generic;
 
-namespace MathExtensions.Utilities
+namespace Samola.Numbers.Utilities
 {
     /// <summary>
     /// Calculates the prime decomposition of a given number

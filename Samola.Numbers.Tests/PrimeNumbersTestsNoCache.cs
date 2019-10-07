@@ -1,14 +1,14 @@
-﻿using MathExtensions.Cache;
-using MathExtensions.Construction;
-using MathExtensions.Enumerables;
-using MathExtensions.Primes;
+﻿using Samola.Numbers.Cache;
+using Samola.Numbers.Construction;
+using Samola.Numbers.Enumerables;
+using Samola.Numbers.Primes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Xunit;
 
-namespace MathExtensions.Tests
+namespace Samola.Numbers.Tests
 {
     public class PrimeNumbersTestsNoCache
     {

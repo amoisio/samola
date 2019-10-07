@@ -1,8 +1,8 @@
-﻿using MathExtensions.Cache;
+﻿using Samola.Numbers.Cache;
 using System;
 using System.Collections.Generic;
 
-namespace MathExtensions.Enumerables
+namespace Samola.Numbers.Enumerables
 {
     // TODO: comments...
     public class PrimeNumbers : CalculatedEnumerable<int>

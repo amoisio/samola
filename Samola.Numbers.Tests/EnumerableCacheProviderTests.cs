@@ -1,9 +1,9 @@
-﻿using MathExtensions.Cache;
+﻿using Samola.Numbers.Cache;
 using Microsoft.Extensions.Caching.Memory;
 using System;
 using Xunit;
 
-namespace MathExtensions.Tests
+namespace Samola.Numbers.Tests
 {
     public class EnumerableCacheProviderTests
     {

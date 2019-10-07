@@ -1,4 +1,4 @@
-﻿namespace MathExtensions
+﻿namespace Samola.Numbers
 {
     /// <summary>
     /// Determines the prime generator method.

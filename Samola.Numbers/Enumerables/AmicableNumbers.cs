@@ -1,9 +1,9 @@
-﻿using MathExtensions.Cache;
-using MathExtensions.Utilities;
+﻿using Samola.Numbers.Cache;
+using Samola.Numbers.Utilities;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace MathExtensions.Enumerables
+namespace Samola.Numbers.Enumerables
 {
     public class AmicableNumbers : CalculatedEnumerable<int>
     {

@@ -1,11 +1,11 @@
-﻿using MathExtensions.Primes;
+﻿using Samola.Numbers.Primes;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
 
-namespace MathExtensions
+namespace Samola.Numbers
 {
     public class ComparePrimeGenerationTimes : IConsoleExcutable
     {

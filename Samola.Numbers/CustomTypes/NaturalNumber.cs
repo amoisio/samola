@@ -1,8 +1,8 @@
-﻿using MathExtensions.Enumerables;
-using MathExtensions.Primes;
-using MathExtensions.Utilities;
+﻿using Samola.Numbers.Enumerables;
+using Samola.Numbers.Primes;
+using Samola.Numbers.Utilities;
 
-namespace MathExtensions.CustomTypes
+namespace Samola.Numbers.CustomTypes
 {
     /// <summary>
     /// Integer wrapper creates a nicer development experience when using MathExtension.

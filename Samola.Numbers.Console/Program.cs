@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 
-namespace MathExtensions
+namespace Samola.Numbers
 {
     class Program
     {

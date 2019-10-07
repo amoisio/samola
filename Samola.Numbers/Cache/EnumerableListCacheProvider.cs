@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace MathExtensions.Cache
+namespace Samola.Numbers.Cache
 {
     /// <summary>
     /// Represents a factory for instantiating enumerable cache objects

@@ -1,7 +1,7 @@
-﻿using MathExtensions.Cache;
-using MathExtensions.CustomTypes;
+﻿using Samola.Numbers.Cache;
+using Samola.Numbers.CustomTypes;
 
-namespace MathExtensions.Enumerables
+namespace Samola.Numbers.Enumerables
 {
     public class NaturalNumbersBuilder
     {

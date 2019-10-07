@@ -1,12 +1,12 @@
-﻿using MathExtensions.Cache;
-using MathExtensions.Construction;
-using MathExtensions.Enumerables;
-using MathExtensions.Primes;
-using MathExtensions.Utilities;
+﻿using Samola.Numbers.Cache;
+using Samola.Numbers.Construction;
+using Samola.Numbers.Enumerables;
+using Samola.Numbers.Primes;
+using Samola.Numbers.Utilities;
 using System.Linq;
 using Xunit;
 
-namespace MathExtensions.Tests
+namespace Samola.Numbers.Tests
 {
     public class AbundantNumbersTests
     {

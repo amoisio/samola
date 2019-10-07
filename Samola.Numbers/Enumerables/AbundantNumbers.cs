@@ -1,8 +1,8 @@
-﻿using MathExtensions.Cache;
-using MathExtensions.Utilities;
+﻿using Samola.Numbers.Cache;
+using Samola.Numbers.Utilities;
 using System.Collections.Generic;
 
-namespace MathExtensions.Enumerables
+namespace Samola.Numbers.Enumerables
 {
     // TODO: Comments...
     public class AbundantNumbers : CalculatedEnumerable<int>

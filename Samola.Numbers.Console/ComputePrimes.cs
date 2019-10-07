@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using MathExtensions.Primes;
+using Samola.Numbers.Primes;
 
-namespace MathExtensions
+namespace Samola.Numbers
 {
     public class ComputePrimes : IConsoleExcutable
     {

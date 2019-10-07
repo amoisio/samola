@@ -1,6 +1,6 @@
-﻿using MathExtensions.Cache;
+﻿using Samola.Numbers.Cache;
 
-namespace MathExtensions.Enumerables
+namespace Samola.Numbers.Enumerables
 {
     public class PrimeNumbersBuilder
     {

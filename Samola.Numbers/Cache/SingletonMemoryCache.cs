@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Caching.Memory;
 
-namespace MathExtensions.Cache
+namespace Samola.Numbers.Cache
 {
     internal sealed class SingletonMemoryCache : IMemoryCache
     {

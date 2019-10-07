@@ -1,6 +1,6 @@
-﻿using MathExtensions.CustomTypes;
+﻿using Samola.Numbers.CustomTypes;
 
-namespace MathExtensions.Enumerables
+namespace Samola.Numbers.Enumerables
 {
     public class CountLimit : IntegerLimit
     {

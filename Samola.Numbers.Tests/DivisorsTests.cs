@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Text;
 using Xunit;
-using MathExtensions;
+using Samola.Numbers;
 using System.Linq;
-using MathExtensions.Primes;
-using MathExtensions.Construction;
-using MathExtensions.Utilities;
-using MathExtensions.Enumerables;
+using Samola.Numbers.Primes;
+using Samola.Numbers.Construction;
+using Samola.Numbers.Utilities;
+using Samola.Numbers.Enumerables;
 
-namespace MathExtensions.Tests
+namespace Samola.Numbers.Tests
 {
     public class DivisorsTests
     {

@@ -3,7 +3,7 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.2</TargetFramework>
-    <RootNamespace>Samola.Numbers</RootNamespace>
+    <RootNamespace>Samola.Numbers.Console</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

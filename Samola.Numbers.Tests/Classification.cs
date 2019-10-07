@@ -1,4 +1,4 @@
-﻿namespace MathExtensions.Tests
+﻿namespace Samola.Numbers.Tests
 {
     public class Classification
     {

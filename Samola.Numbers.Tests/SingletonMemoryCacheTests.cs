@@ -1,5 +1,5 @@
-﻿using MathExtensions.Cache;
-using MathExtensions.Enumerables;
+﻿using Samola.Numbers.Cache;
+using Samola.Numbers.Enumerables;
 using Microsoft.Extensions.Caching.Memory;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading;
 using Xunit;
 
-namespace MathExtensions.Tests
+namespace Samola.Numbers.Tests
 {
     public class SingletonMemoryCacheTests
     {

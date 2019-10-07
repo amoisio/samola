@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace MathExtensions.Primes
+namespace Samola.Numbers.Primes
 {
     /// <summary>
     /// Generates N first prime numbers

@@ -1,9 +1,9 @@
-﻿using MathExtensions.Enumerables;
-using MathExtensions.Primes;
+﻿using Samola.Numbers.Enumerables;
+using Samola.Numbers.Primes;
 using System.Linq;
 using Xunit;
 
-namespace MathExtensions.Tests
+namespace Samola.Numbers.Tests
 {
     public class PrimeNumbersTestsCache_Builder
     {

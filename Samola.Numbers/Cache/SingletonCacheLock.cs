@@ -1,4 +1,4 @@
-﻿namespace MathExtensions.Cache
+﻿namespace Samola.Numbers.Cache
 {
     internal class SingletonCacheLock
     {

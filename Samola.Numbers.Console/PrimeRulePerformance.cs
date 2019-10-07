@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using MathExtensions.Primes;
+using Samola.Numbers.Primes;
 
-namespace MathExtensions
+namespace Samola.Numbers
 {
     class PrimeRulePerformance : IConsoleExcutable
     {

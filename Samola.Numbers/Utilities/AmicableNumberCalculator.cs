@@ -1,9 +1,9 @@
-﻿using MathExtensions.Construction;
-using MathExtensions.Primes;
+﻿using Samola.Numbers.Construction;
+using Samola.Numbers.Primes;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace MathExtensions.Utilities
+namespace Samola.Numbers.Utilities
 {
     public class AmicableNumberCalculator
     {

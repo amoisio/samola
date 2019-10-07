@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading;
 
-namespace MathExtensions
+namespace Samola.Numbers
 {
     public static partial class MathExt
     {

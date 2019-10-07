@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace MathExtensions
+namespace Samola.Numbers
 {
     class Menu
     {

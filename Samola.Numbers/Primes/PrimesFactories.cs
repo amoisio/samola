@@ -1,6 +1,6 @@
-﻿using MathExtensions.Primes;
+﻿using Samola.Numbers.Primes;
 
-namespace MathExtensions.Construction
+namespace Samola.Numbers.Construction
 {
     public class PrimesSimpleFactory : IPrimesCreator
     {

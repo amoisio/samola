@@ -1,7 +1,7 @@
-﻿using MathExtensions.Cache;
-using MathExtensions.Utilities;
+﻿using Samola.Numbers.Cache;
+using Samola.Numbers.Utilities;
 
-namespace MathExtensions.Enumerables
+namespace Samola.Numbers.Enumerables
 {
     public class AmicableNumbersBuilder
     {

@@ -1,10 +1,10 @@
-﻿using MathExtensions.Primes;
+﻿using Samola.Numbers.Primes;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 
-namespace MathExtensions
+namespace Samola.Numbers
 {
     class PrimeGenerationPerformance : IConsoleExcutable
     {

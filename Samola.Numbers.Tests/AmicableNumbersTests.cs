@@ -1,9 +1,9 @@
 ﻿using Xunit;
-using MathExtensions.Utilities;
-using MathExtensions.Enumerables;
+using Samola.Numbers.Utilities;
+using Samola.Numbers.Enumerables;
 using System.Linq;
 
-namespace MathExtensions.Tests
+namespace Samola.Numbers.Tests
 {
     public class AmicableNumbersTests
     {

@@ -2,13 +2,13 @@
 using Xunit;
 using System.Linq;
 using System.Collections.Generic;
-using MathExtensions;
-using MathExtensions.Primes;
-using MathExtensions.Construction;
-using MathExtensions.Utilities;
-using MathExtensions.Enumerables;
+using Samola.Numbers;
+using Samola.Numbers.Primes;
+using Samola.Numbers.Construction;
+using Samola.Numbers.Utilities;
+using Samola.Numbers.Enumerables;
 
-namespace MathExtensions.Tests
+namespace Samola.Numbers.Tests
 {
     public class PrimeDecomposerTests
     {
