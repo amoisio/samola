@@ -12,7 +12,8 @@ namespace Samola.Numbers.Tests
         {
             _builder = new AmicableNumbersBuilder();
         }
-       [Fact]
+
+        [Fact]
         public void AmicableNumbers_returns_numbers_which_have_an_amicable_number()
         {
             var limit = new CountLimit(2);
@@ -26,6 +27,36 @@ namespace Samola.Numbers.Tests
 
             Assert.Equal(220, numbers[0]);
             Assert.Equal(284, numbers[1]);
+        }
+
+        [Fact]
+        public void AmicableNumbers_works_correctly_with_the_countlimit()
+        {
+            PrimeDecomposer decomposer = new PrimeDecomposer(new MaxValueLimit(284));
+            DivisorCalculator divisor = new DivisorCalculator(decomposer);
+
+            var builder = new AmicableNumbersBuilder();
+            _builder.Limit = new CountLimit(2);
+            _builder.Divisor = divisor;
+            var numbers = _builder.Build().ToArray();
+
+            Assert.Equal(504, numbers.Sum());
+        }
+
+        [Fact]
+        public void AmicableNumbers_works_correctly_with_the_maxvaluelimit()
+        {
+            var upTo = 284;
+            var limit = new MaxValueLimit(upTo);
+            PrimeDecomposer decomposer = new PrimeDecomposer(limit);
+            DivisorCalculator divisor = new DivisorCalculator(decomposer);
+
+            var builder = new AmicableNumbersBuilder();
+            _builder.Limit = limit;
+            _builder.Divisor = divisor;
+            var numbers = _builder.Build().ToArray();
+
+            Assert.Equal(504, numbers.Sum());
         }
     }
 }

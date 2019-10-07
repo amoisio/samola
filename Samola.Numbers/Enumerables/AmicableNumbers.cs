@@ -38,7 +38,7 @@ namespace Samola.Numbers.Enumerables
                 {
                     var sumDivisors = _divisorCalculator.GetProperDivisors(b);
                     int bSum = sumDivisors.Sum(); // d(b) = sumSum
-                    if (a != b && a == bSum)
+                    if (a < b && a == bSum)
                     {
                         _amicableNumbers.Add(a);
                         _amicableNumbers.Add(b);
