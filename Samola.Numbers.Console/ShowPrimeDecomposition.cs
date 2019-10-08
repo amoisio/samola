@@ -18,7 +18,7 @@ namespace Samola.Numbers
             int upTo = Int32.Parse(Console.ReadLine());
 
             MaxValueLimit maxValueLimit = new MaxValueLimit(upTo);
-            PrimeDecomposer primeDecomposer = new PrimeDecomposer(maxValueLimit);
+            PrimeDecomposer primeDecomposer = new PrimeDecomposer();
 
             for (int i = 1; i <= upTo; i++)
             {

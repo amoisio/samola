@@ -17,8 +17,8 @@ namespace Samola.Numbers
         {
             Console.Write("Print divisors for > ");
             int number = Int32.Parse(Console.ReadLine());
-
-            var primeDecomposer = new PrimeDecomposer(new MaxValueLimit(number));
+            //new MaxValueLimit(number)
+            var primeDecomposer = new PrimeDecomposer();
             var divisorCalculator = new DivisorCalculator(primeDecomposer);
 
             

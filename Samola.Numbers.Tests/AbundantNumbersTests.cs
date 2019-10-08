@@ -1,7 +1,4 @@
-﻿using Samola.Numbers.Cache;
-using Samola.Numbers.Construction;
-using Samola.Numbers.Enumerables;
-using Samola.Numbers.Primes;
+﻿using Samola.Numbers.Enumerables;
 using Samola.Numbers.Utilities;
 using System.Linq;
 using Xunit;
@@ -20,12 +17,10 @@ namespace Samola.Numbers.Tests
         [Fact]
         public void Returns_only_abundant_numbers()
         {
-            var maxLimit = new MaxValueLimit(28123);
-            var decomposer = new PrimeDecomposer(maxLimit);
-            var divisor = new DivisorCalculator(decomposer);
+            var divisor = new DivisorCalculator();
             var classifier = new NumberClassifier(divisor);
 
-            _builder.Limit = maxLimit;
+            _builder.Limit = new MaxValueLimit(28123);
             _builder.Classifier = classifier;
             var abundantNumbers = _builder.Build();
             foreach(var aNumber in abundantNumbers)
@@ -41,12 +36,10 @@ namespace Samola.Numbers.Tests
         [Fact]
         public void MaxValueLimit_limits_the_abundant_numbers()
         {
-            var maxLimit = new MaxValueLimit(28123);
-            var decomposer = new PrimeDecomposer(maxLimit);
-            var divisor = new DivisorCalculator(decomposer);
+            var divisor = new DivisorCalculator();
             var classifier = new NumberClassifier(divisor);
 
-            _builder.Limit = maxLimit;
+            _builder.Limit = new MaxValueLimit(28123);
             _builder.Classifier = classifier;
             var abundantNumbers = _builder.Build();
 
@@ -56,12 +49,10 @@ namespace Samola.Numbers.Tests
         [Fact]
         public void CountLimit_limits_the_abundant_numbers()
         {
-            var limit = new CountLimit(1000);
-            var decomposer = new PrimeDecomposer(limit);
-            var divisor = new DivisorCalculator(decomposer);
+            var divisor = new DivisorCalculator();
             var classifier = new NumberClassifier(divisor);
 
-            _builder.Limit = limit;
+            _builder.Limit = new CountLimit(1000);
             _builder.Classifier = classifier;
             var abundantNumbers = _builder.Build();
             Assert.Equal(1000, abundantNumbers.Count());

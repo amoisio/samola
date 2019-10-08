@@ -18,7 +18,8 @@ namespace Samola.Numbers.Tests
         {
             var limit = new CountLimit(2);
             _builder.Limit = limit;
-            var decomposer = new PrimeDecomposer(new MaxValueLimit(284));
+            //new MaxValueLimit(284)
+            var decomposer = new PrimeDecomposer();
             var divisor = new DivisorCalculator(decomposer);
             _builder.Divisor = divisor;
             
@@ -32,7 +33,8 @@ namespace Samola.Numbers.Tests
         [Fact]
         public void AmicableNumbers_works_correctly_with_the_countlimit()
         {
-            PrimeDecomposer decomposer = new PrimeDecomposer(new MaxValueLimit(284));
+            //new MaxValueLimit(284)
+            PrimeDecomposer decomposer = new PrimeDecomposer();
             DivisorCalculator divisor = new DivisorCalculator(decomposer);
 
             var builder = new AmicableNumbersBuilder();
@@ -48,7 +50,7 @@ namespace Samola.Numbers.Tests
         {
             var upTo = 284;
             var limit = new MaxValueLimit(upTo);
-            PrimeDecomposer decomposer = new PrimeDecomposer(limit);
+            PrimeDecomposer decomposer = new PrimeDecomposer();
             DivisorCalculator divisor = new DivisorCalculator(decomposer);
 
             var builder = new AmicableNumbersBuilder();

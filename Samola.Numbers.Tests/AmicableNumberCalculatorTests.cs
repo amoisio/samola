@@ -12,7 +12,7 @@ namespace Samola.Numbers.Tests
         public void AmicableNumbers_works(int number, int expected)
         {
             var maxValueLimit = new MaxValueLimit(number);
-            var decomposer = new PrimeDecomposer(maxValueLimit);
+            var decomposer = new PrimeDecomposer();
             var divisor = new DivisorCalculator(decomposer);
             var aNumber = new AmicableNumberCalculator(divisor);
             var amicableNumber = aNumber.FindAmicableNumber(number);

@@ -19,7 +19,7 @@ namespace Samola.Numbers
             int number = Int32.Parse(Console.ReadLine());
 
             var maxValueLimit = new MaxValueLimit(number);
-            var decomposer = new PrimeDecomposer(maxValueLimit);
+            var decomposer = new PrimeDecomposer();
             var divisor = new DivisorCalculator(decomposer);
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();

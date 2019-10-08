@@ -17,7 +17,7 @@ namespace Samola.Numbers.Tests
         {
             var number = 14;
             var maxValueLimit = new MaxValueLimit(number);
-            var decomposer = new PrimeDecomposer(maxValueLimit);
+            var decomposer = new PrimeDecomposer();
 
             var decomposition = decomposer.CalculateDecomposition(number);
 
@@ -33,7 +33,7 @@ namespace Samola.Numbers.Tests
         public void PrimeDecomposition_decomposes_number_75_correctly()
         {
             var maxValueLimit = new MaxValueLimit(75);
-            var decomposer = new PrimeDecomposer(maxValueLimit);
+            var decomposer = new PrimeDecomposer();
 
             var decomposition = decomposer.CalculateDecomposition(75);
 
@@ -49,7 +49,7 @@ namespace Samola.Numbers.Tests
         public void PrimeDecomposition_decomposes_number_420_correctly()
         {
             var maxValueLimit = new MaxValueLimit(420);
-            var decomposer = new PrimeDecomposer(maxValueLimit);
+            var decomposer = new PrimeDecomposer();
 
             var decomposition = decomposer.CalculateDecomposition(420);
 
@@ -67,7 +67,7 @@ namespace Samola.Numbers.Tests
         public void PrimeDecomposition_decomposes_number_65536_correctly()
         {
             var maxValueLimit = new MaxValueLimit(65536);
-            var decomposer = new PrimeDecomposer(maxValueLimit);
+            var decomposer = new PrimeDecomposer();
 
             var decomposition = decomposer.CalculateDecomposition(65536);
 
@@ -81,7 +81,7 @@ namespace Samola.Numbers.Tests
         [Fact]
         public void PrimeDecomposition_decomposes_number_14_correctly_with_unlimited_primes()
         {
-            var decomposer = new PrimeDecomposer(CountLimit.Default);
+            var decomposer = new PrimeDecomposer();
 
             var decomposition = decomposer.CalculateDecomposition(14);
 
@@ -96,7 +96,7 @@ namespace Samola.Numbers.Tests
         [Fact]
         public void PrimeDecomposition_decomposes_number_75_correctly_with_unlimited_primes()
         {
-            var decomposer = new PrimeDecomposer(CountLimit.Default);
+            var decomposer = new PrimeDecomposer();
 
             var decomposition = decomposer.CalculateDecomposition(75);
 
@@ -111,7 +111,7 @@ namespace Samola.Numbers.Tests
         [Fact]
         public void PrimeDecomposition_decomposes_number_420_correctly_with_unlimited_primes()
         {
-            var decomposer = new PrimeDecomposer(CountLimit.Default);
+            var decomposer = new PrimeDecomposer();
 
             var decomposition = decomposer.CalculateDecomposition(420);
 
@@ -128,7 +128,7 @@ namespace Samola.Numbers.Tests
         [Fact]
         public void PrimeDecomposition_decomposes_number_65536_correctly_with_unlimited_primes()
         {
-            var decomposer = new PrimeDecomposer(CountLimit.Default);
+            var decomposer = new PrimeDecomposer();
 
             var decomposition = decomposer.CalculateDecomposition(65536);
 

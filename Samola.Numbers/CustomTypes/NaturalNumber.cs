@@ -51,7 +51,7 @@ namespace Samola.Numbers.CustomTypes
             {
                 if (!_classification.HasValue)
                 {
-                    var decomposer = new PrimeDecomposer(new MaxValueLimit(Value));
+                    var decomposer = new PrimeDecomposer();
                     var divisor = new DivisorCalculator(decomposer);
                     var classifier = new NumberClassifier(divisor);
                     _classification = classifier.Classify(Value);

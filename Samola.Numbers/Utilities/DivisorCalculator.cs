@@ -1,15 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using Samola.Numbers.Construction;
-using Samola.Numbers.Primes;
 
 namespace Samola.Numbers.Utilities
 {
     public class DivisorCalculator
     {
         private PrimeDecomposer _primeDecomposer;
+
+        public DivisorCalculator()
+        {
+            _primeDecomposer = new PrimeDecomposer();
+        }
 
         public DivisorCalculator(PrimeDecomposer primeDecomposer)
         {
