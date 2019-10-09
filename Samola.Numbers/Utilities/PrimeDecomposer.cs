@@ -9,7 +9,6 @@ namespace Samola.Numbers.Utilities
     /// </summary>
     public class PrimeDecomposer 
     {
-        private PrimeNumbers _primes;
         private readonly PrimeNumbersBuilder _builder;
 
         public PrimeDecomposer()
@@ -20,29 +19,18 @@ namespace Samola.Numbers.Utilities
 
         public Dictionary<int, int> CalculateDecomposition(int number)
         {
-            var decomposition = new Dictionary<int, int>();
-
-            if (number == 1)
-            {
-                decomposition.Add(number, 1);
-            }
-
             _builder.Limit = new MaxValueLimit(number);
-            _primes = _builder.Build();
+            var primes = _builder.Build();
 
-            var primesHash = new HashSet<int>(_primes);
-            
-            // This check can be optimized
-            // IsPrime computes the check. However, with we might already have knowledge of existing primes at this point
-            // - If that is the case then we could simply check if number is contained in the prime hashset, making this check a O(1)
-            if (primesHash.Contains(number))//MathExt.IsPrime(number)) 
+            var decomposition = new Dictionary<int, int>();
+            if (number == 1 || MathExt.IsPrime(number)) 
             {
                 decomposition.Add(number, 1);
             }
             else
             {
                 var temp = number;
-                foreach (var prime in primesHash)
+                foreach (var prime in primes)
                 {
                     if (temp == 1)
                         break;

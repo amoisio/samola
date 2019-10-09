@@ -36,11 +36,8 @@ namespace Samola.Numbers.Tests
         [Fact]
         public void MaxValueLimit_limits_the_abundant_numbers()
         {
-            var divisor = new DivisorCalculator();
-            var classifier = new NumberClassifier(divisor);
-
             _builder.Limit = new MaxValueLimit(28123);
-            _builder.Classifier = classifier;
+            _builder.Classifier = new NumberClassifier();
             var abundantNumbers = _builder.Build();
 
             Assert.True(abundantNumbers.Last() <= 28123);
@@ -49,11 +46,8 @@ namespace Samola.Numbers.Tests
         [Fact]
         public void CountLimit_limits_the_abundant_numbers()
         {
-            var divisor = new DivisorCalculator();
-            var classifier = new NumberClassifier(divisor);
-
             _builder.Limit = new CountLimit(1000);
-            _builder.Classifier = classifier;
+            _builder.Classifier = new NumberClassifier();
             var abundantNumbers = _builder.Build();
             Assert.Equal(1000, abundantNumbers.Count());
         }

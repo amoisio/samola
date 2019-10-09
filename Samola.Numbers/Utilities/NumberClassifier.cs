@@ -9,6 +9,11 @@ namespace Samola.Numbers.Utilities
         private readonly DivisorCalculator _divisorCalculator;
         private readonly Dictionary<int, NumberClassification> _classifications;
 
+        public NumberClassifier() : this (new DivisorCalculator())
+        {
+            
+        }
+
         public NumberClassifier(DivisorCalculator divisorCalculator)
         {
             _divisorCalculator = divisorCalculator;
