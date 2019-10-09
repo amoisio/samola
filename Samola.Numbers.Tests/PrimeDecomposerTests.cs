@@ -1,25 +1,26 @@
-﻿using System;
-using Xunit;
-using System.Linq;
+﻿using Xunit;
 using System.Collections.Generic;
-using Samola.Numbers;
-using Samola.Numbers.Primes;
-using Samola.Numbers.Construction;
 using Samola.Numbers.Utilities;
-using Samola.Numbers.Enumerables;
+using System.Diagnostics;
+using System.Linq;
 
 namespace Samola.Numbers.Tests
 {
     public class PrimeDecomposerTests
     {
+        private PrimeDecomposer _decomposer;
+
+        public PrimeDecomposerTests()
+        {
+            _decomposer = new PrimeDecomposer();
+        }
+
         [Fact]
         public void PrimeDecomposition_decomposes_number_14_correctly()
         {
             var number = 14;
-            var maxValueLimit = new MaxValueLimit(number);
-            var decomposer = new PrimeDecomposer();
 
-            var decomposition = decomposer.CalculateDecomposition(number);
+            var decomposition = _decomposer.CalculateDecomposition(number);
 
             var expected = new Dictionary<int, int>()
             {
@@ -30,12 +31,9 @@ namespace Samola.Numbers.Tests
         }
 
         [Fact]
-        public void PrimeDecomposition_decomposes_number_75_correctly()
+        public void PrimeDecomposition_ecomposes_number_75_correctly()
         {
-            var maxValueLimit = new MaxValueLimit(75);
-            var decomposer = new PrimeDecomposer();
-
-            var decomposition = decomposer.CalculateDecomposition(75);
+            var decomposition = _decomposer.CalculateDecomposition(75);
 
             var expected = new Dictionary<int, int>()
             {
@@ -48,10 +46,7 @@ namespace Samola.Numbers.Tests
         [Fact]
         public void PrimeDecomposition_decomposes_number_420_correctly()
         {
-            var maxValueLimit = new MaxValueLimit(420);
-            var decomposer = new PrimeDecomposer();
-
-            var decomposition = decomposer.CalculateDecomposition(420);
+            var decomposition = _decomposer.CalculateDecomposition(420);
 
             var expected = new Dictionary<int, int>()
             {
@@ -66,10 +61,7 @@ namespace Samola.Numbers.Tests
         [Fact]
         public void PrimeDecomposition_decomposes_number_65536_correctly()
         {
-            var maxValueLimit = new MaxValueLimit(65536);
-            var decomposer = new PrimeDecomposer();
-
-            var decomposition = decomposer.CalculateDecomposition(65536);
+            var decomposition = _decomposer.CalculateDecomposition(65536);
 
             var expected = new Dictionary<int, int>()
             {
@@ -81,9 +73,7 @@ namespace Samola.Numbers.Tests
         [Fact]
         public void PrimeDecomposition_decomposes_number_14_correctly_with_unlimited_primes()
         {
-            var decomposer = new PrimeDecomposer();
-
-            var decomposition = decomposer.CalculateDecomposition(14);
+            var decomposition = _decomposer.CalculateDecomposition(14);
 
             var expected = new Dictionary<int, int>()
             {
@@ -96,9 +86,7 @@ namespace Samola.Numbers.Tests
         [Fact]
         public void PrimeDecomposition_decomposes_number_75_correctly_with_unlimited_primes()
         {
-            var decomposer = new PrimeDecomposer();
-
-            var decomposition = decomposer.CalculateDecomposition(75);
+            var decomposition = _decomposer.CalculateDecomposition(75);
 
             var expected = new Dictionary<int, int>()
             {
@@ -111,9 +99,7 @@ namespace Samola.Numbers.Tests
         [Fact]
         public void PrimeDecomposition_decomposes_number_420_correctly_with_unlimited_primes()
         {
-            var decomposer = new PrimeDecomposer();
-
-            var decomposition = decomposer.CalculateDecomposition(420);
+            var decomposition = _decomposer.CalculateDecomposition(420);
 
             var expected = new Dictionary<int, int>()
             {
@@ -128,9 +114,7 @@ namespace Samola.Numbers.Tests
         [Fact]
         public void PrimeDecomposition_decomposes_number_65536_correctly_with_unlimited_primes()
         {
-            var decomposer = new PrimeDecomposer();
-
-            var decomposition = decomposer.CalculateDecomposition(65536);
+            var decomposition = _decomposer.CalculateDecomposition(65536);
 
             var expected = new Dictionary<int, int>()
             {
@@ -139,5 +123,24 @@ namespace Samola.Numbers.Tests
             Assert.Equal(expected, decomposition);
         }
 
+        [Fact]
+        public void Prime_decomposer_decomposes_values_upto_30000_under_one_second()
+        {
+            int n = 30000;
+
+            List<long> times = new List<long>();
+            for (int j = 0; j < 5; j++)
+            {
+                Stopwatch stopwatch = Stopwatch.StartNew();
+                for (int i = 1; i <= n; i++)
+                {
+                    _decomposer.CalculateDecomposition(i);
+                }
+                stopwatch.Stop();
+                times.Add(stopwatch.ElapsedMilliseconds);
+            }
+
+            Assert.True(times.Average() < 1000);
+        }
     }
 }

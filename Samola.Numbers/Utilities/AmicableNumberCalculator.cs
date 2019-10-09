@@ -1,6 +1,4 @@
-﻿using Samola.Numbers.Construction;
-using Samola.Numbers.Primes;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace Samola.Numbers.Utilities
@@ -10,6 +8,11 @@ namespace Samola.Numbers.Utilities
         private readonly HashSet<int> _nonAmicableNumbers;
         private readonly Dictionary<int, int> _amicableNumbers;
         private readonly DivisorCalculator _divisorCalculator;
+
+        public AmicableNumberCalculator() : this(new DivisorCalculator())
+        {
+
+        }
 
         public AmicableNumberCalculator(DivisorCalculator divisorCalculator)
         {

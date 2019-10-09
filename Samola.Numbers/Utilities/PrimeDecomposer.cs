@@ -1,6 +1,5 @@
 ﻿using Samola.Numbers.Enumerables;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Samola.Numbers.Utilities
 {

@@ -7,9 +7,9 @@ namespace Samola.Numbers.Utilities
     {
         private PrimeDecomposer _primeDecomposer;
 
-        public DivisorCalculator()
+        public DivisorCalculator() : this(new PrimeDecomposer())
         {
-            _primeDecomposer = new PrimeDecomposer();
+
         }
 
         public DivisorCalculator(PrimeDecomposer primeDecomposer)
