@@ -1,18 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Xunit;
-using Samola.Numbers;
-using System.Linq;
-using Samola.Numbers.Primes;
-using Samola.Numbers.Construction;
+﻿using Xunit;
 using Samola.Numbers.Utilities;
-using Samola.Numbers.Enumerables;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 
 namespace Samola.Numbers.Tests
 {
-    public class DivisorsTests
+    public class DivisorCalculatorTests
     {
+        private DivisorCalculator _calculator;
+
+        public DivisorCalculatorTests()
+        {
+            _calculator = new DivisorCalculator();
+        }
+
         /// 1: 1
         /// 3: 1,3
         /// 6: 1,2,3,6
@@ -31,9 +33,7 @@ namespace Samola.Numbers.Tests
         [InlineData(3022111, 4)]
         public void Divisors_should_calculate_the_correct_amount(int number, int expectedDivisors)
         {
-            DivisorCalculator divisorCalculator = new DivisorCalculator();
-
-            var D = divisorCalculator.NumberOfDivisors(number);
+            var D = _calculator.NumberOfDivisors(number);
 
             Assert.Equal(expectedDivisors, D);
         }
@@ -49,9 +49,7 @@ namespace Samola.Numbers.Tests
         [InlineData(3, 2)]
         public void Divisors_should_return_1_and_prime_for_prime_numbers(int number, int expectedDivisors)
         {
-            DivisorCalculator divisorCalculator = new DivisorCalculator();
-
-            var D = divisorCalculator.NumberOfDivisors(number);
+            var D = _calculator.NumberOfDivisors(number);
 
             Assert.Equal(expectedDivisors, D);
         }
@@ -60,11 +58,7 @@ namespace Samola.Numbers.Tests
         public void Divisors_return_all_divisors_of_a_number()
         {
             int number = 180;
-
-            var decomposer = new PrimeDecomposer();
-            var decomposition = decomposer.CalculateDecomposition(number);
-            DivisorCalculator divisorCalculator = new DivisorCalculator(decomposer);
-            var divisors = divisorCalculator.GetDivisors(decomposition);
+            var divisors = _calculator.GetDivisors(number);
 
             Assert.Contains(1, divisors);
             Assert.Contains(2, divisors);
@@ -91,8 +85,7 @@ namespace Samola.Numbers.Tests
         {
             var number = 180;
 
-            DivisorCalculator divisorCalculator = new DivisorCalculator();
-            var divisors = divisorCalculator.GetProperDivisors(number);
+            var divisors = _calculator.GetProperDivisors(number);
             Assert.Contains(1, divisors);
             Assert.Contains(2, divisors);
             Assert.Contains(3, divisors);
@@ -131,8 +124,7 @@ namespace Samola.Numbers.Tests
         [InlineData(3022111, 4)]
         public void Divisors_should_calculate_the_correct_amount_with_unlimited_primes(int number, int expectedDivisors)
         {
-            var divisorCalculator = new DivisorCalculator();
-            var D = divisorCalculator.NumberOfDivisors(number);
+            var D = _calculator.NumberOfDivisors(number);
 
             Assert.Equal(expectedDivisors, D);
         }
@@ -148,9 +140,7 @@ namespace Samola.Numbers.Tests
         [InlineData(3, 2)]
         public void Divisors_should_return_1_and_prime_for_prime_numbers_with_unlimited_primes(int number, int expectedDivisors)
         {
-            var divisorCalculator = new DivisorCalculator();
-
-            var D = divisorCalculator.NumberOfDivisors(number);
+            var D = _calculator.NumberOfDivisors(number);
 
             Assert.Equal(expectedDivisors, D);
         }
@@ -159,8 +149,7 @@ namespace Samola.Numbers.Tests
         public void Divisors_return_all_divisors_of_a_number_with_unlimited_primes()
         {
             int number = 180;
-            var divisorCalculator = new DivisorCalculator();
-            var divisors = divisorCalculator.GetDivisors(number);
+            var divisors = _calculator.GetDivisors(number);
 
             Assert.Contains(1, divisors);
             Assert.Contains(2, divisors);
@@ -185,8 +174,7 @@ namespace Samola.Numbers.Tests
         [Fact]
         public void ProperDivisors_contain_all_divisors_except_the_number_itself_with_unlimited_primes()
         {
-            var divisorCalculator = new DivisorCalculator();
-            var divisors = divisorCalculator.GetProperDivisors(180);
+            var divisors = _calculator.GetProperDivisors(180);
             Assert.Contains(1, divisors);
             Assert.Contains(2, divisors);
             Assert.Contains(3, divisors);
@@ -205,6 +193,26 @@ namespace Samola.Numbers.Tests
             Assert.Contains(60, divisors);
             Assert.Contains(90, divisors);
             Assert.DoesNotContain(180, divisors);
+        }
+
+        [Fact]
+        public void Divisor_computes_proper_divisors_for_values_upto_30000_under_one_second()
+        {
+            int n = 30000;
+
+            List<long> times = new List<long>();
+            for (int j = 0; j < 5; j++)
+            {
+                Stopwatch stopwatch = Stopwatch.StartNew();
+                for (int i = 1; i <= n; i++)
+                {
+                    _calculator.GetProperDivisors(i);
+                }
+                stopwatch.Stop();
+                times.Add(stopwatch.ElapsedMilliseconds);
+            }
+
+            Assert.True(times.Average() < 1000);
         }
     }
 }
