@@ -17,7 +17,7 @@ namespace Samola.Numbers
                 stopwatch.Restart();
                 for (int i = 1; i <= j; i++)
                 {
-                    i.NumberOfDigits();
+                    i.NumberOfDigits2();
                 }
                 stopwatch.Stop();
                 System.Console.WriteLine($"NumberOfDigits ({j}) : {stopwatch.ElapsedMilliseconds}ms");
@@ -25,7 +25,7 @@ namespace Samola.Numbers
                 stopwatch.Restart();
                 for (int i = 1; i <= j; i++)
                 {
-                    i.NumberOfDigits2();
+                    i.NumberOfDigits();
                 }
                 stopwatch.Stop();
                 System.Console.WriteLine($"NumberOfDigits2({j}) : {stopwatch.ElapsedMilliseconds}ms");
