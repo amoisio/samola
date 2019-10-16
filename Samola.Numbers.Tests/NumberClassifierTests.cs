@@ -27,9 +27,9 @@ namespace Samola.Numbers.Tests
         }
 
         [Fact]
-        public void Classifier_classfies_values_upto_30000_under_one_second()
+        public void Classifier_classfies_values_upto_10000_under_one_second()
         {
-            int n = 30000;
+            int n = 10000;
 
             List<long> times = new List<long>();
             for (int j = 0; j < 5; j++)

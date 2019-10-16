@@ -30,6 +30,8 @@ namespace Samola.Numbers
             _menu.Executables.Add(new AmicableNumbersPerformance());
             _menu.Executables.Add(new PrimeRulePerformance());
             _menu.Executables.Add(new PrimeGenerationPerformance());
+            _menu.Executables.Add(new ShowFibonacci());
+            _menu.Executables.Add(new NumberOfDigitsPerformance());
         }
     }
 }

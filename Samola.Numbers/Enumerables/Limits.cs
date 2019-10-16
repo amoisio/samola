@@ -15,6 +15,21 @@ namespace Samola.Numbers.Enumerables
         }
     }
 
+    public class LargeIntegerCountLimit : EnumerableLimit<LargeInteger>
+    {
+        private readonly int _limit;
+
+        public LargeIntegerCountLimit(int limit) : base(new LargeInteger(limit))
+        {
+            _limit = limit;
+        }
+
+        public override bool LimitOK(EnumerationState<LargeInteger> state)
+        {
+            return state.YieldedCount < _limit;
+        }
+    }
+
     public class MaxNaturalCountLimit : NaturalNumberLimit
     {
         public MaxNaturalCountLimit(int limit) : base(new NaturalNumber(limit)) { }

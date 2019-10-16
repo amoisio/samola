@@ -11,7 +11,7 @@ namespace Samola.Numbers.Utilities
         /// Determines the number of digits in an integer by converting it to a string and calculating the number of characters in the string.
         /// Executes roughly in T = 7,5 timeunits
         /// </summary>
-        public static int NumberOfDigits(this int s)
+        public static int NumberOfDigits2(this int s)
         {
             if (s == 0)
                 return 1;
@@ -23,7 +23,7 @@ namespace Samola.Numbers.Utilities
         /// Determines the number of digits in an integer by using base-10 logarithm.
         /// Executes roughly in T = 3,9 timeunits
         /// </summary>
-        public static int NumberOfDigits2(this int s)
+        public static int NumberOfDigits(this int s)
         {
             var t = Math.Abs(s);
             if (t == 1 || t == 0)

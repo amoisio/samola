@@ -82,8 +82,6 @@ namespace Samola.Numbers.CustomTypes
             }
         }
 
-        public LargeInteger(int digitPlaces = 9) : this(0, digitPlaces) { }
-
         public LargeInteger(int integer, int digitPlaces = 9) : this(integer.ToString(), digitPlaces) { }
 
         public LargeInteger(string integerStr, int digitPlaces = 9)
@@ -106,7 +104,8 @@ namespace Samola.Numbers.CustomTypes
 
         private static int[] ParseIntegersForInternalStorage(string integerStr, int digitPlaces)
         {
-            return integerStr.Substrings(digitPlaces)
+            return integerStr.Substrings(digitPlaces, true) //true == Start with the remainder (ie. the most significant digits)
+                .Reverse() // Least significant digits in index 0
                 .Select(e => Int32.Parse(e))
                 .ToArray();
         }
@@ -118,7 +117,7 @@ namespace Samola.Numbers.CustomTypes
 
             Add(newValues, right, 0, digitPlaces);
 
-            var result = new LargeInteger(digitPlaces);
+            var result = new LargeInteger(0, digitPlaces);
             result._values = newValues;
             return result;
         }
@@ -145,7 +144,7 @@ namespace Samola.Numbers.CustomTypes
                 Add(newValues, right._values[i], i, digitPlaces);
             }
 
-            var result = new LargeInteger(digitPlaces);
+            var result = new LargeInteger(0, digitPlaces);
             result._values = newValues;
             return result;
 
@@ -250,7 +249,7 @@ namespace Samola.Numbers.CustomTypes
 
             Multiply(newValues, right, 0, digitPlaces);
 
-            var result = new LargeInteger(digitPlaces);
+            var result = new LargeInteger(0, digitPlaces);
             result._values = newValues;
             return result;
 
