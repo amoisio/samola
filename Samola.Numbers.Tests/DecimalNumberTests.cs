@@ -1,5 +1,4 @@
-﻿
-using Samola.Numbers.Enumerables;
+﻿using Samola.Numbers.Enumerables;
 using System.Collections.Generic;
 using System.Linq;
 using Xunit;
@@ -48,7 +47,7 @@ namespace Samola.Numbers.Tests
 
             var arr = digits.ToArray();
 
-            Assert.Equal(expectedExists, digits.RecurringDecimalFractionFound);
+            Assert.Equal(expectedExists, digits.HasRecurrence);
             Assert.Equal(recurrenceFraction, digits.RecurringDecimalFraction);
         }
 

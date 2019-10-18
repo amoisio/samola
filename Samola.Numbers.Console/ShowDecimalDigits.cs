@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Linq;
-using Samola.Numbers.Primes;
-using Samola.Numbers.Construction;
-using Samola.Numbers.Utilities;
 using Samola.Numbers.Enumerables;
-using Samola.Numbers.CustomTypes;
 
 namespace Samola.Numbers
 {
@@ -25,7 +19,7 @@ namespace Samola.Numbers
                 DecimalDigits digits = new DecimalDigits(i);
                 var arr = digits.ToArray();
 
-                int len = digits.RecurringDecimalFractionFound
+                int len = digits.HasRecurrence
                     ? digits.RecurringDecimalFraction.Length
                     : 0;
 
