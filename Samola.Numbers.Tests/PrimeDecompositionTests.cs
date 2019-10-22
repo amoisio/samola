@@ -4,6 +4,7 @@ using Samola.Numbers.Utilities;
 using System.Diagnostics;
 using System.Linq;
 using Samola.Numbers.Enumerables;
+using Samola.Numbers.Comparers;
 
 namespace Samola.Numbers.Tests
 {
@@ -176,6 +177,19 @@ namespace Samola.Numbers.Tests
 
             Assert.True(powComp.Equals(same));
             Assert.False(decomposition.Equals(same));
+        }
+
+        [Fact]
+        public void EqualityComparer_works_as_expected()
+        {
+            HashSet<PrimeDecomposition> d = new HashSet<PrimeDecomposition>(new PrimeDecompositionEqualityComparer());
+            d.Add(PrimeDecomposition.Create(50));
+            d.Add(PrimeDecomposition.Create(51));
+
+            var decomp1 = PrimeDecomposition.Create(50);
+            var decomp2 = PrimeDecomposition.Create(49);
+            Assert.Contains(decomp1, d);
+            Assert.DoesNotContain(decomp2, d);
         }
     }
 }
