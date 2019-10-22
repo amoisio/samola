@@ -33,6 +33,7 @@ namespace Samola.Numbers
             _menu.Executables.Add(new ShowFibonacci());
             _menu.Executables.Add(new NumberOfDigitsPerformance());
             _menu.Executables.Add(new ShowDecimalDigits());
+            _menu.Executables.Add(new CountUniquePrimes());
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Samola.Numbers.Enumerables;
+using System;
 using System.Collections.Generic;
 
 namespace Samola.Numbers.Utilities
@@ -6,6 +7,7 @@ namespace Samola.Numbers.Utilities
     /// <summary>
     /// Calculates the prime decomposition of a given number
     /// </summary>
+    [Obsolete]
     public class PrimeDecomposer 
     {
         private readonly PrimeNumbersBuilder _builder;
