@@ -44,5 +44,21 @@ namespace Samola.Numbers.Utilities
             return digits;
         }
 
+        public static int[] ToDigits(this int number)
+        {
+            int digitCount = (int)Math.Floor(Math.Log10(number)) + 1;
+
+            int[] digits = new int[digitCount];
+
+            int temp = number;
+            for (int i = digitCount - 1; i >= 0; i--)
+            {
+                temp = Math.DivRem(temp, 10, out int result);
+                digits[i] = result;
+            }
+
+            return digits;
+        }
+
     }
 }

@@ -23,29 +23,98 @@ namespace Samola.Numbers.Counters
     public class DialCounter
     {
         private readonly int[] _dials;
+        private const int N_VALUES = 10;
+        private readonly int[] _values;
 
-        public DialCounter(int n)
+        public DialCounter(int n) : this(n, null) { }
+
+        public DialCounter(int n, Func<int, int> mapper)
         {
             _dials = new int[n];
-            Dials = n;
-            InitializeDials();
+            _values = new int[N_VALUES];
+            NumberOfDials = n;
+            InitializeDials(_dials);
+            InitializeValues(_values, mapper);
+            IsCounterEmpty = false;
         }
 
-        public DialCounter(int[] dials)
+        public DialCounter(int[] dials) : this(dials, null) { }
+
+        public DialCounter(int[] dials, Func<int, int> mapper)
         {
+            ValidateDials(dials);
+            NumberOfDials = dials.Length;
             _dials = dials;
-            Dials = dials.Length;
+            _values = new int[N_VALUES];
+            InitializeValues(_values, mapper);
+            IsCounterEmpty = false;
         }
 
-        private void InitializeDials()
+        private void InitializeDials(int[] dials)
         {
-            for (int i = 0; i < Dials; i++)
+            int n = dials.Length;
+            for (int i = 0; i < n; i++)
             {
-                _dials[i] = 9;
+                dials[i] = 9;
             }
         }
 
-        public int Dials { get; }
+        private void InitializeValues(int[] values, Func<int, int> mapper)
+        {
+            Func<int, int> tempMapper = mapper ?? (d => d);
+
+            for (int i = 0; i < N_VALUES; i++)
+            {
+                _values[i] = tempMapper(i);
+            }
+        }
+
+        private void ValidateDials(int[] dials)
+        {
+            int n = dials.Length;
+            int temp = dials[0];
+            for (int i = 1; i < n; i++)
+            {
+                if (dials[i] > temp)
+                    throw new ArgumentException("Unsuitable data set for a count down dial. Please check the 'data' array.");
+                temp = dials[i];
+            }
+        }
+
+        public int NumberOfDials { get; }
+
+        public bool IsCounterEmpty { get; private set; }
+
+        public int Sum
+        {
+            get
+            {
+                int sum = 0;
+                for(int i = 0; i < NumberOfDials; i++)
+                {
+                    sum += _values[_dials[i]];
+                }
+                return sum;
+            }
+        }
+
+        public int[] DialDigits => _dials;
+
+        public int DialDigit(int dialIndex)
+        {
+            return _dials[dialIndex];
+
+        }
+
+        public int DialValue(int dialIndex)
+        {
+            return _values[_dials[dialIndex]];
+        }
+
+        public bool Roll()
+        {
+            return this.Roll(NumberOfDials - 1);
+        }
 
         /// <summary>
         /// Roll dial once
@@ -53,7 +122,7 @@ namespace Samola.Numbers.Counters
         /// <param name="dialIndex">0 based index of the dial. 0 being the most significant dial.</param>
         public bool Roll(int dialIndex)
         {
-            if (dialIndex < 0 || dialIndex >= Dials)
+            if (dialIndex < 0 || dialIndex >= NumberOfDials)
                 throw new IndexOutOfRangeException("dialIndex is out of range");
 
             int oldValue = _dials[dialIndex];
@@ -79,12 +148,13 @@ namespace Samola.Numbers.Counters
             if (affectedIndex == -1)
             {
                 // The counter has been spent.
+                IsCounterEmpty = true;
                 return false;
             }
             else
             {
                 int newValue = _dials[affectedIndex] - 1;
-                for (int i = affectedIndex; i < Dials; i++)
+                for (int i = affectedIndex; i < NumberOfDials; i++)
                 {
                     _dials[i] = newValue;
                 }
@@ -94,13 +164,14 @@ namespace Samola.Numbers.Counters
 
         public void Reset()
         {
-            InitializeDials();
+            InitializeDials(_dials);
+            IsCounterEmpty = false;
         }
 
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < Dials; i++)
+            for (int i = 0; i < NumberOfDials; i++)
             {
                 sb.Append(_dials[i]);
             }

@@ -18,5 +18,16 @@ namespace Samola.Numbers.Tests
         {
             Assert.Equal(expected, value.NumberOfDigits());
         }
+
+        [Theory]
+        [InlineData(123, new int[] {1,2,3 })]
+        [InlineData(014, new int[] { 1, 4 })]
+        [InlineData(987532, new int[] { 9, 8, 7, 5, 3, 2 })]
+        public void IntToArray_splits_integer_digits_into_separate_numbers(int value, int[] expectedDigits)
+        {
+            var digits = value.ToDigits();
+
+            Assert.Equal(expectedDigits, digits);
+        }
     }
 }
