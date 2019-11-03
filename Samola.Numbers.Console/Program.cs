@@ -35,6 +35,7 @@ namespace Samola.Numbers
             _menu.Executables.Add(new ShowDecimalDigits());
             _menu.Executables.Add(new CountUniquePrimes());
             _menu.Executables.Add(new ShowDigitPowerWalk());
+            _menu.Executables.Add(new ShowMultiplicandRanges());
         }
     }
 }
