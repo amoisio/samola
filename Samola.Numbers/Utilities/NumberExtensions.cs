@@ -51,7 +51,7 @@ namespace Samola.Numbers.Utilities
             int[] digits = new int[digitCount];
 
             int temp = number;
-            for (int i = digitCount - 1; i >= 0; i--)
+            for (int i = 0; i < digitCount; i++)
             {
                 temp = Math.DivRem(temp, 10, out int result);
                 digits[i] = result;

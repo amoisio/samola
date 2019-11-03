@@ -21,9 +21,9 @@ namespace Samola.Numbers.Tests
         }
 
         [Theory]
-        [InlineData(123, new int[] {1,2,3 })]
-        [InlineData(014, new int[] { 1, 4 })]
-        [InlineData(987532, new int[] { 9, 8, 7, 5, 3, 2 })]
+        [InlineData(123, new int[] { 3,2,1 })]
+        [InlineData(014, new int[] { 4, 1 })]
+        [InlineData(987532, new int[] { 2, 3, 5, 7, 8, 9 })]
         public void IntToArray_splits_integer_digits_into_separate_numbers(int value, int[] expectedDigits)
         {
             var digits = value.ToDigits();
