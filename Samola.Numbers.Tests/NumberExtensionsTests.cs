@@ -14,6 +14,7 @@ namespace Samola.Numbers.Tests
         [InlineData(-14, 2)]
         [InlineData(0, 1)]
         [InlineData(-0317, 3)]
+        [InlineData(1000, 4)]
         public void NumberOfDigits_correctly_calculates_the_number_or_digits(int value, int expected)
         {
             Assert.Equal(expected, value.NumberOfDigits());

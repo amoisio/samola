@@ -25,8 +25,8 @@ namespace Samola.Numbers.Utilities
         /// </summary>
         public static int NumberOfDigits(this int s)
         {
-            var t = Math.Abs(s);
-            if (t == 1 || t == 0)
+            var t = Math.Abs(s) + 1; // + 1 offsets digit calculation for exact powers of 10
+            if (t == 1)
                 return 1;
             else
                 return (int)Math.Ceiling(Math.Log10(t));
