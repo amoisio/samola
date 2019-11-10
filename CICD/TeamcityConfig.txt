@@ -22,3 +22,5 @@ docker run -it --name teamcity-server-instance -p 8111:8111 -v teamcity_data:C:\
 ocker run -it -e SERVER_URL="<url>"
     -v <path>:C:/BuildAgent/conf
     jetbrains/teamcity-agent
+	
+	
