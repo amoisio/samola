@@ -5,6 +5,58 @@ namespace Samola.Utilities.Tests
 {
     public class StringExtensionsTests
     {
+        [Fact]
+        public void Extract_throws_if_pattern_is_empty()
+        {
+            string pattern = String.Empty;
+            string s = "Problem123.cs";
+
+            try
+            {
+                var result = s.Extract(pattern);
+                Assert.False(true);
+            }
+            catch (ArgumentNullException)
+            {
+                Assert.True(true);
+            }
+            catch (Exception)
+            {
+                Assert.False(true);
+            }
+        }
+
+        [Fact]
+        public void Extract_throws_if_pattern_is_missing_the_placeholder()
+        {
+            string pattern = "Problem.cs";
+            string s = "Problem123.cs";
+
+            try
+            {
+                var result = s.Extract(pattern);
+                Assert.False(true);
+            }
+            catch (ArgumentException)
+            {
+                Assert.True(true);
+            }
+            catch (Exception)
+            {
+                Assert.False(true);
+            }
+        }
+
+        [Theory]
+        [InlineData("Problem123.cs", "Problem{0}.cs", "123")]
+        [InlineData("Probiproblmeas23_234ffProblem123.cs", "Problem{0}.cs", "123")]
+        [InlineData("Problem123.cs.cs.cs.cs", "Problem{0}.cs", "123")]
+        public void Extract_parses_the_placeholder_value_eagerly(string s, string pattern, string expected)
+        {
+            var result = s.Extract(pattern);
+            Assert.Equal(expected, result);
+        }
+
         [Theory]
         [InlineData("This is a string that I would like to split", 4, new string[] { "This", " is a string that I would like to split" })]
         [InlineData("This is a string that I would like to split", 15, new string[] { "This is a strin", "g that I would like to split" })]

@@ -3,8 +3,40 @@ using System.Collections.Generic;
 
 namespace Samola.Utilities
 {
-    public static class StringExtensions 
+    public static class StringExtensions
     {
+        /// <summary>
+        /// Extracts the placeholder value from a string
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="pattern">String format pattern with the placeholder substring {0}</param>
+        public static string Extract(this string s, string pattern)
+        {
+            if (String.IsNullOrEmpty(pattern))
+                throw new ArgumentNullException(nameof(pattern));
+
+            if (!pattern.Contains("{0}"))
+                throw new ArgumentException("No placeholder string found!", nameof(pattern));
+
+            int patternIndex = pattern.IndexOf("{0}");
+            string startOfString = pattern.Substring(0, patternIndex);
+            string endOfString = pattern.Substring(patternIndex + 3);
+
+            int sourceStartIndex = s.IndexOf(startOfString);
+            int valueStartIndex = sourceStartIndex + startOfString.Length;
+            int sourceEndIndex = s.IndexOf(endOfString, valueStartIndex);
+            int valueEndIndex = sourceEndIndex - 1;
+
+            if (sourceStartIndex >= 0 && sourceEndIndex > valueStartIndex)
+            {
+                return s.Substring(valueStartIndex, valueEndIndex - valueStartIndex + 1);
+            }
+            else
+            {
+                return null;
+            }
+        }
+
         /// <summary>
         /// Splits the string into two so that the first string runs from 0 to index - 1, and the second string runs from index to end-of-string
         /// </summary>
@@ -25,12 +57,12 @@ namespace Samola.Utilities
             {
                 lines.Add(line);
             }
-            else 
+            else
             {
                 lines.Add(line.Substring(0, splitFromIndex));
                 lines.Add(line.Substring(splitFromIndex));
             }
-            
+
             return lines.ToArray();
         }
 
@@ -47,7 +79,7 @@ namespace Samola.Utilities
             List<string> lines = new List<string>();
 
             string tempLine = line.Trim();
-            while(tempLine.Length > 0)
+            while (tempLine.Length > 0)
             {
                 var tempLength = GetSplitLength(tempLine, maxLength);
                 var tempLines = tempLine.Split(tempLength);
@@ -75,7 +107,7 @@ namespace Samola.Utilities
                 while (tempLength > 0 && !SplitLengthFound(trimmedLine, tempLength--))
                     ;
 
-                
+
                 if (tempLength == 0)
                 {
                     tempLength = maxLength;
