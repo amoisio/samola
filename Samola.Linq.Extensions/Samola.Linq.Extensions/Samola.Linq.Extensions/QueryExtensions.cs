@@ -24,8 +24,11 @@ namespace Samola.Linq.Extensions
             IEnumerable<TInner> inner,
             Func<TOuter, TKey> outerKeySelector,
             Func<TInner, TKey> innerKeySelector,
-            Func<TOuter, TInner, TResult> resultSelector) where TKey : struct
+            Func<TOuter, TInner, TResult> resultSelector)
         {
+            if (!typeof(TKey).IsPrimitive && typeof(TKey) != typeof(string))
+                throw new ArgumentException($"{nameof(TKey)} must be of primitive or string type.");
+
             if (inner == null)
                 throw new ArgumentNullException(nameof(inner), "inner cannot be null");
 

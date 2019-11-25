@@ -129,5 +129,36 @@ namespace Samola.Linq.Extensions.Tests
 
             Assert.Equal(expected, result);            
         }
+
+        [Fact]
+        public void FullOuterJoin_can_use_string_as_key()
+        {
+            var outer = new TestEntity[]
+            {
+                new TestEntity { Key = 1, Opt = "outer1"},
+                new TestEntity { Key = 2, Opt = "outer2"},
+                new TestEntity { Key = 3, Opt = "outer3"},
+
+            };
+
+            var inner = new TestEntity[]
+            {
+                new TestEntity { Key = 2, Opt = "outer1"},
+            };
+
+            var expected = new Tuple<int, int>[]
+            {
+                Tuple.Create(1, 2),
+                Tuple.Create(2, 0),
+                Tuple.Create(3, 0)
+            };
+
+            var result = outer.FullOuterJoin(inner,
+                o => o.Opt,
+                i => i.Opt,
+                (o, i) => Tuple.Create(o?.Key ?? 0, i?.Key ?? 0)).ToArray();
+
+            Assert.Equal(expected, result);
+        }
     }
 }
