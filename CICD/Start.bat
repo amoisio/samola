@@ -1,1 +1,0 @@
-docker run -it --name teamcity-server-instance -p 8111:8111 -v teamcity_data:/ProgramData/JetBrains/TeamCity -v teamcity_logs:/TeamCity/logs jetbrains/teamcity-server
