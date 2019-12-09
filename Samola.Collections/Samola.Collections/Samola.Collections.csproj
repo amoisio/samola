@@ -10,7 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Samola.Utilities\Samola.Utilities.csproj" />
+    <ProjectReference Include="..\..\Samola.Utilities\Samola.Utilities\Samola.Utilities.csproj" />
   </ItemGroup>
 
 </Project>
