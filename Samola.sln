@@ -7,9 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Samola.Collections", "Samol
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Samole.Collections.Tests", "Samola.Collections\Samole.Collections.Tests\Samole.Collections.Tests.csproj", "{DA5FF17E-C9E5-476B-93BB-A4B672553104}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Samola.Linq.Extensions", "Samola.Linq.Extensions\Samola.Linq.Extensions\Samola.Linq.Extensions\Samola.Linq.Extensions.csproj", "{5BECBC58-DCE7-4397-B2BB-66DECAD8BCEC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Samola.Linq.Extensions", "Samola.Linq.Extensions\Samola.Linq.Extensions\Samola.Linq.Extensions.csproj", "{5BECBC58-DCE7-4397-B2BB-66DECAD8BCEC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Samola.Linq.Extensions.Tests", "Samola.Linq.Extensions\Samola.Linq.Extensions\Samola.Linq.Extensions.Tests\Samola.Linq.Extensions.Tests.csproj", "{681A338A-863D-4D47-B2B1-A5F1E81915A4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Samola.Linq.Extensions.Tests", "Samola.Linq.Extensions\Samola.Linq.Extensions.Tests\Samola.Linq.Extensions.Tests.csproj", "{681A338A-863D-4D47-B2B1-A5F1E81915A4}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Samola.Numbers", "Samola.Numbers\Samola.Numbers\Samola.Numbers.csproj", "{CB5B790E-E08B-4C85-A330-455787531393}"
 EndProject
