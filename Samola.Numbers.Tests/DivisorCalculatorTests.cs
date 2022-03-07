@@ -212,7 +212,7 @@ namespace Samola.Numbers.Tests
                 times.Add(stopwatch.ElapsedMilliseconds);
             }
 
-            Assert.True(times.Average() < 1000);
+            Assert.InRange(times.Average(), 0, 1100);
         }
     }
 }
