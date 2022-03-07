@@ -2,6 +2,15 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <RootNamespace>Samola.Numbers</RootNamespace>
+    <Title>Samola numbers</Title>
+    <Product>Samola numbers</Product>
+    <Description>Samola numbers</Description>
+    <Version>1.0.0.0</Version>
+    <Authors>Aleksi Moisio</Authors>
+    <Copyright>Copyright (c) 2022 Aleksi Moisio</Copyright> 
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageTags>Samola;.NET</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
