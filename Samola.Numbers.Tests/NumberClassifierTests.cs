@@ -27,7 +27,7 @@ namespace Samola.Numbers.Tests
         }
 
         [Fact]
-        public void Classifier_classfies_values_upto_10000_under_one_second()
+        public void Classifier_classfies_values_upto_10000_under_two_seconds()
         {
             int n = 10000;
 
@@ -43,7 +43,7 @@ namespace Samola.Numbers.Tests
                 times.Add(stopwatch.ElapsedMilliseconds);
             }
 
-            Assert.True(times.Average() < 1000);
+            Assert.InRange(times.Average(), 0, 2000);
         }
     }
 }
