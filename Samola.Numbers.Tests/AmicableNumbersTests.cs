@@ -22,7 +22,7 @@ namespace Samola.Numbers.Tests
             var decomposer = new PrimeDecomposer();
             var divisor = new DivisorCalculator(decomposer);
             _builder.Divisor = divisor;
-            
+
             var amicableNumbers = _builder.Build();
             var numbers = amicableNumbers.ToArray();
 

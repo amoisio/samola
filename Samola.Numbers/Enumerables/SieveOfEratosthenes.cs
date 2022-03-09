@@ -22,7 +22,7 @@ namespace Samola.Numbers.Enumerables
 
         public int GetNextPrime()
         {
-            while (!MathExt.IsPrime(++_upToInt));
+            while (!MathExt.IsPrime(++_upToInt)) ;
             return _upToInt;
         }
 

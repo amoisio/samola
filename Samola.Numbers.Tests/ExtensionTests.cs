@@ -60,7 +60,7 @@ namespace Samola.Numbers.Tests
         }
 
         [Theory]
-        [InlineData("0123456789", 3, new string[] { "0", "123", "456", "789"})]
+        [InlineData("0123456789", 3, new string[] { "0", "123", "456", "789" })]
         [InlineData("012345678", 3, new string[] { "012", "345", "678" })]
         [InlineData("012 456 8", 3, new string[] { "012", " 45", "6 8" })]
         public void Substrings_splits_a_string_into_several_substrings_starting_from_the_end(string testString, int len, string[] expected)

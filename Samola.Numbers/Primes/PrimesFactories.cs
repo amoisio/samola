@@ -10,7 +10,7 @@ namespace Samola.Numbers.Construction
         /// </summary>
         private readonly int _maxCount;
 
-        public PrimesSimpleFactory(int maxCount )
+        public PrimesSimpleFactory(int maxCount)
         {
             _maxCount = maxCount;
         }

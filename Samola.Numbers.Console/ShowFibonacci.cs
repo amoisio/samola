@@ -29,7 +29,7 @@ namespace Samola.Numbers
             if (displayAll)
             {
                 int index = 1;
-                foreach(var number in numbers)
+                foreach (var number in numbers)
                 {
                     Console.WriteLine($"F{index,-4}: {number}");
                     if (number.ToString().Length == max)

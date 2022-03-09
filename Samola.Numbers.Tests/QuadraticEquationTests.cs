@@ -20,7 +20,7 @@ namespace Samola.Numbers.Tests
         }
 
         [Theory]
-        [InlineData(1, 2, 1, new double[] {-1})]
+        [InlineData(1, 2, 1, new double[] { -1 })]
         [InlineData(1, -3, 2, new double[] { 1, 2 })]
         public void Roots_are_correctly_calculated(int a, int b, int c, double[] expected)
         {

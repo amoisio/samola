@@ -97,7 +97,7 @@ namespace Samola.Numbers.Tests
             var primes = _provider.Build();
 
             int count = 0;
-            foreach(var prime in primes)
+            foreach (var prime in primes)
             {
                 count++;
             }
@@ -124,7 +124,7 @@ namespace Samola.Numbers.Tests
 
             _provider.Limit = new CountLimit(count + 1);
             primes = _provider.Build();
-            
+
             temp = primes.Last();
 
             Assert.True(temp > maxValue);

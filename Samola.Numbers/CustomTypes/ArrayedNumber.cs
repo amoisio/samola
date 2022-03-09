@@ -8,7 +8,7 @@ namespace Samola.Numbers.CustomTypes
     public struct ArrayedNumber
     {
         public readonly int[] digits;
-        
+
         public ArrayedNumber(int number)
             : this(number.ToDigits())
         {
@@ -20,7 +20,7 @@ namespace Samola.Numbers.CustomTypes
             this.digits = digits;
         }
 
-        public static ArrayedNumber operator+(ArrayedNumber left, int right)
+        public static ArrayedNumber operator +(ArrayedNumber left, int right)
         {
             return left + new ArrayedNumber(right.ToDigits());
         }
@@ -30,7 +30,7 @@ namespace Samola.Numbers.CustomTypes
             return right + left;
         }
 
-        public static ArrayedNumber operator+ (ArrayedNumber left, ArrayedNumber right)
+        public static ArrayedNumber operator +(ArrayedNumber left, ArrayedNumber right)
         {
             int digitsLeft = left.digits.Length;
             int digitsRight = right.digits.Length;
@@ -48,7 +48,7 @@ namespace Samola.Numbers.CustomTypes
                 carry = Math.DivRem(leftop + rightop + carry, 10, out int result);
 
                 if (i < digitsResult - 1 || result != 0)
-                    digits.Add(result); 
+                    digits.Add(result);
             }
 
             return new ArrayedNumber(digits.ToArray());
@@ -72,7 +72,7 @@ namespace Samola.Numbers.CustomTypes
                 digits.Add(result);
             }
 
-            while(carry != 0)
+            while (carry != 0)
             {
                 carry = Math.DivRem(carry, 10, out int result);
                 digits.Add(result);

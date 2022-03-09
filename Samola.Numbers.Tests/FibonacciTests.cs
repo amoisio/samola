@@ -28,7 +28,7 @@ namespace Samola.Numbers.Tests
             for (int i = 1; i < 30; i++)
             {
                 var expected = Fibonacci.GetNth(i);
-                Assert.Equal(expected.ToString(), numbers[i-1].ToString());
+                Assert.Equal(expected.ToString(), numbers[i - 1].ToString());
             }
         }
     }

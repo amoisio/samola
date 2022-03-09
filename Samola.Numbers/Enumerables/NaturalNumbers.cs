@@ -10,7 +10,7 @@ namespace Samola.Numbers.Enumerables
         internal NaturalNumbers(NaturalNumberLimit limit, IEnumerableCacheProvider<NaturalNumber> cacheProvider)
             : base(limit, cacheProvider)
         {
-            
+
         }
 
         protected override IEnumerable<NaturalNumber> GetItems(NaturalNumber[] previousItems)

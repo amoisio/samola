@@ -27,7 +27,7 @@ namespace Samola.Numbers
                 DrawMenu(clearScreen);
                 index = ReadMenuSelection();
             }
-            
+
             if (index > -1)
                 RunExecutable(index);
         }
@@ -54,11 +54,11 @@ namespace Samola.Numbers
             if (input.ToLower().Trim() == "x")
             {
                 return 0;
-            } 
+            }
             else
             {
                 return Int32.Parse(input) - 1;
-            } 
+            }
         }
 
         public void RunExecutable(int index)

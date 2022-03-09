@@ -16,11 +16,11 @@ namespace Samola.Numbers.CustomTypes
         public PyramidNode Root { get; }
         public PyramidNode Current { get; private set; }
 
-        
+
         public int CalculateMaxPathValue()
         {
             int count = _nodes.Length;
-            for(int i = count - 1; i >= 0; i--)
+            for (int i = count - 1; i >= 0; i--)
             {
                 var node = _nodes[i];
                 node.Value = node.Value + Math.Max(node.Left?.Value ?? 0, node.Right?.Value ?? 0);

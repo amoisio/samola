@@ -88,7 +88,7 @@ namespace Samola.Linq.Extensions.Tests
             {
                 Assert.True(true);
             }
-            catch(Exception)
+            catch (Exception)
             {
                 Assert.False(true);
             }
@@ -102,7 +102,7 @@ namespace Samola.Linq.Extensions.Tests
                 new TestEntity { Key = 1, Opt = "outer1"},
                 new TestEntity { Key = 2, Opt = "outer2"},
                 new TestEntity { Key = 3, Opt = "outer3"},
-                
+
             };
 
             var inner = new TestEntity[]
@@ -127,7 +127,7 @@ namespace Samola.Linq.Extensions.Tests
                 i => i.Key,
                 (o, i) => Tuple.Create(o?.Opt, i?.Opt)).ToArray();
 
-            Assert.Equal(expected, result);            
+            Assert.Equal(expected, result);
         }
 
         [Fact]

@@ -11,7 +11,7 @@ namespace Samola.Numbers.Enumerables
         internal FibonacciNumbers(LargeIntegerCountLimit integerLimit, IEnumerableCacheProvider<LargeInteger> cacheProvider)
             : base(integerLimit, cacheProvider)
         {
-            
+
         }
 
         protected override IEnumerable<LargeInteger> GetItems(LargeInteger[] previousItems)
@@ -48,7 +48,7 @@ namespace Samola.Numbers.Enumerables
                 yield return second;
             }
 
-            while(true)
+            while (true)
             {
                 temp = first + second;
                 first = second;

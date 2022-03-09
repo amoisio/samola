@@ -123,7 +123,7 @@ namespace Samola.Numbers.Tests
         {
             int n = 10000;
 
-            List<long> times = new List<long>();
+            var times = new List<long>();
             for (int j = 0; j < 5; j++)
             {
                 Stopwatch stopwatch = Stopwatch.StartNew();
@@ -146,8 +146,8 @@ namespace Samola.Numbers.Tests
             PrimeDecomposition same = PrimeDecomposition.Create(50);
             PrimeDecomposition diff1 = PrimeDecomposition.Create(250);
             PrimeDecomposition diff2 = PrimeDecomposition.Create(2);
-            PrimeDecomposition diff3 = PrimeDecomposition.Create(13*7*7*3*3);
-            
+            PrimeDecomposition diff3 = PrimeDecomposition.Create(13 * 7 * 7 * 3 * 3);
+
             Assert.True(decomposition.Equals(same));
             Assert.False(decomposition.Equals(diff1));
             Assert.False(decomposition.Equals(diff2));
@@ -157,11 +157,11 @@ namespace Samola.Numbers.Tests
         [Fact]
         public void Can_be_raised_to_power_k()
         {
-            PrimeDecomposition decomposition = PrimeDecomposition.Create(5*5*2);
+            PrimeDecomposition decomposition = PrimeDecomposition.Create(5 * 5 * 2);
 
             var powComp = decomposition.Pow(2);
 
-            PrimeDecomposition same = PrimeDecomposition.Create(5*5*5*5*2*2);
+            PrimeDecomposition same = PrimeDecomposition.Create(5 * 5 * 5 * 5 * 2 * 2);
 
             Assert.True(powComp.Equals(same));
         }

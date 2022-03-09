@@ -31,7 +31,8 @@ namespace Samola.Numbers.Enumerables
                 tempDate = from.AddDays(7 + offset);
 
             // return while within range
-            while (to >= tempDate) { 
+            while (to >= tempDate)
+            {
                 yield return tempDate;
                 tempDate = tempDate.AddDays(7);
             }

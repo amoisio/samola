@@ -23,7 +23,7 @@ namespace Samola.Numbers
             var divisor = new DivisorCalculator(decomposer);
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
-            
+
             var amicableNumber = new AmicableNumberCalculator(divisor);
 
             for (int i = 1; i <= number; i++)
@@ -33,7 +33,7 @@ namespace Samola.Numbers
                 if (aNumber.HasValue)
                 {
                     Console.WriteLine($"{i,4} <-A-> {aNumber}");
-                } 
+                }
             }
             stopwatch.Stop();
             Console.WriteLine($"Computation took: {stopwatch.ElapsedMilliseconds} ms.");

@@ -35,7 +35,7 @@ namespace Samola.Numbers.Tests
 
             CollatzSequence sequence = new CollatzSequence(startingNumber);
 
-            foreach(var number in sequence)
+            foreach (var number in sequence)
             {
                 if (number == 16)
                     break;

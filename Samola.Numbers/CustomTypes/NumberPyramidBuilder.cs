@@ -36,11 +36,11 @@
 
                     // determine parent item indices a_i and b_i on level n - 1
                     if (i == n_s)
-                    { 
+                    {
                         // current item is at the start of the level => left parent is null
                         b_i = ab_s;
                         a_i = null;
-                        
+
                     }
                     else if (i == n_e)
                     {
@@ -66,5 +66,5 @@
         }
     }
 
-    
+
 }

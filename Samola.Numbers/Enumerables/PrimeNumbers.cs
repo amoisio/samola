@@ -10,7 +10,7 @@ namespace Samola.Numbers.Enumerables
         internal PrimeNumbers(IntegerLimit integerLimit, IEnumerableCacheProvider<int> cacheProvider)
             : base(integerLimit, cacheProvider)
         {
-            
+
         }
 
         protected override IEnumerable<int> GetItems(int[] previousItems)

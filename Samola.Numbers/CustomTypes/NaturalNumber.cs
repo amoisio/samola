@@ -15,7 +15,7 @@ namespace Samola.Numbers.CustomTypes
             Value = number;
         }
 
-        public static NaturalNumber operator+(NaturalNumber a, int b)
+        public static NaturalNumber operator +(NaturalNumber a, int b)
         {
             return new NaturalNumber(a.Value + b);
         }
@@ -25,7 +25,7 @@ namespace Samola.Numbers.CustomTypes
             return b + a;
         }
 
-        public static NaturalNumber operator++(NaturalNumber a)
+        public static NaturalNumber operator ++(NaturalNumber a)
         {
             return a + 1;
         }

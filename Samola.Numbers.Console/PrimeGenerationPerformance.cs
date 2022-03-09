@@ -49,7 +49,7 @@ namespace Samola.Numbers
                 stopwatch.Stop();
                 long totalU = stopwatch.ElapsedMilliseconds;
 
-                Console.WriteLine($"Datapoints {dataPoint, 6}. First iteration : {totalN}ms. Second iteration : {totalU} ms.");
+                Console.WriteLine($"Datapoints {dataPoint,6}. First iteration : {totalN}ms. Second iteration : {totalU} ms.");
             }
 
             Console.WriteLine("Prime generation with PrimesNewCached with cache");

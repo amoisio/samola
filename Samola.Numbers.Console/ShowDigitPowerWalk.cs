@@ -55,13 +55,13 @@ namespace Samola.Numbers
                 while (!counter.IsCounterEmpty)
                 {
                     int sum = counter.Sum;
-                    if (sum >= lowerBound && sum <= upperBound) 
+                    if (sum >= lowerBound && sum <= upperBound)
                     {
                         var dialDigits = counter.DialDigits;
                         var sumDigits = sum.ToDigits();
 
                         var ok = dialDigits.ContainsSameItems(sumDigits);
-                        
+
                         if (ok && sum != 1)
                         {
                             var dial = counter.ToString();
@@ -74,6 +74,6 @@ namespace Samola.Numbers
             }
         }
 
-        
+
     }
 }

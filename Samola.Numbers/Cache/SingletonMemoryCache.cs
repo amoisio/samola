@@ -12,7 +12,8 @@ namespace Samola.Numbers.Cache
         // not to mark type as beforefieldinit
         static SingletonMemoryCache() { }
 
-        private SingletonMemoryCache()  {
+        private SingletonMemoryCache()
+        {
             _memoryCache = new MemoryCache(new MemoryCacheOptions());
         }
 

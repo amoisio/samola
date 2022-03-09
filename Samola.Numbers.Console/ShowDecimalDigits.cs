@@ -14,7 +14,7 @@ namespace Samola.Numbers
             int max = Int32.Parse(Console.ReadLine());
 
 
-            for(int i = 2; i <= max; i++)
+            for (int i = 2; i <= max; i++)
             {
                 DecimalDigits digits = new DecimalDigits(i);
                 var arr = digits.ToArray();
@@ -23,7 +23,7 @@ namespace Samola.Numbers
                     ? digits.RecurringDecimalFraction.Length
                     : 0;
 
-                Console.WriteLine($"{i, -4}: {len, 4}: 0.{digits.DecimalPart}");
+                Console.WriteLine($"{i,-4}: {len,4}: 0.{digits.DecimalPart}");
             }
         }
     }

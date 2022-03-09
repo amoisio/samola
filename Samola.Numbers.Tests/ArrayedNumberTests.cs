@@ -43,7 +43,7 @@ namespace Samola.Numbers.Tests
             ArrayedNumber aRight = new ArrayedNumber(353.ToDigits());
 
             var sum = aLeft + aRight;
-            Assert.Equal(new int[] {0,0,0,4,8,4,7,4,1,2}, sum.digits);
+            Assert.Equal(new int[] { 0, 0, 0, 4, 8, 4, 7, 4, 1, 2 }, sum.digits);
         }
 
         [Theory]

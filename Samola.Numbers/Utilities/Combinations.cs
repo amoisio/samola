@@ -8,7 +8,7 @@ namespace Samola.Numbers.Utilities
         public static long Factorial(int n)
         {
             long temp = 1;
-            for(int i = 2; i <= n; i++)
+            for (int i = 2; i <= n; i++)
             {
                 temp *= i;
             }
@@ -19,12 +19,13 @@ namespace Samola.Numbers.Utilities
         {
             // Build nominators and denominators
             int smaller, larger;
-            
+
             if (k > n - k)
             {
                 smaller = n - k;
                 larger = k;
-            } else
+            }
+            else
             {
                 smaller = k;
                 larger = n - k;
@@ -32,7 +33,7 @@ namespace Samola.Numbers.Utilities
 
             long[] nominators = Range(larger + 1, n - larger).OrderByDescending(e => e).ToArray();
             long[] denominators = Range(1, smaller).OrderByDescending(e => e).ToArray();
-            
+
             // Cancel out single factors
             int nominatorCount = nominators.Length;
             int denominatorCount = denominators.Length;

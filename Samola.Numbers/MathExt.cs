@@ -49,7 +49,7 @@ namespace Samola.Numbers
             if (number <= 2)
                 return true;
 
-            if (number % 2 == 0 )
+            if (number % 2 == 0)
                 return false;
 
             double max = Math.Sqrt(number);
@@ -85,7 +85,7 @@ namespace Samola.Numbers
             return true;
         }
 
-       
+
 
         private static readonly ReaderWriterLockSlim _cachedLock = new ReaderWriterLockSlim();
         private static HashSet<long> _cached = new HashSet<long>() { 2 };
@@ -98,7 +98,7 @@ namespace Samola.Numbers
             if (number == 2 || number == 1)
                 return true;
 
-            if (number % 2 == 0 )
+            if (number % 2 == 0)
                 return false;
 
             // The value up to which we to check to determine if the number is prime
@@ -112,7 +112,7 @@ namespace Samola.Numbers
                 // First, iterate over existing primes
                 foreach (var prime in _cached)
                 {
-                    if (prime == number) 
+                    if (prime == number)
                     {
                         return true; // The number is a prime and is already included
                     }
@@ -224,7 +224,7 @@ namespace Samola.Numbers
             if (number % 2 == 0 || number % 3 == 0)
                 return false;
 
-            for (long k = 1; (6*k - 1) * (6*k - 1) <= number; k++)
+            for (long k = 1; (6 * k - 1) * (6 * k - 1) <= number; k++)
             {
                 long lvalue = 6 * k - 1;
                 if (number % lvalue == 0)

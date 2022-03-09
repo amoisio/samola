@@ -24,7 +24,7 @@ namespace Samola.Numbers.Cache
         private readonly int _capacity;
 
         public EnumerableListCacheProvider(int capacity)
-            : this (Guid.NewGuid().ToString(), capacity)
+            : this(Guid.NewGuid().ToString(), capacity)
         {
 
         }

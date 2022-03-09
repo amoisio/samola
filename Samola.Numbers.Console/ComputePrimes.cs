@@ -27,7 +27,7 @@ namespace Samola.Numbers
             var uprimes = PrimesNew.Create(u, PrimesGenerationRule.GenaratePrimesUpToN).ToArray();
 
             var len = control.Length;
-            for(int i = 0; i < len; i++)
+            for (int i = 0; i < len; i++)
             {
                 long cp = control.Length > i ? control[i] : -1;
                 long np = nprimes.Length > i ? nprimes[i] : -1;
@@ -37,9 +37,9 @@ namespace Samola.Numbers
 
             Console.WriteLine("Generated primes:");
 
-            foreach(var pval in primes)
+            foreach (var pval in primes)
             {
-                Console.WriteLine($"{pval.Item1, 4}, {pval.Item2, 4}, {pval.Item3, 4}");
+                Console.WriteLine($"{pval.Item1,4}, {pval.Item2,4}, {pval.Item3,4}");
             }
         }
     }

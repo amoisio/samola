@@ -8,14 +8,16 @@ namespace Samola.Numbers.Utilities
     /// Calculates the prime decomposition of a given number
     /// </summary>
     [Obsolete]
-    public class PrimeDecomposer 
+    public class PrimeDecomposer
     {
         private readonly PrimeNumbersBuilder _builder;
 
         public PrimeDecomposer()
         {
-            _builder = new PrimeNumbersBuilder();
-            _builder.UseCache = true;
+            _builder = new PrimeNumbersBuilder
+            {
+                UseCache = true
+            };
         }
 
         public Dictionary<int, int> CalculateDecomposition(int number)
@@ -24,7 +26,7 @@ namespace Samola.Numbers.Utilities
             var primes = _builder.Build();
 
             var decomposition = new Dictionary<int, int>();
-            if (number == 1 || MathExt.IsPrime(number)) 
+            if (number == 1 || MathExt.IsPrime(number))
             {
                 decomposition.Add(number, 1);
             }
@@ -36,7 +38,8 @@ namespace Samola.Numbers.Utilities
                     if (temp == 1)
                         break;
 
-                    while (temp % prime == 0) {
+                    while (temp % prime == 0)
+                    {
                         if (decomposition.ContainsKey(prime))
                             decomposition[prime]++;
                         else

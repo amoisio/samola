@@ -7,7 +7,8 @@ namespace Samola.Numbers.Primes
     /// <summary>
     /// Represents a collection of prime number
     /// </summary>
-    public interface IPrimes : IEnumerable<int> {
+    public interface IPrimes : IEnumerable<int>
+    {
 
         int LastYieldedPrime { get; }
     }

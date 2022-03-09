@@ -12,7 +12,7 @@ namespace Samola.Numbers.Utilities
             // Let <a> and <b> be s.t. d(<a>) = n and d(<b>) = m
             //  , where d is a function which extracts the number of digits of the provided value
             // Then d(<a>*<b>) will be in [m+n-1, m+n] (e.g. 10 * 10 = 100 and 99 * 99 = 9811)
-            
+
             // COROLLARY: FIXED AMOUNT OF DIGITS
             // Given a the value <a> and total amount of digits <d> in pandigital identity <a> * <b> = <r>, the
             // number of digits reserved for <b> is given by

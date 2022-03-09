@@ -21,7 +21,7 @@ namespace Samola.Numbers
             var primeDecomposer = new PrimeDecomposer();
             var divisorCalculator = new DivisorCalculator(primeDecomposer);
 
-            
+
 
             // Calculate the prime decomposition of the number
             var decomposition = primeDecomposer.CalculateDecomposition(number);
@@ -37,7 +37,7 @@ namespace Samola.Numbers
                 if (i == 0)
                     t[i] = 1;
                 else
-                    t[i] = m1[i-1] * t[i-1];
+                    t[i] = m1[i - 1] * t[i - 1];
             }
 
             // Calculate the divisors
@@ -46,7 +46,7 @@ namespace Samola.Numbers
             for (int i = 0; i < n; i++)
             {
                 long temp = 1L;
-                for(int j = 0; j < len; j++)
+                for (int j = 0; j < len; j++)
                 {
                     long exponent = (i / t[j]) % m1[j];
                     temp *= (long)Math.Pow(darr[j].Key, exponent);

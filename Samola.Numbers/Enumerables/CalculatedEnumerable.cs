@@ -45,7 +45,7 @@ namespace Samola.Numbers.Enumerables
         protected CalculatedEnumerable(EnumerableLimit<T> limit)
             : this(limit, null)
         {
-            
+
         }
 
         /// <summary>
@@ -76,7 +76,7 @@ namespace Samola.Numbers.Enumerables
             int tempIndex = 0;
             int yieldedCount = 0;
             T tempItem = default(T);
-            
+
             while (CanYield(tempItem, yieldedCount))
             {
                 var tempItems = _cache.Items;

@@ -9,7 +9,7 @@ namespace Samola.Numbers.CustomTypes
         private readonly int _month;
         private readonly int _day;
 
-        public Date(int year, int month, int day) 
+        public Date(int year, int month, int day)
         {
             _year = year;
             _month = month;
@@ -34,7 +34,7 @@ namespace Samola.Numbers.CustomTypes
         }
 
         public static bool operator <(Date a, Date b) => b > a;
-        
+
         public static bool operator >(Date a, Date b)
         {
             if (a.Year == b.Year)

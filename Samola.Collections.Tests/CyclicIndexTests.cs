@@ -184,7 +184,7 @@ namespace Samole.Collections.Tests
         [InlineData(0, 2, 3, 6)]
         [InlineData(1, 2, 3, 7)]
         [InlineData(2, 2, 3, 8)]
-        public void Projects_cyclic_indices_onto_integer_space(int cycleIndex, int cycleNumber, int cycleSize,  int expected)
+        public void Projects_cyclic_indices_onto_integer_space(int cycleIndex, int cycleNumber, int cycleSize, int expected)
         {
             var number = CyclicIndexUtils.ToInteger(cycleIndex, cycleNumber, cycleSize);
             Assert.Equal(expected, number);

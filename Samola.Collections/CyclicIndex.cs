@@ -67,7 +67,7 @@ namespace Samola.Collections
         public static bool operator ==(CyclicIndex index1, CyclicIndex index2)
         {
             return (object)index1 == null && (object)index2 == null
-                || ((object)index1 != null && (object)index2 != null 
+                || ((object)index1 != null && (object)index2 != null
                     && index1.Value == index2.Value
                     && index1.CycleSize == index2.CycleSize);
         }
@@ -83,8 +83,8 @@ namespace Samola.Collections
         public override bool Equals(object obj)
         {
             var index = obj as CyclicIndex;
-            return index != null 
-                && Value == index.Value 
+            return index != null
+                && Value == index.Value
                 && CycleSize == index.CycleSize;
         }
 

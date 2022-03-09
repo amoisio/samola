@@ -90,7 +90,7 @@ namespace Samola.Numbers.Counters
             get
             {
                 int sum = 0;
-                for(int i = 0; i < NumberOfDials; i++)
+                for (int i = 0; i < NumberOfDials; i++)
                 {
                     sum += _values[_dials[i]];
                 }

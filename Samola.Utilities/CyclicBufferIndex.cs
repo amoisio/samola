@@ -25,7 +25,7 @@ namespace Samola.Utilities
         /// <returns></returns>
         public static int FromStorageIndex(int storageIndex, int storageSize, int storageRootIndex)
         {
-            return CyclicIndexUtils.FromInteger(storageIndex -  storageRootIndex, storageSize);
+            return CyclicIndexUtils.FromInteger(storageIndex - storageRootIndex, storageSize);
         }
     }
 

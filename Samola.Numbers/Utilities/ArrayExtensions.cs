@@ -19,7 +19,7 @@ namespace Samola.Numbers.Utilities
             var orderedOther = other.OrderBy(e => e).ToArray();
 
             int len = other.Length;
-            for(int i = 0; i < len; i++)
+            for (int i = 0; i < len; i++)
             {
                 if (orderedArray[i] != orderedOther[i])
                     return false;

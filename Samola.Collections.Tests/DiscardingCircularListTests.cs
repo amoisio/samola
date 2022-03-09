@@ -31,7 +31,7 @@ namespace Samole.Collections.Tests
         public void Can_be_enumerated_normally()
         {
             int c = 0;
-            foreach(var item in _buffer)
+            foreach (var item in _buffer)
             {
                 c++;
             }
@@ -46,7 +46,7 @@ namespace Samole.Collections.Tests
 
         public An_initialized_discarding_circular_list()
         {
-            _buffer = new DiscardingCircularList<int>(4, new []{ 1, 2, 3, 4 });
+            _buffer = new DiscardingCircularList<int>(4, new[] { 1, 2, 3, 4 });
         }
 
         [Fact]

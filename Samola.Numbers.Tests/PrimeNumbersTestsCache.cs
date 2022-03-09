@@ -96,7 +96,7 @@ namespace Samola.Numbers.Tests
             var primes = _builder.Build();
 
             int count = 0;
-            foreach(var prime in primes)
+            foreach (var prime in primes)
             {
                 count++;
             }

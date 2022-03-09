@@ -23,7 +23,7 @@ namespace Samola.Numbers.Tests
             _builder.Limit = new MaxValueLimit(28123);
             _builder.Classifier = classifier;
             var abundantNumbers = _builder.Build();
-            foreach(var aNumber in abundantNumbers)
+            foreach (var aNumber in abundantNumbers)
             {
                 var classification = classifier.Classify(aNumber);
                 Assert.True(classification == NumberClassification.Abundant);

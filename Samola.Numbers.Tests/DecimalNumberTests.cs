@@ -11,7 +11,7 @@ namespace Samola.Numbers.Tests
         [InlineData(2, new int[] { 5 })]
         [InlineData(3, new int[] { 3, 3, 3, 3, 3, 3, 3, 3, 3, 3 })]
         [InlineData(4, new int[] { 2, 5 })]
-        [InlineData(5, new int[] { 2  })]
+        [InlineData(5, new int[] { 2 })]
         [InlineData(6, new int[] { 1, 6, 6, 6, 6, 6, 6, 6, 6, 6 })]
         [InlineData(7, new int[] { 1, 4, 2, 8, 5, 7, 1, 4, 2, 8 })]
         [InlineData(8, new int[] { 1, 2, 5 })]
@@ -22,7 +22,7 @@ namespace Samola.Numbers.Tests
             var digits = new DecimalDigits(denominator, tailCount: 10);
             var numbers = new List<int>();
 
-            foreach(var digit in digits)
+            foreach (var digit in digits)
             {
                 numbers.Add(digit);
             }

@@ -44,10 +44,10 @@ namespace Samola.Numbers.Primes
         {
             List<int> primes = new List<int>();
             int generated = 0;
-            foreach(var candidate in GetPrimeCandidates())
+            foreach (var candidate in GetPrimeCandidates())
             {
                 bool isPrime = false;
-                foreach(var prime in primes)
+                foreach (var prime in primes)
                 {
                     if (prime * prime > candidate)
                     {

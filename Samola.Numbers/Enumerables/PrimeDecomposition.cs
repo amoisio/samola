@@ -22,9 +22,11 @@ namespace Samola.Numbers.Enumerables
 
         private static Dictionary<int, int> CalculateDecomposition(int number)
         {
-            var builder = new PrimeNumbersBuilder();
-            builder.UseCache = true;
-            builder.Limit = new MaxValueLimit(number);
+            var builder = new PrimeNumbersBuilder
+            {
+                UseCache = true,
+                Limit = new MaxValueLimit(number)
+            };
             var primes = builder.Build();
 
             // 99% of the values from 2 up to 200k can be represented with just 25 first primes

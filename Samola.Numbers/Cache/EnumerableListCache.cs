@@ -72,7 +72,7 @@ namespace Samola.Numbers.Cache
 
         public bool Contains(TEnumerable item)
         {
-            lock(_memoryCacheLock)
+            lock (_memoryCacheLock)
             {
                 return CachedItems.Contains(item);
             }

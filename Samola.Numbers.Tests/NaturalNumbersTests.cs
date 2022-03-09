@@ -26,7 +26,7 @@ namespace Samola.Numbers.Tests
 
             var naturalNumbers = Enumerable.Range(1, 5000).ToArray();
 
-            for(int i = 0; i < arr.Length; i++)
+            for (int i = 0; i < arr.Length; i++)
             {
                 Assert.Equal(naturalNumbers[i], arr[i]);
             }
@@ -42,7 +42,7 @@ namespace Samola.Numbers.Tests
             _primesBuilder.Limit = new MaxValueLimit(5000);
             var primes = _primesBuilder.Build();
 
-            foreach(var prime in primes)
+            foreach (var prime in primes)
             {
                 var val = arr.Single(e => e.Value == prime);
                 Assert.True(val.IsPrime);
@@ -75,7 +75,7 @@ namespace Samola.Numbers.Tests
             _builder.Limit = new MaxNaturalValueLimit(22);
             var numbers = _builder.Build();
 
-            foreach(var n in numbers)
+            foreach (var n in numbers)
             {
                 if (n.Value == number)
                     Assert.Equal(expected, n.Classification);
