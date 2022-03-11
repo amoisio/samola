@@ -1,15 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace Samola.Numbers.Primes
 {
     /// <summary>
-    /// Represents a collection of prime number
+    /// A collection of prime numbers
     /// </summary>
     public interface IPrimes : IEnumerable<int>
     {
-
-        int LastYieldedPrime { get; }
+        /// <summary>
+        /// Check if the given number is a prime number.
+        /// </summary>
+        /// <param name="value">Number to check</param>
+        /// <returns>True if the value is prime number. False, otherwise.</returns>
+        bool IsPrime(int value);
     }
 }

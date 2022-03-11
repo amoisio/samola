@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Samola.Numbers.Construction;
-using Samola.Numbers.Enumerables;
-using Samola.Numbers.Primes;
 using Samola.Numbers.Utilities;
-using System.Linq;
 using Samola.Numbers.Counters;
 
 namespace Samola.Numbers
@@ -14,11 +8,11 @@ namespace Samola.Numbers
     {
         public string ExecutableName => "Find values equal to their digit powers.";
 
-        private int GetMaximumDigit(int power)
+        private static int GetMaximumDigit(int power)
         {
             int k = 0;
             int lowerBound = 0;
-            int upperBound = 0;
+            int upperBound;
             int maximumValue = 0;
 
             while (lowerBound <= maximumValue)

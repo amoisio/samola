@@ -1,10 +1,11 @@
 ﻿using Xunit;
 using System.Collections.Generic;
-using Samola.Numbers.Utilities;
 using System.Diagnostics;
 using System.Linq;
-using Samola.Numbers.Enumerables;
 using Samola.Numbers.Comparers;
+using Samola.Numbers.Primes;
+using Samola.Numbers.Primes.Generators;
+using System;
 
 namespace Samola.Numbers.Tests
 {
@@ -14,8 +15,10 @@ namespace Samola.Numbers.Tests
         public void PrimeDecomposition_decomposes_number_14_correctly()
         {
             var number = 14;
+            var primes = new Primes6k();
+            var decomposer = new PrimeDecomposer(primes);
 
-            var decomposition = PrimeDecomposition.Create(number);
+            var decomposition = decomposer.CalculateDecomposition(number);
 
             var expected = new Dictionary<int, int>()
             {
@@ -28,7 +31,10 @@ namespace Samola.Numbers.Tests
         [Fact]
         public void PrimeDecomposition_ecomposes_number_75_correctly()
         {
-            var decomposition = PrimeDecomposition.Create(75);
+            var primes = new Primes6k();
+            var decomposer = new PrimeDecomposer(primes);
+
+            var decomposition = decomposer.CalculateDecomposition(75);
 
             var expected = new Dictionary<int, int>()
             {
@@ -41,7 +47,10 @@ namespace Samola.Numbers.Tests
         [Fact]
         public void PrimeDecomposition_decomposes_number_420_correctly()
         {
-            var decomposition = PrimeDecomposition.Create(420);
+            var primes = new Primes6k();
+            var decomposer = new PrimeDecomposer(primes);
+
+            var decomposition = decomposer.CalculateDecomposition(420);
 
             var expected = new Dictionary<int, int>()
             {
@@ -56,60 +65,10 @@ namespace Samola.Numbers.Tests
         [Fact]
         public void PrimeDecomposition_decomposes_number_65536_correctly()
         {
-            var decomposition = PrimeDecomposition.Create(65536);
+            var primes = new Primes6k();
+            var decomposer = new PrimeDecomposer(primes);
 
-            var expected = new Dictionary<int, int>()
-            {
-                { 2, 16 },
-            };
-            Assert.Equal(expected, decomposition);
-        }
-
-        [Fact]
-        public void PrimeDecomposition_decomposes_number_14_correctly_with_unlimited_primes()
-        {
-            var decomposition = PrimeDecomposition.Create(14);
-
-            var expected = new Dictionary<int, int>()
-            {
-                { 2, 1 },
-                { 7, 1 }
-            };
-            Assert.Equal(expected, decomposition);
-        }
-
-        [Fact]
-        public void PrimeDecomposition_decomposes_number_75_correctly_with_unlimited_primes()
-        {
-            var decomposition = PrimeDecomposition.Create(75);
-
-            var expected = new Dictionary<int, int>()
-            {
-                { 3, 1 },
-                { 5, 2 }
-            };
-            Assert.Equal(expected, decomposition);
-        }
-
-        [Fact]
-        public void PrimeDecomposition_decomposes_number_420_correctly_with_unlimited_primes()
-        {
-            var decomposition = PrimeDecomposition.Create(420);
-
-            var expected = new Dictionary<int, int>()
-            {
-                { 2, 2 },
-                { 3, 1 },
-                { 5, 1 },
-                { 7, 1 }
-            };
-            Assert.Equal(expected, decomposition);
-        }
-
-        [Fact]
-        public void PrimeDecomposition_decomposes_number_65536_correctly_with_unlimited_primes()
-        {
-            var decomposition = PrimeDecomposition.Create(65536);
+            var decomposition = decomposer.CalculateDecomposition(65536);
 
             var expected = new Dictionary<int, int>()
             {
@@ -122,6 +81,9 @@ namespace Samola.Numbers.Tests
         public void Prime_decomposition_decomposes_values_upto_10000_under_two_seconds()
         {
             int n = 10000;
+            var cachedPrimes = new Primes6k().TakeWhile(p => p < Math.Sqrt(n));
+            var primes = new Primes6k(cachedPrimes);
+            var decomposer = new PrimeDecomposer(primes);
 
             var times = new List<long>();
             for (int j = 0; j < 5; j++)
@@ -129,7 +91,7 @@ namespace Samola.Numbers.Tests
                 Stopwatch stopwatch = Stopwatch.StartNew();
                 for (int i = 1; i <= n; i++)
                 {
-                    PrimeDecomposition.Create(i);
+                    decomposer.CalculateDecomposition(i);
                 }
                 stopwatch.Stop();
                 times.Add(stopwatch.ElapsedMilliseconds);
@@ -141,12 +103,16 @@ namespace Samola.Numbers.Tests
         [Fact]
         public void Equals_works()
         {
-            PrimeDecomposition decomposition = PrimeDecomposition.Create(50);
+            var cachedPrimes = new Primes6k().TakeWhile(p => p < Math.Sqrt(500));
+            var primes = new Primes6k(cachedPrimes);
+            var decomposer = new PrimeDecomposer(primes);
 
-            PrimeDecomposition same = PrimeDecomposition.Create(50);
-            PrimeDecomposition diff1 = PrimeDecomposition.Create(250);
-            PrimeDecomposition diff2 = PrimeDecomposition.Create(2);
-            PrimeDecomposition diff3 = PrimeDecomposition.Create(13 * 7 * 7 * 3 * 3);
+            var decomposition = decomposer.CalculateDecomposition(50);
+
+            var same = decomposer.CalculateDecomposition(50);
+            var diff1 = decomposer.CalculateDecomposition(250);
+            var diff2 = decomposer.CalculateDecomposition(2);
+            var diff3 = decomposer.CalculateDecomposition(13 * 7 * 7 * 3 * 3);
 
             Assert.True(decomposition.Equals(same));
             Assert.False(decomposition.Equals(diff1));
@@ -157,11 +123,13 @@ namespace Samola.Numbers.Tests
         [Fact]
         public void Can_be_raised_to_power_k()
         {
-            PrimeDecomposition decomposition = PrimeDecomposition.Create(5 * 5 * 2);
+            var primes = new Primes6k();
+            var decomposer = new PrimeDecomposer(primes);
+            var decomposition = decomposer.CalculateDecomposition(5 * 5 * 2);
 
             var powComp = decomposition.Pow(2);
 
-            PrimeDecomposition same = PrimeDecomposition.Create(5 * 5 * 5 * 5 * 2 * 2);
+            var same = decomposer.CalculateDecomposition(5 * 5 * 5 * 5 * 2 * 2);
 
             Assert.True(powComp.Equals(same));
         }
@@ -169,11 +137,13 @@ namespace Samola.Numbers.Tests
         [Fact]
         public void Pow_operation_does_not_modify_decomposition_in_place()
         {
-            PrimeDecomposition decomposition = PrimeDecomposition.Create(5 * 5 * 2);
+            var primes = new Primes6k();
+            var decomposer = new PrimeDecomposer(primes);
+            var decomposition = decomposer.CalculateDecomposition(5 * 5 * 2);
 
             var powComp = decomposition.Pow(2);
 
-            PrimeDecomposition same = PrimeDecomposition.Create(5 * 5 * 5 * 5 * 2 * 2);
+            var same = decomposer.CalculateDecomposition(5 * 5 * 5 * 5 * 2 * 2);
 
             Assert.True(powComp.Equals(same));
             Assert.False(decomposition.Equals(same));
@@ -182,12 +152,14 @@ namespace Samola.Numbers.Tests
         [Fact]
         public void EqualityComparer_works_as_expected()
         {
-            HashSet<PrimeDecomposition> d = new HashSet<PrimeDecomposition>(new PrimeDecompositionEqualityComparer());
-            d.Add(PrimeDecomposition.Create(50));
-            d.Add(PrimeDecomposition.Create(51));
+            var d = new HashSet<IPrimeDecomposition>(new PrimeDecompositionEqualityComparer());
+            var primes = new Primes6k();
+            var decomposer = new PrimeDecomposer(primes);
+            d.Add(decomposer.CalculateDecomposition(50));
+            d.Add(decomposer.CalculateDecomposition(51));
 
-            var decomp1 = PrimeDecomposition.Create(50);
-            var decomp2 = PrimeDecomposition.Create(49);
+            var decomp1 = decomposer.CalculateDecomposition(50);
+            var decomp2 = decomposer.CalculateDecomposition(49);
             Assert.Contains(decomp1, d);
             Assert.DoesNotContain(decomp2, d);
         }

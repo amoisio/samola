@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Linq;
-using Samola.Numbers.Primes;
-using Samola.Numbers.Construction;
-using Samola.Numbers.Utilities;
 using Samola.Numbers.Enumerables;
-using Samola.Numbers.CustomTypes;
 
 namespace Samola.Numbers
 {
@@ -22,7 +16,7 @@ namespace Samola.Numbers
             Console.Write("Display all (Y) > ");
             bool displayAll = Console.ReadLine() == "Y";
 
-            FibonacciNumbersBuilder builder = new FibonacciNumbersBuilder();
+            var builder = new FibonacciNumbersBuilder();
             builder.Limit = new LargeIntegerCountLimit(5000); // At most 5000 Fibonacci terms
             var numbers = builder.Build();
 

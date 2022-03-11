@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using Samola.Numbers.Primes.Generators;
 
 namespace Samola.Numbers
 {
@@ -12,18 +13,17 @@ namespace Samola.Numbers
 
         public void Run()
         {
-            Dictionary<string, long[]> totals = new Dictionary<string, long[]>();
+            var totals = new Dictionary<string, long[]>();
             int count = 2000000;
             int reps = 10;
 
             // Numbers to test
             var numbers = Enumerable.Range(1, count);
 
-            totals.Add("Simple", Perforce("Simple", MathExt.IsPrimeSimple, reps, numbers, 1));
-            totals.Add("Cached", Perforce("Cached", MathExt.IsPrimeCached, reps, numbers, 2));
-            totals.Add("CachedNoLocks", Perforce("Cached No Locks", MathExt.IsPrimeCachedNoLocks, reps, numbers, 3));
-            totals.Add("Simple6k", Perforce("Simple6k", MathExt.IsPrimeSimple6k, reps, numbers, 4));
-            totals.Add("Simple6kCache", Perforce("Simple6k Cached", MathExt.IsPrimeSimple6kCached, reps, numbers, 5));
+            var simple = new PrimesSimple();
+            totals.Add("Simple", Perforce("Simple", simple.IsPrime, reps, numbers, 1));
+            var sixk = new Primes6k();
+            totals.Add("6k", Perforce("6k", sixk.IsPrime, reps, numbers, 4));
 
             Console.WriteLine();
             foreach (var total in totals)
@@ -33,12 +33,12 @@ namespace Samola.Numbers
         }
 
 
-        private static long[] Perforce(string label, Func<long, bool> primeFn, int reps, IEnumerable<int> numbers, int y)
+        private static long[] Perforce(string label, Func<int, bool> primeFn, int reps, IEnumerable<int> numbers, int y)
         {
             Console.WriteLine($"{label}:");
 
-            Stopwatch stopwatch = new Stopwatch();
-            List<long> timings = new List<long>();
+            var stopwatch = new Stopwatch();
+            var timings = new List<long>();
 
             for (int i = 0; i < reps; i++)
             {

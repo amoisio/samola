@@ -1,18 +1,20 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using Samola.Numbers.Primes;
+using Samola.Numbers.Primes.Generators;
 
 namespace Samola.Numbers.Utilities
 {
     public class DivisorCalculator
     {
-        private PrimeDecomposer _primeDecomposer;
+        private readonly IPrimeDecomposer _primeDecomposer;
 
-        public DivisorCalculator() : this(new PrimeDecomposer())
-        {
+        public DivisorCalculator() : this(new Primes6k()) { }
 
-        }
+        public DivisorCalculator(IPrimes primes) : this(new PrimeDecomposer(primes)) { }
 
-        public DivisorCalculator(PrimeDecomposer primeDecomposer)
+        public DivisorCalculator(IPrimeDecomposer primeDecomposer)
         {
             _primeDecomposer = primeDecomposer;
         }
@@ -23,10 +25,10 @@ namespace Samola.Numbers.Utilities
             return NumberOfDivisors(decomposition);
         }
 
-        public int NumberOfDivisors(Dictionary<int, int> decomposition)
+        public int NumberOfDivisors(IPrimeDecomposition decomposition)
         {
             // if the decomposition only consists of the trivial prime 1 then return 1
-            if (decomposition.Count == 1 && decomposition.First().Key == 1)
+            if (decomposition.Count() == 1 && decomposition.First().Key == 1)
                 return 1;
 
             var D = decomposition.Select(e => e.Value + 1)
@@ -48,17 +50,16 @@ namespace Samola.Numbers.Utilities
             return divisors;
         }
 
-
-        public HashSet<int> GetDivisors(Dictionary<int, int> decomposition)
+        public HashSet<int> GetDivisors(IPrimeDecomposition decomposition)
         {
             // Calculate a helper array
             var darr = decomposition.ToArray();
-            var len = decomposition.Count;
+            var len = decomposition.Count();
             int[] m1 = new int[len]; // max exponent + 1
             int[] t = new int[len]; // cumulative products of m1 cells
             for (int i = 0; i < len; i++)
             {
-                m1[i] = (int)darr[i].Value + 1;
+                m1[i] = darr[i].Value + 1;
                 if (i == 0)
                     t[i] = 1;
                 else
@@ -67,14 +68,15 @@ namespace Samola.Numbers.Utilities
 
             // Calculate the divisors
             int n = NumberOfDivisors(decomposition);
-            HashSet<int> divisors = new HashSet<int>();
+            var divisors = new HashSet<int>();
             for (int i = 0; i < n; i++)
             {
                 int temp = 1;
                 for (int j = 0; j < len; j++)
                 {
-                    int exponent = (i / t[j]) % m1[j];
-                    temp *= MathExt.Pow(darr[j].Key, exponent);
+                    int exponent = i / t[j] % m1[j];
+                    var pow = Math.Pow(darr[j].Key, exponent);
+                    temp *= (int)pow;
                 }
                 divisors.Add(temp);
             }

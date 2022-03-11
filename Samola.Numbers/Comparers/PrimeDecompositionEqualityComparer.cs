@@ -1,16 +1,15 @@
-﻿using Samola.Numbers.Enumerables;
+﻿using Samola.Numbers.Primes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Samola.Numbers.Comparers
 {
-    public class PrimeDecompositionEqualityComparer : IEqualityComparer<PrimeDecomposition>
+    public class PrimeDecompositionEqualityComparer : IEqualityComparer<IPrimeDecomposition>
     {
-        public bool Equals(PrimeDecomposition x, PrimeDecomposition y)
+        public bool Equals(IPrimeDecomposition x, IPrimeDecomposition y)
         {
-            if (x.Count != y.Count)
+            if (x.Count() != y.Count())
                 return false;
 
             foreach (var item in x)
@@ -22,7 +21,7 @@ namespace Samola.Numbers.Comparers
             return true;
         }
 
-        public int GetHashCode(PrimeDecomposition obj)
+        public int GetHashCode(IPrimeDecomposition obj)
         {
             return obj.GetHashCode();
         }

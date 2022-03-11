@@ -8,7 +8,7 @@ namespace Samola.Numbers.Tests
 {
     public class NumberClassifierTests
     {
-        private NumberClassifier _classifier;
+        private readonly NumberClassifier _classifier;
 
         public NumberClassifierTests()
         {
@@ -31,7 +31,7 @@ namespace Samola.Numbers.Tests
         {
             int n = 10000;
 
-            List<long> times = new List<long>();
+            var times = new List<long>();
             for (int j = 0; j < 5; j++)
             {
                 Stopwatch stopwatch = Stopwatch.StartNew();

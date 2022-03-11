@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Linq;
 using Samola.Numbers.Primes;
-using Samola.Numbers.Construction;
 using Samola.Numbers.Utilities;
-using Samola.Numbers.Enumerables;
+using Samola.Numbers.Primes.Generators;
 
 namespace Samola.Numbers
 {
@@ -18,7 +15,8 @@ namespace Samola.Numbers
             Console.Write("Print divisors for > ");
             int number = Int32.Parse(Console.ReadLine());
             //new MaxValueLimit(number)
-            var primeDecomposer = new PrimeDecomposer();
+            var primes = new Primes6k();
+            var primeDecomposer = new PrimeDecomposer(primes);
             var divisorCalculator = new DivisorCalculator(primeDecomposer);
 
 
@@ -28,7 +26,7 @@ namespace Samola.Numbers
 
             // Calculate a helper array
             var darr = decomposition.ToArray();
-            int len = decomposition.Count;
+            int len = decomposition.Count();
             long[] m1 = new long[len]; // max exponent + 1
             long[] t = new long[len]; // cumulative products of m1 cells
             for (int i = 0; i < len; i++)

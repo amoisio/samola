@@ -1,6 +1,4 @@
-﻿using Samola.Numbers.Enumerables;
-using Samola.Numbers.Primes;
-using Samola.Numbers.Utilities;
+﻿using Samola.Numbers.Utilities;
 
 namespace Samola.Numbers.CustomTypes
 {
@@ -9,11 +7,11 @@ namespace Samola.Numbers.CustomTypes
     /// </summary>
     public class NaturalNumber
     {
-        public int Value { get; }
         public NaturalNumber(int number)
         {
             Value = number;
         }
+        public int Value { get; }
 
         public static NaturalNumber operator +(NaturalNumber a, int b)
         {
@@ -28,37 +26,6 @@ namespace Samola.Numbers.CustomTypes
         public static NaturalNumber operator ++(NaturalNumber a)
         {
             return a + 1;
-        }
-
-        private bool? _isPrime;
-        public bool IsPrime
-        {
-            get
-            {
-                if (!_isPrime.HasValue)
-                {
-                    _isPrime = MathExt.IsPrime(Value);
-                }
-
-                return _isPrime.Value;
-            }
-        }
-
-        private NumberClassification? _classification;
-        public NumberClassification Classification
-        {
-            get
-            {
-                if (!_classification.HasValue)
-                {
-                    var decomposer = new PrimeDecomposer();
-                    var divisor = new DivisorCalculator(decomposer);
-                    var classifier = new NumberClassifier(divisor);
-                    _classification = classifier.Classify(Value);
-                }
-
-                return _classification.Value;
-            }
         }
     }
 }

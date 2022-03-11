@@ -7,7 +7,7 @@ namespace Samola.Numbers.Tests
 {
     public class AbundantNumbersTests
     {
-        private AbundantNumbersBuilder _builder;
+        private readonly AbundantNumbersBuilder _builder;
 
         public AbundantNumbersTests()
         {
