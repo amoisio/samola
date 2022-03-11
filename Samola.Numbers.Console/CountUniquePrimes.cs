@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using Samola.Numbers.Construction;
 using Samola.Numbers.Enumerables;
 using Samola.Numbers.Primes;
-using Samola.Numbers.Utilities;
 using System.Linq;
+using Samola.Numbers.Primes.Generators;
 
 namespace Samola.Numbers
 {
@@ -19,10 +17,11 @@ namespace Samola.Numbers
             Console.Write($"Count from {start} up to > ");
             int upTo = Int32.Parse(Console.ReadLine());
 
-            MaxValueLimit maxValueLimit = new MaxValueLimit(upTo);
-            PrimeDecomposer primeDecomposer = new PrimeDecomposer();
+            var maxValueLimit = new MaxValueLimit(upTo);
+            var primes = new Primes6k();
+            var primeDecomposer = new PrimeDecomposer(primes);
 
-            Dictionary<int, int> result = new Dictionary<int, int>(1000);
+            var result = new Dictionary<int, int>(1000);
 
             for (int i = start; i <= upTo; i++)
             {

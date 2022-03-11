@@ -29,7 +29,7 @@ namespace Samola.Numbers.Utilities
             else
             {
                 var divisors = _divisorCalculator.GetProperDivisors(number);
-                int properSum = divisors.Sum();
+                var properSum = divisors.Sum();
 
                 if (properSum < number)
                     return NumberClassification.Deficient;

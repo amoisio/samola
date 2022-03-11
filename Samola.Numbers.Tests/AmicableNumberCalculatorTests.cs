@@ -1,6 +1,7 @@
 ﻿using Xunit;
 using Samola.Numbers.Utilities;
-using Samola.Numbers.Enumerables;
+using Samola.Numbers.Primes;
+using Samola.Numbers.Primes.Generators;
 
 namespace Samola.Numbers.Tests
 {
@@ -11,8 +12,8 @@ namespace Samola.Numbers.Tests
         [InlineData(284, 220)]
         public void AmicableNumbers_works(int number, int expected)
         {
-            var maxValueLimit = new MaxValueLimit(number);
-            var decomposer = new PrimeDecomposer();
+            var primes = new Primes6k();
+            var decomposer = new PrimeDecomposer(primes);
             var divisor = new DivisorCalculator(decomposer);
             var aNumber = new AmicableNumberCalculator(divisor);
             var amicableNumber = aNumber.FindAmicableNumber(number);

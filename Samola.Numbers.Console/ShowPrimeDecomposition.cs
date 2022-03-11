@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Samola.Numbers.Construction;
-using Samola.Numbers.Enumerables;
 using Samola.Numbers.Primes;
-using Samola.Numbers.Utilities;
+using Samola.Numbers.Primes.Generators;
 
 namespace Samola.Numbers
 {
@@ -17,8 +13,8 @@ namespace Samola.Numbers
             Console.Write("Print decompositions up to > ");
             int upTo = Int32.Parse(Console.ReadLine());
 
-            MaxValueLimit maxValueLimit = new MaxValueLimit(upTo);
-            PrimeDecomposer primeDecomposer = new PrimeDecomposer();
+            var primes = new Primes6k();
+            var primeDecomposer = new PrimeDecomposer(primes);
 
             for (int i = 1; i <= upTo; i++)
             {

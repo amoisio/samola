@@ -35,10 +35,9 @@ namespace Samola.Numbers.Utilities
             if (b > 0)
             {
                 var sumDivisors = _divisorCalculator.GetProperDivisors(b);
-                int bSum = sumDivisors.Sum(); // d(b) = sumSum
+                var bSum = sumDivisors.Sum(); // d(b) = sumSum
                 if (a != b && a == bSum)
                 {
-
                     _amicableNumbers.Add(a, b);
                     _amicableNumbers.Add(b, a);
                     return b;

@@ -1,4 +1,5 @@
 ﻿using Samola.Numbers.Primes;
+using Samola.Numbers.Primes.Generators;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -16,56 +17,38 @@ namespace Samola.Numbers
 
             int[] dataPoints = new int[] { 10, 100, 500, 1000, 5000, 10000, 30000, 70000, 100000, 150000, 300000 };
 
-            Console.WriteLine("Prime generation with provider PrimesFactory.Create");
+            Console.WriteLine("Prime generation with simple prime algorithm");
             foreach (var dataPoint in dataPoints)
             {
-                var primesN = PrimesNew.Create(dataPoint, PrimesGenerationRule.GenerateNPrimes);
+                var primesN = new PrimesSimple();
 
                 stopwatch.Restart();
-                foreach (var prime in primesN) { }
+                var arr1 = primesN.Take(dataPoint).ToArray();
                 stopwatch.Stop();
-                long totalN = stopwatch.ElapsedMilliseconds;
+                var totalN = stopwatch.ElapsedMilliseconds;
 
                 stopwatch.Restart();
-                foreach (var prime in primesN) { }
+                var arr2 = primesN.Take(dataPoint).ToArray();
                 stopwatch.Stop();
-                long totalU = stopwatch.ElapsedMilliseconds;
+                var totalU = stopwatch.ElapsedMilliseconds;
 
                 Console.WriteLine($"Datapoints {dataPoint,6}. First iteration : {totalN}ms. Second iteration : {totalU} ms.");
             }
 
-            Console.WriteLine("Prime generation with PrimesNewCached without cache");
+            Console.WriteLine("Prime generation with 6k prime algorithm");
             foreach (var dataPoint in dataPoints)
             {
-                var primesN = Primes6k.Create(dataPoint, false);
+                var primesN = new Primes6k();
 
                 stopwatch.Restart();
-                foreach (var prime in primesN) { }
+                var arr1 = primesN.Take(dataPoint).ToArray();
                 stopwatch.Stop();
-                long totalN = stopwatch.ElapsedMilliseconds;
+                var totalN = stopwatch.ElapsedMilliseconds;
 
                 stopwatch.Restart();
-                foreach (var prime in primesN) { }
+                var arr12= primesN.Take(dataPoint).ToArray();
                 stopwatch.Stop();
-                long totalU = stopwatch.ElapsedMilliseconds;
-
-                Console.WriteLine($"Datapoints {dataPoint,6}. First iteration : {totalN}ms. Second iteration : {totalU} ms.");
-            }
-
-            Console.WriteLine("Prime generation with PrimesNewCached with cache");
-            foreach (var dataPoint in dataPoints)
-            {
-                var primesN = Primes6k.Create(dataPoint, true);
-
-                stopwatch.Restart();
-                foreach (var prime in primesN) { }
-                stopwatch.Stop();
-                long totalN = stopwatch.ElapsedMilliseconds;
-
-                stopwatch.Restart();
-                foreach (var prime in primesN) { }
-                stopwatch.Stop();
-                long totalU = stopwatch.ElapsedMilliseconds;
+                var totalU = stopwatch.ElapsedMilliseconds;
 
                 Console.WriteLine($"Datapoints {dataPoint,6}. First iteration : {totalN}ms. Second iteration : {totalU} ms.");
             }

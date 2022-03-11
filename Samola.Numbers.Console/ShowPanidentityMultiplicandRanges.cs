@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Samola.Numbers.Construction;
-using Samola.Numbers.Enumerables;
-using Samola.Numbers.Primes;
 using Samola.Numbers.Utilities;
-using System.Linq;
 
 namespace Samola.Numbers
 {

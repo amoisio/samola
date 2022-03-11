@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Text;
-using Samola.Numbers.Construction;
-using Samola.Numbers.Enumerables;
 using Samola.Numbers.Primes;
+using Samola.Numbers.Primes.Generators;
 using Samola.Numbers.Utilities;
 
 namespace Samola.Numbers
@@ -18,8 +15,8 @@ namespace Samola.Numbers
             Console.Write("Compute amicable numbers up to > ");
             int number = Int32.Parse(Console.ReadLine());
 
-            var maxValueLimit = new MaxValueLimit(number);
-            var decomposer = new PrimeDecomposer();
+            var primes = new Primes6k();
+            var decomposer = new PrimeDecomposer(primes);
             var divisor = new DivisorCalculator(decomposer);
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();

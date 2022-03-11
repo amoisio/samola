@@ -6,33 +6,7 @@ namespace Samola.Numbers
 {
     public static partial class MathExt
     {
-        public static int Pow(int x, int y)
-        {
-            if (y < 0)
-                throw new ArgumentException("Exponent must be non-negative.");
-
-            if (y == 0)
-                return 1;
-
-            if (y == 1)
-                return x;
-
-            if (x % 2 == 0)
-            {
-                return x << y - 1;
-            }
-            else
-            {
-                int result = 1;
-                while (y-- > 0)
-                {
-                    result *= x;
-                }
-                return result;
-            }
-        }
-
-        public static bool IsPrime(long number)
+        public static bool IsPrime(int number)
         {
             return IsPrimeSimple6k(number);
         }
@@ -41,7 +15,7 @@ namespace Samola.Numbers
         /// Tests if a number is prime
         /// </summary>
         /// <param name="number">Number to test</param>
-        public static bool IsPrimeBase(long number)
+        public static bool IsPrimeBase(int number)
         {
             if (number < 1)
                 throw new ArgumentException("Number must be >= 1.");
@@ -53,7 +27,7 @@ namespace Samola.Numbers
                 return false;
 
             double max = Math.Sqrt(number);
-            for (long i = 3; i <= max; i++)
+            for (int i = 3; i <= max; i++)
             {
                 if (number % i == 0)
                 {
@@ -63,7 +37,7 @@ namespace Samola.Numbers
             return true;
         }
 
-        public static bool IsPrimeSimple(long number)
+        public static bool IsPrimeSimple(int number)
         {
             if (number < 1)
                 throw new ArgumentException("Number must be non-negative.");
@@ -74,7 +48,7 @@ namespace Samola.Numbers
             if (number % 2 == 0 || number % 3 == 0)
                 return false;
 
-            for (long i = 2; i * i <= number; i++)
+            for (int i = 2; i * i <= number; i++)
             {
                 if (number % i == 0)
                 {
@@ -88,9 +62,9 @@ namespace Samola.Numbers
 
 
         private static readonly ReaderWriterLockSlim _cachedLock = new ReaderWriterLockSlim();
-        private static HashSet<long> _cached = new HashSet<long>() { 2 };
+        private static HashSet<int> _cached = new HashSet<int>() { 2 };
 
-        public static bool IsPrimeCached(long number)
+        public static bool IsPrimeCached(int number)
         {
             if (number < 1)
                 throw new ArgumentException("Number must be >= 1.");
@@ -104,7 +78,7 @@ namespace Samola.Numbers
             // The value up to which we to check to determine if the number is prime
             double max = Math.Sqrt(number);
 
-            long tempPrime = 2;
+            int tempPrime = 2;
 
             _cachedLock.EnterReadLock();
             try
@@ -135,7 +109,7 @@ namespace Samola.Numbers
                 _cachedLock.ExitReadLock();
             }
 
-            for (long i = tempPrime; i <= max; i++)
+            for (int i = tempPrime; i <= max; i++)
             {
                 if (number % i == 0)
                 {
@@ -158,9 +132,9 @@ namespace Samola.Numbers
             return true;
         }
 
-        private static HashSet<long> _cachedNoLocks = new HashSet<long>() { 2 };
+        private static HashSet<int> _cachedNoLocks = new HashSet<int>() { 2 };
 
-        public static bool IsPrimeCachedNoLocks(long number)
+        public static bool IsPrimeCachedNoLocks(int number)
         {
             if (number < 1)
                 throw new ArgumentException("Number must be >= 1.");
@@ -174,7 +148,7 @@ namespace Samola.Numbers
             // The value up to which we to check to determine if the number is prime
             double max = Math.Sqrt(number);
 
-            long tempPrime = 2;
+            int tempPrime = 2;
 
             // First, iterate over existing primes
             foreach (var prime in _cachedNoLocks)
@@ -197,7 +171,7 @@ namespace Samola.Numbers
                 tempPrime = prime; // Set tempPrime to hold the value of the last iteration
             }
 
-            for (long i = tempPrime; i <= max; i++)
+            for (int i = tempPrime; i <= max; i++)
             {
                 if (number % i == 0)
                 {
@@ -213,7 +187,7 @@ namespace Samola.Numbers
         /// Tests if a number is prime (employs the realization that all primes >= 5 can be represented as 6*k +- 1 where k > 0).
         /// </summary>
         /// <param name="number">Number to test</param>
-        public static bool IsPrimeSimple6k(long number)
+        public static bool IsPrimeSimple6k(int number)
         {
             if (number < 1)
                 throw new ArgumentException("Number must be non-negative.");
@@ -224,13 +198,13 @@ namespace Samola.Numbers
             if (number % 2 == 0 || number % 3 == 0)
                 return false;
 
-            for (long k = 1; (6 * k - 1) * (6 * k - 1) <= number; k++)
+            for (int k = 1; (6 * k - 1) * (6 * k - 1) <= number; k++)
             {
-                long lvalue = 6 * k - 1;
+                int lvalue = 6 * k - 1;
                 if (number % lvalue == 0)
                     return false;
 
-                long rvalue = 6 * k + 1;
+                int rvalue = 6 * k + 1;
                 if (number % rvalue == 0)
                     return false;
             }
@@ -239,13 +213,13 @@ namespace Samola.Numbers
         }
 
         private static readonly ReaderWriterLockSlim _cached6kLock = new ReaderWriterLockSlim();
-        private static HashSet<long> _cached6k = new HashSet<long>() { 2, 3 };
+        private static HashSet<int> _cached6k = new HashSet<int>() { 2, 3 };
 
         /// <summary>
         /// Tests if a number is prime (employs the realization that all primes >= 5 can be represented as 6*k +- 1 where k > 0).
         /// </summary>
         /// <param name="number">Number to test</param>
-        public static bool IsPrimeSimple6kCached(long number)
+        public static bool IsPrimeSimple6kCached(int number)
         {
             if (number < 1)
                 throw new ArgumentException("Number must be non-negative.");
@@ -256,7 +230,7 @@ namespace Samola.Numbers
             if (number % 2 == 0 || number % 3 == 0)
                 return false;
 
-            long tempPrime = 2;
+            int tempPrime = 2;
 
             _cached6kLock.EnterReadLock();
             try
@@ -288,13 +262,13 @@ namespace Samola.Numbers
             }
 
             var a = Math.Max((tempPrime + 1) / 6, 1);
-            for (long k = a; (6 * k - 1) * (6 * k - 1) <= number; k++)
+            for (int k = a; (6 * k - 1) * (6 * k - 1) <= number; k++)
             {
-                long lvalue = 6 * k - 1;
+                int lvalue = 6 * k - 1;
                 if (number % lvalue == 0)
                     return false;
 
-                long rvalue = 6 * k + 1;
+                int rvalue = 6 * k + 1;
                 if (number % rvalue == 0)
                     return false;
             }
