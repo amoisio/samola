@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Samola.Numbers.Primes;
-using Samola.Numbers.Primes.Generators;
 
 namespace Samola.Numbers.Utilities
 {
@@ -10,9 +9,9 @@ namespace Samola.Numbers.Utilities
     {
         private readonly IPrimeDecomposer _primeDecomposer;
 
-        public DivisorCalculator() : this(new Primes6k()) { }
+        public DivisorCalculator() : this(new PrimeNumbers6k()) { }
 
-        public DivisorCalculator(IPrimes primes) : this(new PrimeDecomposer(primes)) { }
+        public DivisorCalculator(IPrimeNumberGenerator primeNumberGenerator) : this(new PrimeDecomposer(primeNumberGenerator)) { }
 
         public DivisorCalculator(IPrimeDecomposer primeDecomposer)
         {
@@ -37,16 +36,25 @@ namespace Samola.Numbers.Utilities
             return D;
         }
 
+        /// <summary>
+        /// Get all unique divisors of a number (except the trivial 1).
+        /// </summary>
+        /// <param name="number"></param>
         public HashSet<int> GetDivisors(int number)
         {
             var decomposition = _primeDecomposer.CalculateDecomposition(number);
             return GetDivisors(decomposition);
         }
 
-        public HashSet<int> GetProperDivisors(int n)
+        /// <summary>
+        /// Get all unique proper divisors of a number.
+        /// Proper divisors do not include 1 or the number itself.
+        /// </summary>
+        /// <param name="number"></param>
+        public HashSet<int> GetProperDivisors(int number)
         {
-            var divisors = GetDivisors(n);
-            divisors.Remove(n);
+            var divisors = GetDivisors(number);
+            divisors.Remove(number);
             return divisors;
         }
 

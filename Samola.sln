@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Samola.Linq.Extensions.Test
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Samola.Numbers", "Samola.Numbers\Samola.Numbers.csproj", "{CB5B790E-E08B-4C85-A330-455787531393}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Samola.Numbers.Console", "Samola.Numbers.Console\Samola.Numbers.Console.csproj", "{CC953C40-0EF7-41D9-80AB-C214C038FD1C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Samola.Numbers.App", "Samola.Numbers.App\Samola.Numbers.App.csproj", "{CC953C40-0EF7-41D9-80AB-C214C038FD1C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Samola.Numbers.Tests", "Samola.Numbers.Tests\Samola.Numbers.Tests.csproj", "{BE21A956-C40C-4463-9B3A-BCE4C97D85BE}"
 EndProject

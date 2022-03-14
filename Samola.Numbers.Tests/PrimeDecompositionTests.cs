@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using Samola.Numbers.Comparers;
 using Samola.Numbers.Primes;
-using Samola.Numbers.Primes.Generators;
 using System;
 
 namespace Samola.Numbers.Tests
@@ -15,7 +13,7 @@ namespace Samola.Numbers.Tests
         public void PrimeDecomposition_decomposes_number_14_correctly()
         {
             var number = 14;
-            var primes = new Primes6k();
+            var primes = new PrimeNumbers6k();
             var decomposer = new PrimeDecomposer(primes);
 
             var decomposition = decomposer.CalculateDecomposition(number);
@@ -29,9 +27,9 @@ namespace Samola.Numbers.Tests
         }
 
         [Fact]
-        public void PrimeDecomposition_ecomposes_number_75_correctly()
+        public void PrimeDecomposition_decomposes_number_75_correctly()
         {
-            var primes = new Primes6k();
+            var primes = new PrimeNumbers6k();
             var decomposer = new PrimeDecomposer(primes);
 
             var decomposition = decomposer.CalculateDecomposition(75);
@@ -47,7 +45,7 @@ namespace Samola.Numbers.Tests
         [Fact]
         public void PrimeDecomposition_decomposes_number_420_correctly()
         {
-            var primes = new Primes6k();
+            var primes = new PrimeNumbers6k();
             var decomposer = new PrimeDecomposer(primes);
 
             var decomposition = decomposer.CalculateDecomposition(420);
@@ -65,7 +63,7 @@ namespace Samola.Numbers.Tests
         [Fact]
         public void PrimeDecomposition_decomposes_number_65536_correctly()
         {
-            var primes = new Primes6k();
+            var primes = new PrimeNumbers6k();
             var decomposer = new PrimeDecomposer(primes);
 
             var decomposition = decomposer.CalculateDecomposition(65536);
@@ -81,8 +79,8 @@ namespace Samola.Numbers.Tests
         public void Prime_decomposition_decomposes_values_upto_10000_under_two_seconds()
         {
             int n = 10000;
-            var cachedPrimes = new Primes6k().TakeWhile(p => p < Math.Sqrt(n));
-            var primes = new Primes6k(cachedPrimes);
+            var cachedPrimes = new PrimeNumbers6k().TakeWhile(p => p < Math.Sqrt(n));
+            var primes = new PrimeNumbers6k(cachedPrimes);
             var decomposer = new PrimeDecomposer(primes);
 
             var times = new List<long>();
@@ -103,8 +101,8 @@ namespace Samola.Numbers.Tests
         [Fact]
         public void Equals_works()
         {
-            var cachedPrimes = new Primes6k().TakeWhile(p => p < Math.Sqrt(500));
-            var primes = new Primes6k(cachedPrimes);
+            var cachedPrimes = new PrimeNumbers6k().TakeWhile(p => p < Math.Sqrt(500));
+            var primes = new PrimeNumbers6k(cachedPrimes);
             var decomposer = new PrimeDecomposer(primes);
 
             var decomposition = decomposer.CalculateDecomposition(50);
@@ -123,7 +121,7 @@ namespace Samola.Numbers.Tests
         [Fact]
         public void Can_be_raised_to_power_k()
         {
-            var primes = new Primes6k();
+            var primes = new PrimeNumbers6k();
             var decomposer = new PrimeDecomposer(primes);
             var decomposition = decomposer.CalculateDecomposition(5 * 5 * 2);
 
@@ -137,7 +135,7 @@ namespace Samola.Numbers.Tests
         [Fact]
         public void Pow_operation_does_not_modify_decomposition_in_place()
         {
-            var primes = new Primes6k();
+            var primes = new PrimeNumbers6k();
             var decomposer = new PrimeDecomposer(primes);
             var decomposition = decomposer.CalculateDecomposition(5 * 5 * 2);
 
@@ -153,7 +151,7 @@ namespace Samola.Numbers.Tests
         public void EqualityComparer_works_as_expected()
         {
             var d = new HashSet<IPrimeDecomposition>(new PrimeDecompositionEqualityComparer());
-            var primes = new Primes6k();
+            var primes = new PrimeNumbers6k();
             var decomposer = new PrimeDecomposer(primes);
             d.Add(decomposer.CalculateDecomposition(50));
             d.Add(decomposer.CalculateDecomposition(51));

@@ -5,25 +5,25 @@ using Samola.Collections;
 
 namespace Samola.Numbers.Enumerables
 {
-    public class FibonacciNumbers : CalculatedEnumerable<int>
+    public class LargeFibonacciNumbers : CalculatedEnumerable<LargeInteger>
     {
-        public FibonacciNumbers(MaximumYieldedCountLimit<int> integerLimit)
+        public LargeFibonacciNumbers(MaximumYieldedCountLimit<LargeInteger> integerLimit)
             : base(integerLimit)
         {
 
         }
         
-        protected override int CalculateNext(IReadOnlyList<int> previousItems)
+        protected override LargeInteger CalculateNext(IReadOnlyList<LargeInteger> previousItems)
         {
             if (previousItems == null)
             {
-                return 1;
+                return new LargeInteger(1);
             }
             
             int len = previousItems.Count();
             if (len < 2)
             {
-                return 1;
+                return new LargeInteger(1);
             }
             else
             {

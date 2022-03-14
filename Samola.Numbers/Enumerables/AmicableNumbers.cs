@@ -1,53 +1,57 @@
-﻿using Samola.Numbers.Cache;
-using Samola.Numbers.Utilities;
+﻿using Samola.Numbers.Utilities;
 using System.Collections.Generic;
 using System.Linq;
+using Samola.Collections;
 
 namespace Samola.Numbers.Enumerables
 {
     public class AmicableNumbers : CalculatedEnumerable<int>
     {
-        private readonly HashSet<int> _amicableNumbers;
         private readonly DivisorCalculator _divisorCalculator;
 
-        internal AmicableNumbers(DivisorCalculator divisorCalculator, IntegerLimit integerLimit, IEnumerableCacheProvider<int> cacheProvider)
-            : base(integerLimit, cacheProvider)
+        public AmicableNumbers(DivisorCalculator divisorCalculator, ICalculationLimit<int> calculationLimit)
+            : base(calculationLimit)
         {
             _divisorCalculator = divisorCalculator;
-            _amicableNumbers = new HashSet<int>();
         }
 
-        protected override IEnumerable<int> GetItems(int[] previousItems)
+        protected override int CalculateNext(IReadOnlyList<int> previousItems)
+        {
+            int next = GetInitialItemToEvaluate(previousItems);
+            int checkSum = CalculateAmicableCheckSumFor(next);
+            while (next != checkSum)
+            {
+                next++;
+                checkSum = CalculateAmicableCheckSumFor(next);
+            }
+            return next;
+        }
+
+        private int GetInitialItemToEvaluate(IReadOnlyList<int> previousItems)
         {
             int next = 1;
-            if (previousItems != null && previousItems.Length > 0)
+            if (previousItems != null && previousItems.Any())
             {
-                next = previousItems[previousItems.Length - 1] + 1;
+                next = previousItems.Last() + 1;
             }
+            return next;
+        }
 
-            while (true)
+        /// <summary>
+        /// Amicable checksum is the sum of proper divisors of the sum of
+        /// proper divisors of the given item.
+        /// </summary>
+        private int CalculateAmicableCheckSumFor(int item)
+        {
+            var nextDivisors = _divisorCalculator.GetProperDivisors(item);
+            var friend = nextDivisors.Sum(); // a = number, d(a) = b = sumNumber
+            // Zero the checksum for items who are amicable with themselves or with no one 
+            if (friend == 0 || friend == item)
             {
-                int a = next;
-                if (_amicableNumbers.Contains(a))
-                    yield return a;
-
-                var divisors = _divisorCalculator.GetProperDivisors(a);
-                int b = divisors.Sum(); // a = number, d(a) = b = sumNumber
-
-                if (b > 0)
-                {
-                    var sumDivisors = _divisorCalculator.GetProperDivisors(b);
-                    int bSum = sumDivisors.Sum(); // d(b) = sumSum
-                    if (a < b && a == bSum)
-                    {
-                        _amicableNumbers.Add(a);
-                        _amicableNumbers.Add(b);
-                        yield return a;
-                    }
-                }
-
-                next++;
+                return 0;
             }
+            var friendDivisors = _divisorCalculator.GetProperDivisors(friend);
+            return friendDivisors.Sum(); // d(b) = sumSum
         }
     }
 }

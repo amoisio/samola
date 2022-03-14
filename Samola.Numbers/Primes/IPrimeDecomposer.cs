@@ -1,7 +1,7 @@
 ﻿namespace Samola.Numbers.Primes
 {
     /// <summary>
-    /// Decomposer which computes the prime decomposition of numbers.
+    /// Prime number decomposition calculator
     /// </summary>
     public interface IPrimeDecomposer
     {

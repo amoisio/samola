@@ -1,4 +1,4 @@
-using Samola.Numbers.Primes.Generators;
+using Samola.Numbers.Primes;
 using System.Linq;
 using Xunit;
 
@@ -8,16 +8,16 @@ namespace Samola.Numbers.Tests
     {
 
         [Theory]
-        [InlineData(1, new int[] { 2 })]
-        [InlineData(2, new int[] { 2, 3 })]
-        [InlineData(3, new int[] { 2, 3, 5 })]
-        [InlineData(4, new int[] { 2, 3, 5, 7 })]
-        [InlineData(6, new int[] { 2, 3, 5, 7, 11, 13 })]
-        [InlineData(7, new int[] { 2, 3, 5, 7, 11, 13, 17 })]
-        [InlineData(5, new int[] { 2, 3, 5, 7, 11 })]
+        [InlineData(1, new[] { 2 })]
+        [InlineData(2, new[] { 2, 3 })]
+        [InlineData(3, new[] { 2, 3, 5 })]
+        [InlineData(4, new[] { 2, 3, 5, 7 })]
+        [InlineData(6, new[] { 2, 3, 5, 7, 11, 13 })]
+        [InlineData(7, new[] { 2, 3, 5, 7, 11, 13, 17 })]
+        [InlineData(5, new[] { 2, 3, 5, 7, 11 })]
         public void PrimesSimple_generate_primes_correctly(int maxPrimes, int[] expectedPrimes)
         {
-            var primes = new PrimesSimple();
+            var primes = new PrimeNumbersSimple();
 
             var actual = primes.Take(maxPrimes).ToArray();
 
@@ -27,11 +27,9 @@ namespace Samola.Numbers.Tests
         [Fact]
         public void PrimesSimple_primes_can_be_iterated_over_multiple_times()
         {
-            var primes = new PrimesSimple();
-            int p;
+            var primes = new PrimeNumbersSimple();
             foreach (var prime in primes)
             {
-                p = prime;
                 if (prime == 17)
                     break;
             }
@@ -41,21 +39,20 @@ namespace Samola.Numbers.Tests
                     break;
 
                 Assert.False(prime >= 17);
-                Assert.True(prime < 17);
             }
         }
 
         [Theory]
-        [InlineData(1, new int[] { 2 })]
-        [InlineData(2, new int[] { 2, 3 })]
-        [InlineData(3, new int[] { 2, 3, 5 })]
-        [InlineData(4, new int[] { 2, 3, 5, 7 })]
-        [InlineData(6, new int[] { 2, 3, 5, 7, 11, 13 })]
-        [InlineData(7, new int[] { 2, 3, 5, 7, 11, 13, 17 })]
-        [InlineData(5, new int[] { 2, 3, 5, 7, 11 })]
+        [InlineData(1, new[] { 2 })]
+        [InlineData(2, new[] { 2, 3 })]
+        [InlineData(3, new[] { 2, 3, 5 })]
+        [InlineData(4, new[] { 2, 3, 5, 7 })]
+        [InlineData(6, new[] { 2, 3, 5, 7, 11, 13 })]
+        [InlineData(7, new[] { 2, 3, 5, 7, 11, 13, 17 })]
+        [InlineData(5, new[] { 2, 3, 5, 7, 11 })]
         public void Primes6k_generate_primes_correctly(int maxPrimes, int[] expectedPrimes)
         {
-            var primes = new Primes6k();
+            var primes = new PrimeNumbers6k();
 
             var actual = primes.Take(maxPrimes).ToArray();
 
@@ -65,11 +62,9 @@ namespace Samola.Numbers.Tests
         [Fact]
         public void Prime6k_primes_can_be_iterated_over_multiple_times()
         {
-            var primes = new Primes6k();
-            int p;
+            var primes = new PrimeNumbers6k();
             foreach (var prime in primes)
             {
-                p = prime;
                 if (prime == 17)
                     break;
             }
@@ -79,7 +74,6 @@ namespace Samola.Numbers.Tests
                     break;
 
                 Assert.False(prime >= 17);
-                Assert.True(prime < 17);
             }
         }
     }

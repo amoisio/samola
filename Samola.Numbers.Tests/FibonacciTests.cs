@@ -5,30 +5,25 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Samola.Collections;
 using Xunit;
 
 namespace Samola.Numbers.Tests
 {
     public class FibonacciTests
     {
-        private FibonacciNumbersBuilder _builder;
-
-        public FibonacciTests()
-        {
-            _builder = new FibonacciNumbersBuilder();
-            _builder.UseCache = false;
-            _builder.Limit = new LargeIntegerCountLimit(30);
-        }
-
         [Fact]
         public void FibonacciNumbers_calculates_fibonacci_numbers()
         {
-            var numbers = _builder.Build().ToArray();
+            var limit = new MaximumYieldedCountLimit<int>(30);
+            var fibonacci = new FibonacciNumbers(limit);
+            
+            var numbers = fibonacci.ToArray();
 
-            for (int i = 1; i < 30; i++)
+            for (int i = 0; i < 30; i++)
             {
-                var expected = Fibonacci.GetNth(i);
-                Assert.Equal(expected.ToString(), numbers[i - 1].ToString());
+                var expected = Fibonacci.GetNth(i + 1).Values[0];
+                Assert.Equal(expected, numbers[i]);
             }
         }
     }
