@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using Samola.Numbers.Primes;
 using System;
+using Samola.Collections;
 
 namespace Samola.Numbers.Tests
 {
@@ -79,8 +80,8 @@ namespace Samola.Numbers.Tests
         public void Prime_decomposition_decomposes_values_upto_10000_under_two_seconds()
         {
             int n = 10000;
-            var cachedPrimes = new PrimeNumbers6k().TakeWhile(p => p < Math.Sqrt(n));
-            var primes = new PrimeNumbers6k(cachedPrimes);
+            var limit = new MaximumYieldedValueLimit(n);
+            var primes = new PrimeNumbers6k(limit);
             var decomposer = new PrimeDecomposer(primes);
 
             var times = new List<long>();
@@ -101,8 +102,7 @@ namespace Samola.Numbers.Tests
         [Fact]
         public void Equals_works()
         {
-            var cachedPrimes = new PrimeNumbers6k().TakeWhile(p => p < Math.Sqrt(500));
-            var primes = new PrimeNumbers6k(cachedPrimes);
+            var primes = new PrimeNumbers6k();
             var decomposer = new PrimeDecomposer(primes);
 
             var decomposition = decomposer.CalculateDecomposition(50);
@@ -148,18 +148,19 @@ namespace Samola.Numbers.Tests
         }
 
         [Fact]
-        public void EqualityComparer_works_as_expected()
+        public void Comparison_works_as_expected()
         {
-            var d = new HashSet<IPrimeDecomposition>(new PrimeDecompositionEqualityComparer());
             var primes = new PrimeNumbers6k();
             var decomposer = new PrimeDecomposer(primes);
-            d.Add(decomposer.CalculateDecomposition(50));
-            d.Add(decomposer.CalculateDecomposition(51));
-
-            var decomp1 = decomposer.CalculateDecomposition(50);
-            var decomp2 = decomposer.CalculateDecomposition(49);
-            Assert.Contains(decomp1, d);
-            Assert.DoesNotContain(decomp2, d);
+            var composition1 = decomposer.CalculateDecomposition(50);
+            var composition2 = decomposer.CalculateDecomposition(51);
+            var reference1 = decomposer.CalculateDecomposition(50);
+            var reference2 = decomposer.CalculateDecomposition(49);
+            
+            Assert.Equal(reference1, composition1);
+            Assert.NotEqual(reference2, composition1);
+            Assert.NotEqual(reference1, composition2);
+            Assert.NotEqual(reference2, composition2);
         }
     }
 }

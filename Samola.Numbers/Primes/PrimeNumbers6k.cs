@@ -1,27 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Samola.Collections;
 
 namespace Samola.Numbers.Primes
 {
-    public class PrimeNumbers6k : PrimeNumberGenerator
+    public class PrimeNumbers6k : PrimeNumbers
     {
-        public PrimeNumbers6k(IEnumerable<int> pregeneratedPrimes = null)
-            : base(pregeneratedPrimes)
+        public PrimeNumbers6k(ICalculationLimit<int> limit = null)
+            : base(limit)
         {
-
+            
         }
-        
+
         public override bool IsPrime(int number)
         {
             if (number < 1)
-                throw new ArgumentException("Number must be non-negative.");
+            {
+                return false;
+            }
 
             if (number <= 3)
+            {
                 return true;
+            }
 
             if (number % 2 == 0 || number % 3 == 0)
+            {
                 return false;
+            }
 
             for (int k = 1; (6 * k - 1) * (6 * k - 1) <= number; k++)
             {
@@ -37,21 +44,23 @@ namespace Samola.Numbers.Primes
             return true;
         }
 
-        protected override int GenerateNext(IReadOnlyList<int> previousPrimes)
+        protected override int CalculateNext(IReadOnlyList<int> previousItems)
         {
-            var lastPrime = previousPrimes.LastOrDefault();
+            var lastPrime = previousItems.LastOrDefault();
             if (lastPrime < 2)
             {
                 return 2;
             }
+
             if (lastPrime < 3)
             {
                 return 3;
             }
+
             var (k, a) = DetermineCoefficients(lastPrime);
             foreach (var candidate in GetPrimeCandidates(k, a))
             {
-                foreach (var prime in previousPrimes)
+                foreach (var prime in previousItems)
                 {
                     if (prime * prime > candidate)
                     {
@@ -64,6 +73,7 @@ namespace Samola.Numbers.Primes
                     }
                 }
             }
+
             throw new InvalidOperationException("Prime generation failed!");
         }
 
@@ -76,16 +86,19 @@ namespace Samola.Numbers.Primes
             {
                 return (0, 0);
             }
+
             int k = Math.DivRem(prime + 1, 6, out int remainder);
             if (remainder == 0)
             {
                 return (k, -1);
             }
+
             k = Math.DivRem(prime - 1, 6, out remainder);
             if (remainder == 0)
             {
                 return (k, 1);
             }
+
             throw new InvalidOperationException("6k + a decomposition failed.");
         }
 
@@ -101,7 +114,6 @@ namespace Samola.Numbers.Primes
                 k++;
                 yield return 6 * k - 1;
                 yield return 6 * k + 1;
-
             }
         }
     }

@@ -11,7 +11,7 @@ namespace Samola.Numbers.Utilities
 
         public DivisorCalculator() : this(new PrimeNumbers6k()) { }
 
-        public DivisorCalculator(IPrimeNumberGenerator primeNumberGenerator) : this(new PrimeDecomposer(primeNumberGenerator)) { }
+        public DivisorCalculator(PrimeNumbers primes) : this(new PrimeDecomposer(primes)) { }
 
         public DivisorCalculator(IPrimeDecomposer primeDecomposer)
         {

@@ -1,14 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using Samola.Collections;
 
 namespace Samola.Numbers.Primes
 {
     /// <summary>
-    /// A prime number generator.
+    /// Represents a type which provides a way of checking if a number is a prime number.
     /// </summary>
-    public interface IPrimeNumberGenerator : IEnumerable<int>
+    public interface IPrimeNumerable
     {
         /// <summary>
-        /// Check is given number is a prime number.
+        /// Check if given number is a prime number.
         /// </summary>
         /// <param name="number">Number to check</param>
         /// <returns>True, if number is a prime number. False, otherwise.</returns>

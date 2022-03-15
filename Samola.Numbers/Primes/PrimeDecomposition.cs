@@ -1,13 +1,14 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace Samola.Numbers.Primes
 {
-    public class PrimeDecomposition : IPrimeDecomposition
+    internal class PrimeDecomposition : IPrimeDecomposition, IEquatable<PrimeDecomposition>
     {
         private readonly Dictionary<int, int> _decomposition;
 
-        public PrimeDecomposition(Dictionary<int, int> decomposition)
+        internal PrimeDecomposition(Dictionary<int, int> decomposition)
         {
             _decomposition = decomposition;
         }
@@ -24,34 +25,7 @@ namespace Samola.Numbers.Primes
             return new PrimeDecomposition(decomposition);
         }
 
-        public int Count => _decomposition.Count;
-
-        public override bool Equals(object obj)
-        {
-            if (!(obj is PrimeDecomposition o))
-            {
-                return false;
-            }
-            else
-            {
-                if (this.Count != o.Count)
-                    return false;
-
-                foreach (var k in this)
-                {
-                    if (!o._decomposition.ContainsKey(k.Key) || o._decomposition[k.Key] != k.Value)
-                        return false;
-                }
-
-                return true;
-            }
-        }
-
-        public override int GetHashCode()
-        {
-            // TODO: come back to this. how to write the get hash code method correctly?
-            return _decomposition.GetHashCode();
-        }
+        public int Factors => _decomposition.Count;
 
         public IEnumerator<KeyValuePair<int, int>> GetEnumerator()
         {
@@ -61,6 +35,38 @@ namespace Samola.Numbers.Primes
         IEnumerator IEnumerable.GetEnumerator()
         {
             return this.GetEnumerator();
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((PrimeDecomposition) obj);
+        }
+        
+        public bool Equals(PrimeDecomposition other)
+        {
+            if (other == null || Factors != other.Factors)
+            {
+                return false;
+            }
+
+            var d = other._decomposition;
+            foreach (var k in this)
+            {
+                if (!d.ContainsKey(k.Key) || d[k.Key] != k.Value)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        public override int GetHashCode()
+        {
+            return _decomposition != null ? _decomposition.GetHashCode() : 0;
         }
     }
 }
