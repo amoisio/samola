@@ -2,7 +2,7 @@
 using Samola.Numbers.Utilities;
 using Samola.Numbers.Enumerables;
 using System.Linq;
-using Samola.Collections;
+using Samola.Collections.CalculatedEnumerable;
 using Samola.Numbers.Primes;
 
 namespace Samola.Numbers.Tests

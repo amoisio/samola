@@ -1,4 +1,4 @@
-namespace Samola.Collections
+namespace Samola.Collections.CalculatedEnumerable
 {
     public class PreviousValueState<TItem> : IEnumerationState<TItem> 
     {

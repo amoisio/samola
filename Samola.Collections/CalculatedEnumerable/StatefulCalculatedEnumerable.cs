@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Samola.Collections
+namespace Samola.Collections.CalculatedEnumerable
 {
     /// <summary>
     /// An enumerable base class meant for calculated sequences of items.

@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using Samola.Collections;
+using Samola.Collections.CalculatedEnumerable;
 using Samola.Numbers.Fibonacci;
 using Xunit;
 

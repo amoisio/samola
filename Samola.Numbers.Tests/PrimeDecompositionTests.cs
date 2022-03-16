@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using Samola.Numbers.Primes;
-using System;
-using Samola.Collections;
+using Samola.Collections.CalculatedEnumerable;
 
 namespace Samola.Numbers.Tests
 {

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Samola.Collections
+namespace Samola.Collections.CalculatedEnumerable
 {
     /// <summary>
     /// An enumerable whose values are calculated on demand.

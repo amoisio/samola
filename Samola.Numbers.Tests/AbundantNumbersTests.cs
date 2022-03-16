@@ -1,7 +1,7 @@
 ﻿using Samola.Numbers.Enumerables;
 using Samola.Numbers.Utilities;
 using System.Linq;
-using Samola.Collections;
+using Samola.Collections.CalculatedEnumerable;
 using Samola.Numbers.Primes;
 using Xunit;
 

@@ -1,5 +1,5 @@
 ﻿using Samola.Numbers.Utilities;
-using Samola.Collections;
+using Samola.Collections.CalculatedEnumerable;
 
 namespace Samola.Numbers.Enumerables
 {

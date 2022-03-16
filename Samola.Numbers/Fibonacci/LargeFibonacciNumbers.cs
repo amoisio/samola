@@ -1,6 +1,6 @@
 ﻿using Samola.Numbers.CustomTypes;
 using System.Linq;
-using Samola.Collections;
+using Samola.Collections.CalculatedEnumerable;
 
 namespace Samola.Numbers.Fibonacci
 {

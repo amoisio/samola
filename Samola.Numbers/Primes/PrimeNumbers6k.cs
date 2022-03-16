@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Samola.Collections;
+using Samola.Collections.CalculatedEnumerable;
 
 namespace Samola.Numbers.Primes
 {

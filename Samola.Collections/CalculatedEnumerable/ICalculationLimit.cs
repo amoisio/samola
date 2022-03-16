@@ -1,4 +1,4 @@
-namespace Samola.Collections
+namespace Samola.Collections.CalculatedEnumerable
 {
     /// <summary>
     /// Represents a calculation limit.

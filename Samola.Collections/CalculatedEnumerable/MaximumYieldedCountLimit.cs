@@ -1,4 +1,4 @@
-namespace Samola.Collections
+namespace Samola.Collections.CalculatedEnumerable
 {
     /// <summary>
     /// Maximum items yielded count limit. Prompts calculation to stop once a predefined number of items

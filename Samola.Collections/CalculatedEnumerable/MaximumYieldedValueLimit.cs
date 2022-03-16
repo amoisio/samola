@@ -1,6 +1,6 @@
 using System;
 
-namespace Samola.Collections
+namespace Samola.Collections.CalculatedEnumerable
 {
     public class MaximumYieldedValueLimit<TItem> : ICalculationLimit<TItem>
         where TItem : IComparable<TItem>
