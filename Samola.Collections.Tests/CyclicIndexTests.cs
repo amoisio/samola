@@ -1,9 +1,8 @@
-﻿using Samola.Collections;
+﻿using Samola.Collections.CircularList;
 using System;
 using Xunit;
-using Samola.Utilities;
 
-namespace Samole.Collections.Tests
+namespace Samola.Collections.Tests
 {
     public class CyclicIndexTests
     {

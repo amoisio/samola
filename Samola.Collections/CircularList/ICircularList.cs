@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Samola.Collections
+namespace Samola.Collections.CircularList
 {
     public interface ICircularList<T> : IEnumerable<T>
     {

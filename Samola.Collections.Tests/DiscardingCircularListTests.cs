@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Text;
-using Samola.Collections;
+using Samola.Collections.CircularList;
 using Xunit;
 
-namespace Samole.Collections.Tests
+namespace Samola.Collections.Tests
 {
     public class An_empty_discarding_circular_list
     {

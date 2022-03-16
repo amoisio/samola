@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Samola.Collections
+﻿namespace Samola.Collections.CircularList
 {
     public static class CyclicBufferIndex
     {

@@ -1,10 +1,9 @@
-﻿using Samola.Utilities;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Samola.Collections
+namespace Samola.Collections.CircularList
 {
     /* Discarding Circular List
      *  A fixed size circular list in which the oldest item is discarded to make room for new, incoming items (ie. when the list is full).

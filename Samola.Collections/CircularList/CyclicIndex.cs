@@ -1,7 +1,6 @@
-﻿using Samola.Utilities;
-using System;
+﻿using System;
 
-namespace Samola.Collections
+namespace Samola.Collections.CircularList
 {
     public class CyclicIndex
     {
