@@ -4,9 +4,9 @@ namespace Samola.Numbers.Primes
 {
     public class PrimeDecomposer : IPrimeDecomposer
     {
-        private readonly PrimeNumbers _primes;
+        private readonly IPrimeNumerable<int> _primes;
 
-        public PrimeDecomposer(PrimeNumbers primes)
+        public PrimeDecomposer(IPrimeNumerable<int> primes)
         {
             _primes = primes;
         }

@@ -1,19 +1,26 @@
-using System.Collections.Generic;
+using System;
 
 namespace Samola.Collections
 {
-    public class MaximumYieldedValueLimit : ICalculationLimit<int>
+    public class MaximumYieldedValueLimit<TItem> : ICalculationLimit<TItem>
+        where TItem : IComparable<TItem>
     {
-        private readonly int _limit;
+        private readonly TItem _limit;
 
-        public MaximumYieldedValueLimit(int limit)
+        public MaximumYieldedValueLimit(TItem limit)
         {
-            _limit = limit;
+            _limit = limit ?? throw new ArgumentNullException(nameof(limit), "Limit must be given.");
         }
 
-        public bool CanYield(int item, IEnumerable<int> previousItems)
+        public bool CanYield(TItem item, int yieldedCount)
         {
-            return item <= _limit;
+            if (item == null)
+            {
+                return false;
+            }
+
+            // item preceded or is the same as the limit
+            return item.CompareTo(_limit) <= 0;
         }
     }
 }

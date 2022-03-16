@@ -2,7 +2,7 @@
 using System.Linq;
 using Samola.Collections;
 using Samola.Numbers.CustomTypes;
-using Samola.Numbers.Enumerables;
+using Samola.Numbers.Fibonacci;
 
 namespace Samola.Numbers.App
 {

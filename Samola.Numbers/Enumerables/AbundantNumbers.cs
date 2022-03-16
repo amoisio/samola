@@ -1,11 +1,9 @@
 ﻿using Samola.Numbers.Utilities;
-using System.Collections.Generic;
-using System.Linq;
 using Samola.Collections;
 
 namespace Samola.Numbers.Enumerables
 {
-    public class AbundantNumbers : CalculatedEnumerable<int>
+    public class AbundantNumbers : StatefulCalculatedEnumerable<int, PreviousValueState<int>>
     {
         private readonly NumberClassifier _classifier;
 
@@ -15,24 +13,16 @@ namespace Samola.Numbers.Enumerables
             _classifier = classifier;
         }
 
-        protected override int CalculateNext(IReadOnlyList<int> previousItems)
+        protected override PreviousValueState<int> InitializeState() => new();
+
+        protected override int CalculateNext(PreviousValueState<int> state)
         {
-            int next = GetInitialItemToEvaluate(previousItems);
+            int next = state.PreviousValue + 1;
             var classification = _classifier.Classify(next);
             while (classification != NumberClassification.Abundant)
             {
                 next++;
                 classification = _classifier.Classify(next);
-            }
-            return next;
-        }
-        
-        private int GetInitialItemToEvaluate(IReadOnlyList<int> previousItems)
-        {
-            int next = 1;
-            if (previousItems != null && previousItems.Any())
-            {
-                next = previousItems.Last() + 1;
             }
             return next;
         }

@@ -1,11 +1,6 @@
-﻿using Samola.Numbers.CustomTypes;
-using Samola.Numbers.Enumerables;
-using Samola.Numbers.Utilities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using Samola.Collections;
+using Samola.Numbers.Fibonacci;
 using Xunit;
 
 namespace Samola.Numbers.Tests
@@ -22,7 +17,7 @@ namespace Samola.Numbers.Tests
 
             for (int i = 0; i < 30; i++)
             {
-                var expected = Fibonacci.GetNth(i + 1).Values[0];
+                var expected = FibonacciNumbers.GetNthTerm(i + 1);
                 Assert.Equal(expected, numbers[i]);
             }
         }

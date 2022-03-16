@@ -3,6 +3,7 @@ using Samola.Numbers.Utilities;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using Samola.Numbers.Primes;
 
 namespace Samola.Numbers.Tests
 {
@@ -12,7 +13,9 @@ namespace Samola.Numbers.Tests
 
         public DivisorCalculatorTests()
         {
-            _calculator = new DivisorCalculator();
+            var primes = new PrimeNumbers6k();
+            var decomposer = new PrimeDecomposer(primes);
+            _calculator = new DivisorCalculator(decomposer);
         }
 
         /// 1: 1

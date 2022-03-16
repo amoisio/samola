@@ -1,11 +1,10 @@
 ﻿using Samola.Numbers.Utilities;
-using System.Collections.Generic;
 using System.Linq;
 using Samola.Collections;
 
 namespace Samola.Numbers.Enumerables
 {
-    public class AmicableNumbers : CalculatedEnumerable<int>
+    public class AmicableNumbers : StatefulCalculatedEnumerable<int, PreviousValueState<int>>
     {
         private readonly DivisorCalculator _divisorCalculator;
 
@@ -15,24 +14,16 @@ namespace Samola.Numbers.Enumerables
             _divisorCalculator = divisorCalculator;
         }
 
-        protected override int CalculateNext(IReadOnlyList<int> previousItems)
+        protected override PreviousValueState<int> InitializeState() => new();
+        
+        protected override int CalculateNext(PreviousValueState<int> state)
         {
-            int next = GetInitialItemToEvaluate(previousItems);
+            int next = state.PreviousValue + 1;
             int checkSum = CalculateAmicableCheckSumFor(next);
             while (next != checkSum)
             {
                 next++;
                 checkSum = CalculateAmicableCheckSumFor(next);
-            }
-            return next;
-        }
-
-        private int GetInitialItemToEvaluate(IReadOnlyList<int> previousItems)
-        {
-            int next = 1;
-            if (previousItems != null && previousItems.Any())
-            {
-                next = previousItems.Last() + 1;
             }
             return next;
         }

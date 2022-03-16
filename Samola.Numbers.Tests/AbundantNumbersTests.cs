@@ -2,6 +2,7 @@
 using Samola.Numbers.Utilities;
 using System.Linq;
 using Samola.Collections;
+using Samola.Numbers.Primes;
 using Xunit;
 
 namespace Samola.Numbers.Tests
@@ -11,9 +12,11 @@ namespace Samola.Numbers.Tests
         [Fact]
         public void Returns_only_abundant_numbers()
         {
-            var divisor = new DivisorCalculator();
+            var primes = new PrimeNumbers6k();
+            var decomposer = new PrimeDecomposer(primes);
+            var divisor = new DivisorCalculator(decomposer);
             var classifier = new NumberClassifier(divisor);
-            var limit = new MaximumYieldedValueLimit(28123);
+            var limit = new MaximumYieldedValueLimit<int>(28123);
 
             var abundantNumbers = new AbundantNumbers(classifier, limit);
           
@@ -30,9 +33,11 @@ namespace Samola.Numbers.Tests
         [Fact]
         public void MaxValueLimit_limits_the_abundant_numbers()
         {
-            var divisor = new DivisorCalculator();
+            var primes = new PrimeNumbers6k();
+            var decomposer = new PrimeDecomposer(primes);
+            var divisor = new DivisorCalculator(decomposer);
             var classifier = new NumberClassifier(divisor);
-            var limit = new MaximumYieldedValueLimit(28123);
+            var limit = new MaximumYieldedValueLimit<int>(28123);
             
             var abundantNumbers = new AbundantNumbers(classifier, limit);
 
@@ -42,7 +47,9 @@ namespace Samola.Numbers.Tests
         [Fact]
         public void CountLimit_limits_the_abundant_numbers()
         {
-            var divisor = new DivisorCalculator();
+            var primes = new PrimeNumbers6k();
+            var decomposer = new PrimeDecomposer(primes);
+            var divisor = new DivisorCalculator(decomposer);
             var classifier = new NumberClassifier(divisor);
             var limit = new MaximumYieldedCountLimit<int>(1000);
             

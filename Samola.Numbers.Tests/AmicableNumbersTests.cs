@@ -44,7 +44,7 @@ namespace Samola.Numbers.Tests
             var primes = new PrimeNumbers6k();
             var decomposer = new PrimeDecomposer(primes);
             var divisor = new DivisorCalculator(decomposer);
-            var limit = new MaximumYieldedValueLimit(284);
+            var limit = new MaximumYieldedValueLimit<int>(284);
             var amicableNumbers = new AmicableNumbers(divisor, limit);
             
             var numbers = amicableNumbers.ToArray();

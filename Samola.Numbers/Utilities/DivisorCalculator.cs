@@ -9,10 +9,6 @@ namespace Samola.Numbers.Utilities
     {
         private readonly IPrimeDecomposer _primeDecomposer;
 
-        public DivisorCalculator() : this(new PrimeNumbers6k()) { }
-
-        public DivisorCalculator(PrimeNumbers primes) : this(new PrimeDecomposer(primes)) { }
-
         public DivisorCalculator(IPrimeDecomposer primeDecomposer)
         {
             _primeDecomposer = primeDecomposer;

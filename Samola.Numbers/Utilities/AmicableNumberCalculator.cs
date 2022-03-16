@@ -9,11 +9,6 @@ namespace Samola.Numbers.Utilities
         private readonly Dictionary<int, int> _amicableNumbers;
         private readonly DivisorCalculator _divisorCalculator;
 
-        public AmicableNumberCalculator() : this(new DivisorCalculator())
-        {
-
-        }
-
         public AmicableNumberCalculator(DivisorCalculator divisorCalculator)
         {
             _divisorCalculator = divisorCalculator;

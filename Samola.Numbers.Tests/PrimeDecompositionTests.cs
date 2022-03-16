@@ -80,7 +80,7 @@ namespace Samola.Numbers.Tests
         public void Prime_decomposition_decomposes_values_upto_10000_under_two_seconds()
         {
             int n = 10000;
-            var limit = new MaximumYieldedValueLimit(n);
+            var limit = new MaximumYieldedValueLimit<int>(n);
             var primes = new PrimeNumbers6k(limit);
             var decomposer = new PrimeDecomposer(primes);
 

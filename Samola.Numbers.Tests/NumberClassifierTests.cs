@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using Samola.Numbers.Primes;
 using Xunit;
 
 namespace Samola.Numbers.Tests
@@ -12,7 +13,10 @@ namespace Samola.Numbers.Tests
 
         public NumberClassifierTests()
         {
-            _classifier = new NumberClassifier();
+            var primes = new PrimeNumbers6k();
+            var decomposer = new PrimeDecomposer(primes);
+            var divisor = new DivisorCalculator(decomposer);
+            _classifier = new NumberClassifier(divisor);
         }
 
         [Theory]

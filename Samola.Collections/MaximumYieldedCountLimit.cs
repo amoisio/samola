@@ -1,6 +1,3 @@
-using System.Collections.Generic;
-using System.Linq;
-
 namespace Samola.Collections
 {
     /// <summary>
@@ -9,15 +6,19 @@ namespace Samola.Collections
     /// </summary>
     public class MaximumYieldedCountLimit<TItem> : ICalculationLimit<TItem>
     {
+        private const int DefaultMaxYielded = 100_000;
         private readonly int _maxCount;
         public MaximumYieldedCountLimit(int maxCount)
         {
             _maxCount = maxCount;
         }
-        
-        public bool CanYield(TItem item, IEnumerable<TItem> previousItems)
+
+        public static MaximumYieldedCountLimit<TItem> Default 
+            => new MaximumYieldedCountLimit<TItem>(DefaultMaxYielded);
+
+        public bool CanYield(TItem item, int yieldedCount)
         {
-            return previousItems.Count() < _maxCount;
+            return yieldedCount < _maxCount;
         }
     }
 }

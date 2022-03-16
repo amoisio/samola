@@ -7,7 +7,6 @@ namespace Samola.Numbers.Counters
     /// DialCounter 
     /// - Has N dials with numbers from 0 to 9
     /// - Count-down dial - dials are initially at 9 and count down to 0
-    /// - TODO: Add count-up functionality
     /// - Dials have different weights.
     /// - The left most dial is most significant and the right most is least significant
     /// - Dials rolls according to the following rules

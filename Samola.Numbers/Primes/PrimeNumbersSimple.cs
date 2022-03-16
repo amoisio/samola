@@ -1,20 +1,20 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Samola.Collections;
+﻿using Samola.Collections;
 
 namespace Samola.Numbers.Primes
 {
-    public class PrimeNumbersSimple : PrimeNumbers
+    public class PrimeNumbersSimple : StatefulCalculatedEnumerable<int, PreviousValueState<int>>, IPrimeNumerable<int>
     {
         public PrimeNumbersSimple(ICalculationLimit<int> limit = null)
-            : base(limit)
+            : base(limit ?? MaximumYieldedCountLimit<int>.Default)
         {
 
         }
 
-        protected override int CalculateNext(IReadOnlyList<int> previousItems)
+        protected override PreviousValueState<int> InitializeState() => new(1 /* trivial prime */);
+        
+        protected override int CalculateNext(PreviousValueState<int> state)
         {
-            var next = GetInitialItemToEvaluate(previousItems);
+            var next = state.PreviousValue + 1;
             while (!IsPrime(next)) 
             { 
                 next++;
@@ -22,18 +22,7 @@ namespace Samola.Numbers.Primes
             return next;
         }
         
-        private int GetInitialItemToEvaluate(IReadOnlyList<int> previousItems)
-        {
-            // 1 is a trivial prime, let's not return it
-            int next = 2;
-            if (previousItems != null && previousItems.Any())
-            {
-                next = previousItems.Last() + 1;
-            }
-            return next;
-        }
-        
-        public override bool IsPrime(int number)
+        public bool IsPrime(int number)
         {
             if (number < 1)
             {

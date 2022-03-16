@@ -5,21 +5,23 @@ using System.Linq;
 namespace Samola.Collections
 {
     /// <summary>
-    /// An enumerable whose values are calculated on demand.
-    /// Has the ability to cache calculated values for faster access in subsequent enumerations.
-    /// By default, has a calculation limit of 100 000 items. 
+    /// An enumerable base class meant for stateless calculated sequences of items.
+    /// Stateless :
+    /// - Calculation of the next item does not depend on previous state.
+    /// Features:
+    /// - Precalculate values for faster access.
+    /// - Customizable calculation limit to prevent infinite enumeration. (By default, yields 100 000 items.)
     /// </summary>
     /// <typeparam name="TItem">Type to enumerate</typeparam>
-    public abstract class CalculatedEnumerable<TItem> : ICalculatedEnumerable<TItem>
+    public abstract class StatelessCalculatedEnumerable<TItem> : ICalculatedEnumerable<TItem>
     {
-        public const int DEFAULT_MAX_YIELDED = 100_000;
         private readonly List<TItem> _precalculatedItems;
-        private readonly ICalculationLimit<TItem> _calculationLimit;
-        
-        protected CalculatedEnumerable(ICalculationLimit<TItem> calculationLimit)
+        private readonly ICalculationLimit<TItem> _limit;
+
+        protected StatelessCalculatedEnumerable(ICalculationLimit<TItem> limit)
         {
             _precalculatedItems = new List<TItem>();
-            _calculationLimit = calculationLimit ?? new MaximumYieldedCountLimit<TItem>(DEFAULT_MAX_YIELDED);
+            _limit = limit ?? MaximumYieldedCountLimit<TItem>.Default;
         }
 
         public void Precalculate(int count)
@@ -32,33 +34,35 @@ namespace Samola.Collections
 
         public IEnumerator<TItem> GetEnumerator()
         {
-            var yieldedItems = new List<TItem>(_precalculatedItems.Count);
             TItem item;
+            int yieldedCount = 0;
+
             // Yield precalculated items
             int len = _precalculatedItems.Count;
             for (int i = 0; i < len; i++)
             {
                 item = _precalculatedItems[i];
-                if (!_calculationLimit.CanYield(item, yieldedItems)) 
+                if (!_limit.CanYield(item, yieldedCount))
                 {
                     yield break;
                 }
+
+                yieldedCount++;
                 yield return item;
-                yieldedItems.Add(item);
             }
-            
+
             // Calculate and yield new items 
-            item = CalculateNext(yieldedItems);
-            while (_calculationLimit.CanYield(item, yieldedItems))
+            item = CalculateNext();
+            while (_limit.CanYield(item, yieldedCount))
             {
+                yieldedCount++;
                 yield return item;
-                yieldedItems.Add(item);
-                item = CalculateNext(yieldedItems);
+                item = CalculateNext();
             }
         }
-
-        protected abstract TItem CalculateNext(IReadOnlyList<TItem> previousItems);
         
+        protected abstract TItem CalculateNext();
+
         IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
