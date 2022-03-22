@@ -3,19 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.902
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Samola.Collections", "Samola.Collections\Samola.Collections.csproj", "{AFA4160F-A135-4DFE-BE3A-1486BB8DEBE5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Samola.DataStructures", "Samola.DataStructures\Samola.DataStructures.csproj", "{AFA4160F-A135-4DFE-BE3A-1486BB8DEBE5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Samola.Collections.Tests", "Samola.Collections.Tests\Samola.Collections.Tests.csproj", "{DA5FF17E-C9E5-476B-93BB-A4B672553104}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Samola.DataStructures.Tests", "Samola.DataStructures.Tests\Samola.DataStructures.Tests.csproj", "{DA5FF17E-C9E5-476B-93BB-A4B672553104}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Samola.Linq.Extensions", "Samola.Linq.Extensions\Samola.Linq.Extensions.csproj", "{5BECBC58-DCE7-4397-B2BB-66DECAD8BCEC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Samola.Extensions", "Samola.Extensions\Samola.Extensions.csproj", "{5BECBC58-DCE7-4397-B2BB-66DECAD8BCEC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Samola.Linq.Extensions.Tests", "Samola.Linq.Extensions.Tests\Samola.Linq.Extensions.Tests.csproj", "{681A338A-863D-4D47-B2B1-A5F1E81915A4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Samola.Extensions.Tests", "Samola.Extensions.Tests\Samola.Extensions.Tests.csproj", "{681A338A-863D-4D47-B2B1-A5F1E81915A4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Samola.Numbers", "Samola.Numbers\Samola.Numbers.csproj", "{CB5B790E-E08B-4C85-A330-455787531393}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Samola.Algorithms", "Samola.Algorithms\Samola.Algorithms.csproj", "{CB5B790E-E08B-4C85-A330-455787531393}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Samola.Numbers.App", "Samola.Numbers.App\Samola.Numbers.App.csproj", "{CC953C40-0EF7-41D9-80AB-C214C038FD1C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Samola.Algorithms.App", "Samola.Algorithms.App\Samola.Algorithms.App.csproj", "{CC953C40-0EF7-41D9-80AB-C214C038FD1C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Samola.Numbers.Tests", "Samola.Numbers.Tests\Samola.Numbers.Tests.csproj", "{BE21A956-C40C-4463-9B3A-BCE4C97D85BE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Samola.Algorithms.Tests", "Samola.Algorithms.Tests\Samola.Algorithms.Tests.csproj", "{BE21A956-C40C-4463-9B3A-BCE4C97D85BE}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Samola.Utilities", "Samola.Utilities\Samola.Utilities.csproj", "{648016C5-FCB5-408E-9C2A-118380A21508}"
 EndProject

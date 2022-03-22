@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <RootNamespace>Samola.Extensions</RootNamespace>
+    <Title>Samola extensions</Title>
+    <Product>Samola extensions</Product>
+    <Description>Samola extensions</Description>
+    <Version>1.0.0.0</Version>
+    <Authors>Aleksi Moisio</Authors>
+    <Copyright>Copyright (c) 2022 Aleksi Moisio</Copyright> 
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageTags>Samola;.NET;Extensions</PackageTags>
+  </PropertyGroup>
+
+</Project>
