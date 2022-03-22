@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Samola.Algorithms.Sequences.App
+namespace Samola.Algorithms.App
 {
     class Program
     {

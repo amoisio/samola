@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Samola.Algorithms.Sequences
+namespace Samola.Algorithms.Utilities
 {
     public class QuadraticEquation
     {

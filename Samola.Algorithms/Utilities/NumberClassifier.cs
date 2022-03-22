@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using Samola.Algorithms.Sequences;
 
-namespace Samola.Algorithms.Sequences
+namespace Samola.Algorithms.Utilities
 {
     public class NumberClassifier
     {

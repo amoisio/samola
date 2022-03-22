@@ -1,8 +1,8 @@
 ﻿using System;
-using Samola.Algorithms.Sequences.Primes;
 using Samola.Algorithms.Sequences;
+using Samola.Algorithms.Utilities;
 
-namespace Samola.Algorithms.Sequences.App
+namespace Samola.Algorithms.App
 {
     class ShowPrimeDecomposition : IConsoleExcutable
     {

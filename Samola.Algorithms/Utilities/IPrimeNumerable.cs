@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Samola.Algorithms.Sequences.Primes
+namespace Samola.Algorithms.Utilities
 {
     /// <summary>
     /// Represents a type which provides a way of checking if a number is a prime number.

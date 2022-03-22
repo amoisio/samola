@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using Samola.Extensions;
 
-namespace Samola.Algorithms.Sequences.App
+namespace Samola.Algorithms.App
 {
     class NumberOfDigitsPerformance : IConsoleExcutable
     {

@@ -2,7 +2,7 @@
 using Samola.DataStructures.Counters;
 using Samola.Extensions;
 
-namespace Samola.Algorithms.Sequences.App
+namespace Samola.Algorithms.App
 {
     class ShowDigitPowerWalk : IConsoleExcutable
     {

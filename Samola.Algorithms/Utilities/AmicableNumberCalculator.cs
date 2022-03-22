@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace Samola.Algorithms.Sequences
+namespace Samola.Algorithms.Utilities
 {
     public class AmicableNumberCalculator
     {

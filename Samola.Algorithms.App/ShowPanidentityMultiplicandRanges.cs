@@ -1,7 +1,8 @@
 ﻿using System;
+using Samola.Algorithms.Utilities;
 using Samola.Extensions;
 
-namespace Samola.Algorithms.Sequences.App
+namespace Samola.Algorithms.App
 {
     class ShowMultiplicandRanges : IConsoleExcutable
     {

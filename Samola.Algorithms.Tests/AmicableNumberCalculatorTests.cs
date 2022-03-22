@@ -1,6 +1,6 @@
-﻿using Samola.Algorithms.Sequences.Primes;
-using Xunit;
+﻿using Xunit;
 using Samola.Algorithms.Sequences;
+using Samola.Algorithms.Utilities;
 
 namespace Samola.Algorithms.Tests
 {

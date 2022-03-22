@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
-using Samola.Algorithms.Sequences.Primes;
 using Samola.Algorithms.Sequences;
+using Samola.Algorithms.Utilities;
 
-namespace Samola.Algorithms.Sequences.App
+namespace Samola.Algorithms.App
 {
     public class ShowDivisors : IConsoleExcutable
     {

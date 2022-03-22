@@ -1,7 +1,6 @@
 ﻿using System.Linq;
-using Samola.Algorithms.CalculatedEnumerable;
-using Samola.Algorithms.Sequences.Primes;
 using Samola.Algorithms.Sequences;
+using Samola.Algorithms.Utilities;
 using Xunit;
 
 namespace Samola.Algorithms.Tests

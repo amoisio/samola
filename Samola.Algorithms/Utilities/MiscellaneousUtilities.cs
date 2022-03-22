@@ -1,7 +1,7 @@
 ﻿using System;
 using Samola.Extensions;
 
-namespace Samola.Algorithms.Sequences
+namespace Samola.Algorithms.Utilities
 {
     public static class MiscellaneousUtilities
     {

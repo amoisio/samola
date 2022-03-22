@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Samola.Algorithms.Sequences.Primes
+namespace Samola.Algorithms.Utilities
 {
     internal class PrimeDecomposition : IPrimeDecomposition, IEquatable<PrimeDecomposition>
     {

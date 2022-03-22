@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Samola.Extensions;
 
-namespace Samola.Algorithms.Sequences
+namespace Samola.Algorithms.Utilities
 {
     public class LargeIntegerContext
     {

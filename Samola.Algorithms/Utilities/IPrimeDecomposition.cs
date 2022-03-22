@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Samola.Algorithms.Sequences.Primes
+namespace Samola.Algorithms.Utilities
 {
     /// <summary>
     /// Prime number decomposition

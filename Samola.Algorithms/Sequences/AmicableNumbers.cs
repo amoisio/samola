@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using Samola.Algorithms.CalculatedEnumerable;
 using Samola.Algorithms.CalculatedEnumerable.State;
+using Samola.Algorithms.Utilities;
 
 namespace Samola.Algorithms.Sequences
 {

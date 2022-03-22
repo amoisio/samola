@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Diagnostics;
-using Samola.Algorithms.Sequences.Primes;
 using Samola.Algorithms.Sequences;
+using Samola.Algorithms.Utilities;
 
-namespace Samola.Algorithms.Sequences.App
+namespace Samola.Algorithms.App
 {
     public class AmicableNumbersPerformance : IConsoleExcutable
     {

@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.Linq;
 using Samola.Algorithms.Sequences;
 
-namespace Samola.Algorithms.Sequences.App
+namespace Samola.Algorithms.App
 {
     class PrimeGenerationPerformance : IConsoleExcutable
     {

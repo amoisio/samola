@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Samola.Algorithms.Sequences;
+using Samola.Algorithms.Utilities;
 using Xunit;
 
 namespace Samola.Algorithms.Tests

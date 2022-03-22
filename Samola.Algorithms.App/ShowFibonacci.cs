@@ -3,7 +3,7 @@ using System.Linq;
 using Samola.Algorithms.CalculatedEnumerable;
 using Samola.Algorithms.Sequences;
 
-namespace Samola.Algorithms.Sequences.App
+namespace Samola.Algorithms.App
 {
     public class ShowFibonacci : IConsoleExcutable
     {

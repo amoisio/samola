@@ -1,4 +1,4 @@
-﻿namespace Samola.Algorithms.Sequences.Primes
+﻿namespace Samola.Algorithms.Utilities
 {
     /// <summary>
     /// Prime number decomposition calculator

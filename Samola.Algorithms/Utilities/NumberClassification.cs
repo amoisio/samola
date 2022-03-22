@@ -1,4 +1,4 @@
-﻿namespace Samola.Algorithms.Sequences
+﻿namespace Samola.Algorithms.Utilities
 {
     public enum NumberClassification
     {
